@@ -26,3 +26,15 @@ export default function Servicios() {
     </main>
   );
 }
+
+export default function Home() {
+  return (
+    <div className="container">
+      <main>
+        <h1>Bienvenido a Estudio Hadjes</h1>
+        <p>Abogados especializados en accidentes de trabajo y derecho laboral en CABA y GBA.</p>
+        <a href="/contacto" className="btn">Contáctanos</a>
+      </main>
+    </div>
+  );
+}
