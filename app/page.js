@@ -1,9 +1,22 @@
+// app/page.js
+"use client";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Home() {
+  const [sueldo, setSueldo] = useState("");
+  const [antiguedad, setAntiguedad] = useState("");
+  const [estimado, setEstimado] = useState("");
+
+  function calcularEstimado() {
+    const s = Number(sueldo || 0);
+    const a = Number(antiguedad || 0);
+    const e = Math.max(0, s * a);
+    setEstimado(e ? `Estimado: $ ${e.toLocaleString("es-AR")}` : "");
+  }
+
   return (
     <main>
-
       {/* HERO */}
       <section id="hero">
         <h1>Abogados Laborales en CABA y GBA</h1>
@@ -46,7 +59,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FAQ */}
+      {/* FAQ breve */}
       <section id="faq">
         <h2>Preguntas frecuentes</h2>
         <details>
@@ -63,32 +76,37 @@ export default function Home() {
         </details>
       </section>
 
-      {/* CALCULADORA (placeholder simple) */}
+      {/* CALCULADORA (estimativo simple) */}
       <section id="calc">
         <h2>Calculadora de indemnización (estimativo)</h2>
-        <form id="calc-form" onSubmit={(e)=>e.preventDefault()}>
+        <form onSubmit={(e)=> e.preventDefault()}>
           <label>
             Sueldo bruto promedio:
-            <input type="number" name="sueldo" placeholder="Ej: 500000" />
+            <input
+              type="number"
+              name="sueldo"
+              value={sueldo}
+              onChange={(e)=> setSueldo(e.target.value)}
+              placeholder="Ej: 500000"
+            />
           </label>
           <label>
             Años de antigüedad:
-            <input type="number" name="antiguedad" placeholder="Ej: 3" />
+            <input
+              type="number"
+              name="antiguedad"
+              value={antiguedad}
+              onChange={(e)=> setAntiguedad(e.target.value)}
+              placeholder="Ej: 3"
+            />
           </label>
-          <button type="button" onClick={()=>{
-            const f = document.getElementById('calc-form');
-            const sueldo = Number(f.sueldo.value||0);
-            const antig = Number(f.antiguedad.value||0);
-            const estimado = Math.max(0, sueldo * antig);
-            const out = document.getElementById('calc-out');
-            out.textContent = estimado ? `Estimado: $ ${estimado.toLocaleString('es-AR')}` : '';
-          }}>Calcular</button>
-          <div id="calc-out" aria-live="polite"></div>
+          <button type="button" onClick={calcularEstimado}>Calcular</button>
+          <div id="calc-out" aria-live="polite">{estimado}</div>
         </form>
         <p className="disclaimer">El resultado es orientativo y no reemplaza el asesoramiento profesional.</p>
       </section>
 
-      {/* LEAD FORM */}
+      {/* LEAD FORM (envía a /api/contact) */}
       <section id="lead-form">
         <h2>Solicitá tu consulta</h2>
         <form method="POST" action="/api/contact">
@@ -111,7 +129,6 @@ export default function Home() {
           <button type="submit" className="btn-primary">Enviar</button>
         </form>
       </section>
-
     </main>
   );
 }
