@@ -1,4 +1,5 @@
 // app/servicios/[slug]/page.js
+import Image from "next/image";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { LeadBlock, BulletList, CtaPrimary } from "@/components/ServiceSeoBlocks";
@@ -29,10 +30,10 @@ export default function ServicePage({ params }) {
 
   if (!svc) {
     return (
-      <main style={{ maxWidth: 720, margin: "40px auto", padding: "0 16px" }}>
-        <h1>Servicio no encontrado</h1>
-        <p>
-          Volvé a la <Link href="/servicios">lista de servicios</Link>.
+      <main className="max-w-2xl mx-auto my-10 px-4">
+        <h1 className="text-2xl font-semibold">Servicio no encontrado</h1>
+        <p className="mt-2">
+          Volvé a la <Link href="/servicios" className="underline underline-offset-2">lista de servicios</Link>.
         </p>
       </main>
     );
@@ -61,7 +62,7 @@ export default function ServicePage({ params }) {
     serviceType: svc.h1 || svc.title,
   };
 
-  // Contenidos base (fallbacks por si faltan claves en SERVICES)
+  // Contenidos base (fallbacks)
   const title = svc.h1 || svc.title || "Servicio";
   const intro = svc.intro || svc.description || "";
   const bullets =
@@ -69,12 +70,28 @@ export default function ServicePage({ params }) {
     (Array.isArray(svc.faqs) ? svc.faqs.map((f) => f.q).filter(Boolean) : []) ||
     [];
 
+  const heroSrc = svc.hero; // e.g. "/img/servicios/accidentes.jpg"
+  const heroAlt = svc.heroAlt || title;
+
   return (
-    <main style={{ maxWidth: 800, margin: "40px auto", padding: "0 16px", lineHeight: 1.75 }}>
+    <main className="max-w-3xl mx-auto my-10 px-4 leading-relaxed">
+      {heroSrc && (
+        <div className="mb-4">
+          <Image
+            src={heroSrc}
+            alt={heroAlt}
+            width={1200}
+            height={630}
+            priority
+            className="w-full h-auto rounded-lg"
+          />
+        </div>
+      )}
+
       <JsonLd data={breadcrumbLd} />
       <JsonLd data={legalServiceLd} />
 
-      <h1>{title}</h1>
+      <h1 className="text-2xl font-semibold">{title}</h1>
 
       <LeadBlock title="¿En qué te ayudamos?">
         {intro}
@@ -82,8 +99,8 @@ export default function ServicePage({ params }) {
         <CtaPrimary href="/contacto">Contanos tu caso</CtaPrimary>
       </LeadBlock>
 
-      <section style={{ marginTop: 24 }}>
-        <h2>Próximos pasos</h2>
+      <section className="mt-6">
+        <h2 className="text-xl font-semibold">Próximos pasos</h2>
         <BulletList
           items={[
             "Enviá tu consulta con la mayor cantidad de detalles posible.",
@@ -93,17 +110,17 @@ export default function ServicePage({ params }) {
         />
       </section>
 
-      <section style={{ marginTop: 24 }}>
-        <h2>Recursos relacionados</h2>
-        <ul>
+      <section className="mt-6">
+        <h2 className="text-xl font-semibold">Recursos relacionados</h2>
+        <ul className="list-disc pl-5 mt-2 space-y-1">
           <li>
-            <Link href="/faq">Preguntas frecuentes</Link>
+            <Link href="/faq" className="underline underline-offset-2">Preguntas frecuentes</Link>
           </li>
           <li>
-            <Link href="/blog">Artículos</Link>
+            <Link href="/blog" className="underline underline-offset-2">Artículos</Link>
           </li>
           <li>
-            <Link href="/">Volver al inicio</Link>
+            <Link href="/" className="underline underline-offset-2">Volver al inicio</Link>
           </li>
         </ul>
       </section>
