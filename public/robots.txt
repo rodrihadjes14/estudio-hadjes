@@ -1,0 +1,17 @@
+# *
+User-agent: *
+Allow: /
+
+# *
+User-agent: *
+Disallow: /lp/
+
+# *
+User-agent: *
+Disallow: /api/
+
+# Host
+Host: https://estudiohadjes.com.ar
+
+# Sitemaps
+Sitemap: https://estudiohadjes.com.ar/sitemap.xml
