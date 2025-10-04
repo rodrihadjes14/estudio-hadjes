@@ -129,6 +129,18 @@ export default function Home() {
           <button type="submit" className="btn-primary">Enviar</button>
         </form>
       </section>
+
+           {/* RECURSOS / INTERLINKING */}
+      <section id="recursos" style={{ marginTop: 32 }}>
+        <h2>Recursos útiles</h2>
+        <ul>
+          <li><Link href="/servicios">Ver todos los servicios</Link></li>
+          <li><Link href="/faq">Preguntas frecuentes</Link></li>
+          <li><Link href="/blog">Artículos y guías</Link></li>
+          <li><a href="#calc">Ir a la calculadora de indemnización</a></li>
+          <li><Link href="/contacto">Contactanos</Link></li>
+        </ul>
+      </section>
     </main>
   );
 }
