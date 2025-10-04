@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <main className="max-w-5xl mx-auto my-10 px-4 leading-relaxed">
       {/* HERO */}
-      <section id="hero" className="mb-6">
+      <section id="hero" className="mb-6 bg-blue-500 text-white">
         <h1 className="text-3xl font-semibold">Abogados Laborales en CABA y GBA</h1>
         <p className="mt-2">Accidentes de trabajo, despidos sin causa y reclamos a ART.</p>
         <div className="mt-3 flex gap-3">
