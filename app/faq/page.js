@@ -7,7 +7,7 @@ export const revalidate = 60;
 
 export function generateMetadata() {
   return pageMeta({
-    title: "Preguntas Frecuentes (FAQ)",
+    title: "Preguntas frecuentes",
     description:
       "Respuestas claras sobre accidentes de trabajo, despidos, ART y procesos en CABA y GBA.",
     path: "/faq",
@@ -16,26 +16,11 @@ export function generateMetadata() {
 
 // Ajustá/extendé las preguntas según tus casos reales
 const FAQS = [
-  {
-    q: "¿Cómo sé si me corresponde indemnización?",
-    a: "Depende del tipo de despido, tu antigüedad y remuneración. Evaluamos tu caso y te orientamos con precisión.",
-  },
-  {
-    q: "¿Qué hago si tuve un accidente en el trabajo?",
-    a: "Informalo de inmediato al empleador y solicitá derivación médica por ART. Guardá toda la documentación.",
-  },
-  {
-    q: "¿Cuánto tarda el trámite?",
-    a: "Varía según el tipo de reclamo y la instancia (administrativa o judicial). Te damos una estimación en la primera consulta.",
-  },
-  {
-    q: "¿Atienden en CABA y GBA?",
-    a: "Sí. Podemos coordinar atención remota y presencial.",
-  },
-  {
-    q: "¿Qué documentación tengo que reunir?",
-    a: "Recibos de sueldo, comunicaciones con el empleador o ART, informes/constancias médicas y cualquier evidencia relevante.",
-  },
+  { q: "¿Cómo sé si me corresponde indemnización?", a: "Depende del tipo de despido, tu antigüedad y remuneración. Evaluamos tu caso y te orientamos con precisión." },
+  { q: "¿Qué hago si tuve un accidente en el trabajo?", a: "Informalo de inmediato al empleador y solicitá derivación médica por ART. Guardá toda la documentación." },
+  { q: "¿Cuánto tarda el trámite?", a: "Varía según el tipo de reclamo y la instancia (administrativa o judicial). Te damos una estimación en la primera consulta." },
+  { q: "¿Atienden en CABA y GBA?", a: "Sí. Podemos coordinar atención remota y presencial." },
+  { q: "¿Qué documentación tengo que reunir?", a: "Recibos de sueldo, comunicaciones con el empleador o ART, informes/constancias médicas y cualquier evidencia relevante." },
 ];
 
 export default function FAQPage() {
@@ -63,43 +48,50 @@ export default function FAQPage() {
   };
 
   return (
-    <main style={{ maxWidth: 960, margin: "40px auto", padding: "0 16px", lineHeight: 1.7 }}>
+    <main className="max-w-5xl mx-auto my-10 px-4 leading-relaxed">
       <JsonLd data={faqLd} />
       <JsonLd data={breadcrumbLd} />
 
-      <nav style={{ fontSize: 14, marginBottom: 16 }}>
-        <Link href="/">Inicio</Link> &nbsp;/&nbsp; <span>Preguntas frecuentes</span>
+      {/* Breadcrumb visible */}
+      <nav className="mb-4 text-sm">
+        <Link href="/">Inicio</Link> <span className="mx-1">/</span> <span>Preguntas frecuentes</span>
       </nav>
 
-      <h1>Preguntas frecuentes</h1>
-      <p>
+      <h1 className="text-3xl font-semibold">Preguntas frecuentes</h1>
+      <p className="mt-2">
         Respuestas breves y claras a las consultas más comunes. Si tu caso requiere análisis específico,{" "}
-        <Link href="/contacto">contactanos</Link>. También podés estimar tu caso con la{" "}
-        <Link href="/#calc">calculadora de indemnización</Link>.
+        <Link href="/contacto" className="underline underline-offset-2">contactanos</Link>. También podés estimar tu caso con la{" "}
+        <Link href="/#calc" className="underline underline-offset-2">calculadora de indemnización</Link>.
       </p>
 
-      <section style={{ marginTop: 24 }}>
+      {/* Acordeón accesible con <details> */}
+      <section className="mt-6 space-y-3">
         {FAQS.map((f, i) => (
-          <details key={i} style={{ margin: "16px 0", padding: "12px 16px", border: "1px solid #444", borderRadius: 8 }}>
-            <summary style={{ cursor: "pointer", fontWeight: 600 }}>{f.q}</summary>
-            <div style={{ marginTop: 8 }}>{f.a}</div>
+          <details key={i} className="rounded-md border border-neutral-700 p-3">
+            <summary className="cursor-pointer select-none font-medium">{f.q}</summary>
+            <div className="mt-2">{f.a}</div>
           </details>
         ))}
       </section>
 
-      <section style={{ marginTop: 24 }}>
-        <h2>Recursos relacionados</h2>
-        <ul>
-          <li><Link href="/servicios/accidentes-de-trabajo">Accidentes de Trabajo</Link></li>
-          <li><Link href="/servicios/despidos-sin-causa">Despidos sin Causa</Link></li>
-          <li><Link href="/servicios/reclamos-a-art">Reclamos a ART</Link></li>
-          <li><Link href="/blog">Blog</Link></li>
-          <li><Link href="/#calc">Calculadora de indemnización</Link></li>
+      {/* Interlinking interno */}
+      <section className="mt-8">
+        <h2 className="text-xl font-semibold">Recursos relacionados</h2>
+        <ul className="mt-2 list-disc pl-5 space-y-1">
+          <li><Link href="/servicios/accidentes-de-trabajo" className="underline underline-offset-2">Accidentes de Trabajo</Link></li>
+          <li><Link href="/servicios/despidos-sin-causa" className="underline underline-offset-2">Despidos sin Causa</Link></li>
+          <li><Link href="/servicios/reclamos-a-art" className="underline underline-offset-2">Reclamos a ART</Link></li>
+          <li><Link href="/blog" className="underline underline-offset-2">Blog</Link></li>
+          <li><Link href="/#calc" className="underline underline-offset-2">Calculadora de indemnización</Link></li>
         </ul>
       </section>
 
-      <section style={{ marginTop: 24 }}>
-        <Link href="/contacto" style={{ display: "inline-block", padding: "10px 16px", border: "1px solid #888", borderRadius: 6 }}>
+      {/* CTA final */}
+      <section className="mt-6">
+        <Link
+          href="/contacto"
+          className="inline-block rounded-md border border-neutral-500 px-4 py-2 hover:bg-neutral-900"
+        >
           Consultá tu caso
         </Link>
       </section>
