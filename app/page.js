@@ -126,16 +126,26 @@ export default function Home() {
       </section>
 
       {/* RECURSOS / INTERLINKING */}
-      <section id="recursos" className="mt-8">
-        <h2 className="text-2xl font-semibold">Recursos útiles</h2>
-        <ul className="mt-3 list-disc pl-5 space-y-1">
-          <li><Link href="/servicios" className="underline underline-offset-2">Ver todos los servicios</Link></li>
-          <li><Link href="/faq" className="underline underline-offset-2">Preguntas frecuentes</Link></li>
-          <li><Link href="/blog" className="underline underline-offset-2">Artículos y guías</Link></li>
-          <li><a href="#calc" className="underline underline-offset-2">Ir a la calculadora de indemnización</a></li>
-          <li><Link href="/contacto" className="underline underline-offset-2">Contactanos</Link></li>
-        </ul>
-      </section>
+<section id="recursos" className="mt-8">
+  <h2 className="text-2xl font-semibold">Recursos útiles</h2>
+  <ul className="mt-3 list-disc pl-5 space-y-1">
+    {/* Enlaces directos a cada servicio */}
+    <li><Link href="/servicios/accidentes-de-trabajo" className="underline underline-offset-2">Accidentes de trabajo</Link></li>
+    <li><Link href="/servicios/despidos-sin-causa" className="underline underline-offset-2">Despidos sin causa</Link></li>
+    <li><Link href="/servicios/enfermedades-laborales" className="underline underline-offset-2">Enfermedades laborales</Link></li>
+    <li><Link href="/servicios/accidentes-de-transito" className="underline underline-offset-2">Accidentes de tránsito</Link></li>
+    <li><Link href="/servicios/defensa-al-consumidor" className="underline underline-offset-2">Defensa del consumidor</Link></li>
+    <li><Link href="/servicios/reclamos-a-art" className="underline underline-offset-2">Reclamos a ART</Link></li>
+
+    {/* Páginas clave */}
+    <li><Link href="/servicios" className="underline underline-offset-2">Ver todos los servicios</Link></li>
+    <li><Link href="/faq" className="underline underline-offset-2">Preguntas frecuentes</Link></li>
+    <li><Link href="/blog" className="underline underline-offset-2">Artículos y guías</Link></li>
+    <li><a href="#calc" className="underline underline-offset-2">Calculadora de indemnización</a></li>
+    <li><Link href="/contacto" className="underline underline-offset-2">Contactanos</Link></li>
+  </ul>
+</section>
+
     </main>
   );
 }
