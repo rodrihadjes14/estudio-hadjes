@@ -12,17 +12,20 @@ export function generateStaticParams() {
   return Object.keys(SERVICES).map((slug) => ({ slug }));
 }
 
+// app/servicios/[slug]/page.js
 export function generateMetadata({ params }) {
   const { slug } = params || {};
   const svc = SERVICES[slug];
   if (!svc) return {};
-
   return pageMeta({
     title: svc.metaTitle || `${svc.h1} en CABA y GBA`,
     description: svc.metaDescription || svc.intro || "",
     path: `/servicios/${slug}`,
+    ogImage: `/og/${slug}.jng`,
   });
 }
+
+
 
 export default function ServicePage({ params }) {
   const { slug } = params || {};
