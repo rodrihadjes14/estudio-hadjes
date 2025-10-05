@@ -3,7 +3,6 @@
 import { useState, useRef } from "react";
 import Link from "next/link";
 
-export const revalidate = 60;
 
 export default function Contacto() {
   const [status, setStatus] = useState({ type: "", msg: "" });
