@@ -3,6 +3,8 @@
 import { useState, useRef } from "react";
 import Link from "next/link";
 
+export const revalidate = 60;
+
 export default function Contacto() {
   const [status, setStatus] = useState({ type: "", msg: "" });
   const [loading, setLoading] = useState(false);
@@ -46,7 +48,6 @@ export default function Contacto() {
       }
 
       setStatus({ type: "success", msg: "¡Gracias! Te contactaremos a la brevedad." });
-
       if (formEl && typeof formEl.reset === "function") formEl.reset();
 
       if (typeof window !== "undefined" && window.gtag) {
@@ -69,7 +70,9 @@ export default function Contacto() {
       <h1 className="text-3xl font-semibold">Contacto</h1>
       <p className="mt-2">
         Contanos tu caso y te respondemos a la brevedad. También podés usar la{" "}
-        <a href="/#calc" className="underline underline-offset-2">calculadora de indemnización</a>.
+        <Link href="/#calc" className="underline underline-offset-2">
+          calculadora de indemnización
+        </Link>.
       </p>
 
       <form ref={formRef} onSubmit={onSubmit} className="mt-6 grid gap-3 sm:grid-cols-2">

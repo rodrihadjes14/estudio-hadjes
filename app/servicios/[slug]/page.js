@@ -155,9 +155,9 @@ export default function ServicePage({ params }) {
             </Link>
           </li>
           <li>
-            <a href="/#calc" className="underline underline-offset-2">
+            <Link href="/#calc" className="underline underline-offset-2">
               Calculadora de indemnización
-            </a>
+            </Link>
           </li>
           <li>
             <Link href="/contacto" className="underline underline-offset-2">

@@ -1,3 +1,6 @@
+import Link from "next/link";
+
+
 // components/ServiceSeoBlocks.js
 export function LeadBlock({ title, children }) {
   return (
@@ -11,15 +14,16 @@ export function LeadBlock({ title, children }) {
 export function CtaPrimary({ href = "/contacto", children = "Contanos tu caso" }) {
   return (
     <div className="mt-6">
-      <a
+      <Link
         href={href}
         className="inline-block rounded-md border border-neutral-500 px-4 py-2 hover:bg-neutral-900"
       >
         {children}
-      </a>
+      </Link>
     </div>
   );
 }
+
 
 /** Listado con bullets claros, evita párrafos largos */
 export function BulletList({ items = [] }) {
