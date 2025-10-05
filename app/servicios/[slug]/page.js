@@ -21,7 +21,7 @@ export function generateMetadata({ params }) {
     title: svc.metaTitle || `${svc.h1} en CABA y GBA`,
     description: svc.metaDescription || svc.intro || "",
     path: `/servicios/${slug}`,
-    ogImage: `/og/${slug}.jng`,
+    ogImage: `/og/${slug}.jpg`,
   });
 }
 
