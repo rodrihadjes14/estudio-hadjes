@@ -4,20 +4,17 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://estudiohadjes.com.a
 module.exports = {
   siteUrl,
   generateRobotsTxt: true,
+  generateIndexSitemap: true,      // explícito (ya es true por defecto)
   sitemapSize: 5000,
   changefreq: 'weekly',
   priority: 0.7,
-  exclude: [
-    '/lp/*',
-    '/api/*',
-  ],
+  exclude: ['/lp/*', '/api/*'],
   robotsTxtOptions: {
     policies: [
       { userAgent: '*', allow: '/' },
       { userAgent: '*', disallow: ['/lp/'] },
       { userAgent: '*', disallow: ['/api/'] },
     ],
-    additionalSitemaps: [`${siteUrl}/sitemap.xml`],
   },
   transform: async (config, path) => {
     const entry = {

@@ -25,7 +25,7 @@ export default function Home() {
     <div>
       <h1 className="hero__title">Abogados laborales en CABA y GBA</h1>
       <p className="hero__subtitle">
-        Accidentes de trabajo, despidos sin causa y reclamos a ART.
+        Si fuiste despedido sin causa, sufriste un accidente de trabajo o enfermedad profesional, contactanos para poder ayudarte.
       </p>
       <div className="mt-4 flex justify-center gap-3">
         <Link href="/contacto" className="btn focus-ring bg-white text-neutral-900 hover:bg-white/90">
