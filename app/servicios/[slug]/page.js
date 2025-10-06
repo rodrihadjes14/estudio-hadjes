@@ -12,7 +12,6 @@ export function generateStaticParams() {
   return Object.keys(SERVICES).map((slug) => ({ slug }));
 }
 
-// app/servicios/[slug]/page.js
 export function generateMetadata({ params }) {
   const { slug } = params || {};
   const svc = SERVICES[slug];
@@ -25,19 +24,17 @@ export function generateMetadata({ params }) {
   });
 }
 
-
-
 export default function ServicePage({ params }) {
   const { slug } = params || {};
   const svc = SERVICES[slug];
 
   if (!svc) {
     return (
-      <main className="max-w-2xl mx-auto my-10 px-4">
+      <main className="page-wrap">
         <h1 className="text-2xl font-semibold">Servicio no encontrado</h1>
         <p className="mt-2">
           Volvé a la{" "}
-          <Link href="/servicios" className="underline underline-offset-2">
+          <Link href="/servicios" className="link">
             lista de servicios
           </Link>.
         </p>
@@ -48,39 +45,39 @@ export default function ServicePage({ params }) {
   const base = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
   const canonical = `${base}/servicios/${slug}`;
 
-  // Hero (opcional, si existe en SERVICES)
+  // Hero opcional
   const heroSrc = svc.hero;
-  const heroAlt = svc.heroAlt || svc.h1 || svc.title || "Servicio";
+  const title = svc.h1 || svc.title || "Servicio";
+  const heroAlt = svc.heroAlt || title;
 
-  // JSON-LD: Breadcrumbs + LegalService
+  // JSON-LD
   const breadcrumbLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Inicio", item: base },
       { "@type": "ListItem", position: 2, name: "Servicios", item: `${base}/servicios` },
-      { "@type": "ListItem", position: 3, name: svc.h1 || svc.title, item: canonical },
+      { "@type": "ListItem", position: 3, name: title, item: canonical },
     ],
   };
 
   const legalServiceLd = {
     "@context": "https://schema.org",
     "@type": "LegalService",
-    name: `Estudio Hadjes — ${svc.h1 || svc.title}`,
+    name: `Estudio Hadjes — ${title}`,
     url: canonical,
     areaServed: "AR",
-    serviceType: svc.h1 || svc.title,
+    serviceType: title,
   };
 
-  // Contenidos base
-  const title = svc.h1 || svc.title || "Servicio";
+  // Contenido base
   const intro = svc.intro || svc.description || "";
   const bullets =
     svc.bullets ||
     (Array.isArray(svc.faqs) ? svc.faqs.map((f) => f.q).filter(Boolean) : []) ||
     [];
 
-  // IL-2: relacionados por servicio
+  // Relacionados
   const RELATED_MAP = {
     "accidentes-de-trabajo": ["reclamos-a-art", "enfermedades-laborales", "despidos-sin-causa"],
     "despidos-sin-causa": ["accidentes-de-trabajo", "reclamos-a-art", "defensa-al-consumidor"],
@@ -99,7 +96,7 @@ export default function ServicePage({ params }) {
     .filter(Boolean);
 
   return (
-    <main className="max-w-3xl mx-auto my-10 px-4 leading-relaxed">
+    <main className="page-wrap">
       {heroSrc && (
         <div className="mb-4">
           <Image
@@ -116,64 +113,71 @@ export default function ServicePage({ params }) {
       <JsonLd data={breadcrumbLd} />
       <JsonLd data={legalServiceLd} />
 
+      {/* Breadcrumb visible */}
       <nav className="mb-4 text-sm">
-      <Link href="/">Inicio</Link> <span className="mx-1">/</span>{" "}
-      <Link href="/servicios">Servicios</Link> <span className="mx-1">/</span>{" "}
-      <span>{title}</span>
+        <Link href="/">Inicio</Link> <span className="mx-1">/</span>{" "}
+        <Link href="/servicios">Servicios</Link> <span className="mx-1">/</span>{" "}
+        <span>{title}</span>
       </nav>
 
+      <h1 className="text-3xl font-semibold">{title}</h1>
 
-      <h1 className="text-2xl font-semibold">{title}</h1>
-
-      <LeadBlock title="¿En qué te ayudamos?">
-        {intro}
-        {!!bullets.length && <BulletList items={bullets} />}
-        <CtaPrimary href="/contacto">Contanos tu caso</CtaPrimary>
-      </LeadBlock>
-
-      <section className="mt-6">
-        <h2 className="text-xl font-semibold">Próximos pasos</h2>
-        <BulletList
-          items={[
-            "Enviá tu consulta con la mayor cantidad de detalles posible.",
-            "Te respondemos con una evaluación preliminar.",
-            "Te guiamos en los pasos administrativos iniciales.",
-          ]}
-        />
+      {/* Intro + bullets + CTA (manteniendo tus bloques actuales) */}
+      <section className="section">
+        <h2 className="section-title">¿En qué te ayudamos?</h2>
+        <LeadBlock>
+          {intro}
+          {!!bullets.length && <BulletList items={bullets} />}
+          <CtaPrimary href="/contacto">Contanos tu caso</CtaPrimary>
+        </LeadBlock>
       </section>
 
-      <section className="mt-6">
-        <h2 className="text-xl font-semibold">Servicios relacionados</h2>
-        <ul className="mt-2 list-disc pl-5 space-y-1">
+      {/* Próximos pasos */}
+      <section className="section">
+        <h2 className="section-title">Próximos pasos</h2>
+        <div className="card mt-2">
+          <BulletList
+            items={[
+              "Enviá tu consulta con la mayor cantidad de detalles posible.",
+              "Te respondemos con una evaluación preliminar.",
+              "Te guiamos en los pasos administrativos iniciales.",
+            ]}
+          />
+        </div>
+      </section>
+
+      {/* Relacionados + recursos */}
+      <section className="section">
+        <h2 className="section-title">Servicios relacionados</h2>
+        <ul className="mt-3 list-disc pl-5 space-y-1">
           {related.map((r) => (
             <li key={r.slug}>
-              <Link href={`/servicios/${r.slug}`} className="underline underline-offset-2">
+              <Link href={`/servicios/${r.slug}`} className="link">
                 {r.title}
               </Link>
             </li>
           ))}
         </ul>
 
-        <h3 className="mt-4 text-lg font-semibold">Recursos</h3>
+        <h3 className="mt-6 text-lg font-semibold">Recursos</h3>
         <ul className="mt-2 list-disc pl-5 space-y-1">
           <li>
-            <Link href="/faq" className="underline underline-offset-2">
+            <Link href="/faq" className="link">
               Preguntas frecuentes
             </Link>
           </li>
           <li>
-            <Link href="/#calc" className="underline underline-offset-2">
+            <a href="/#calc" className="link">
               Calculadora de indemnización
-            </Link>
+            </a>
           </li>
           <li>
-            <Link href="/contacto" className="underline underline-offset-2">
+            <Link href="/contacto" className="link">
               Contactanos
             </Link>
           </li>
         </ul>
       </section>
     </main>
-
   );
 }

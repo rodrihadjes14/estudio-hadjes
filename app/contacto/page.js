@@ -3,7 +3,6 @@
 import { useState, useRef } from "react";
 import Link from "next/link";
 
-
 export default function Contacto() {
   const [status, setStatus] = useState({ type: "", msg: "" });
   const [loading, setLoading] = useState(false);
@@ -61,103 +60,112 @@ export default function Contacto() {
   }
 
   return (
-    <main className="max-w-5xl mx-auto my-10 px-4 leading-relaxed">
+    <main className="page-wrap">
+      {/* Breadcrumb visible */}
       <nav className="mb-4 text-sm">
         <Link href="/">Inicio</Link> <span className="mx-1">/</span> <span>Contacto</span>
       </nav>
 
       <h1 className="text-3xl font-semibold">Contacto</h1>
-      <p className="mt-2">
-        Contanos tu caso y te respondemos a la brevedad. También podés usar la{" "}
-        <Link href="/#calc" className="underline underline-offset-2">
-          calculadora de indemnización
-        </Link>.
-      </p>
 
-      <form ref={formRef} onSubmit={onSubmit} className="mt-6 grid gap-3 sm:grid-cols-2">
-        <label className="flex flex-col">
-          <span className="text-sm">Nombre y apellido</span>
+      <section className="section">
+        <p className="max-w-2xl">
+          Contanos tu caso y te respondemos a la brevedad. También podés usar la{" "}
+          <Link href="/#calc" className="link">calculadora de indemnización</Link>.
+        </p>
+
+        <form ref={formRef} onSubmit={onSubmit} className="mt-4 grid gap-3 sm:grid-cols-2">
+          <label className="flex flex-col">
+            <span className="text-sm">Nombre y apellido</span>
+            <input
+              name="name"
+              required
+              placeholder="Tu nombre"
+              autoComplete="name"
+              className="input-base focus-ring mt-1"
+            />
+          </label>
+
+          <label className="flex flex-col">
+            <span className="text-sm">Email</span>
+            <input
+              name="email"
+              type="email"
+              required
+              placeholder="tucorreo@ejemplo.com"
+              autoComplete="email"
+              className="input-base focus-ring mt-1"
+            />
+          </label>
+
+          <label className="flex flex-col">
+            <span className="text-sm">Teléfono (opcional)</span>
+            <input
+              name="phone"
+              placeholder="+54 11 ..."
+              autoComplete="tel"
+              className="input-base focus-ring mt-1"
+            />
+          </label>
+
+          <label className="flex flex-col sm:col-span-2">
+            <span className="text-sm">Mensaje</span>
+            <textarea
+              name="message"
+              rows={6}
+              required
+              placeholder="Contanos brevemente tu situación..."
+              className="input-base focus-ring mt-1"
+            />
+          </label>
+
+          {/* Honeypot */}
           <input
-            name="name"
-            required
-            placeholder="Tu nombre"
-            autoComplete="name"
-            className="mt-1 rounded-md border border-neutral-700 bg-transparent px-3 py-2"
+            name="website"
+            type="text"
+            className="sr-only"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
           />
-        </label>
 
-        <label className="flex flex-col">
-          <span className="text-sm">Email</span>
-          <input
-            name="email"
-            type="email"
-            required
-            placeholder="tucorreo@ejemplo.com"
-            autoComplete="email"
-            className="mt-1 rounded-md border border-neutral-700 bg-transparent px-3 py-2"
-          />
-        </label>
+          <div className="sm:col-span-2">
+            <button
+              type="submit"
+              disabled={loading}
+              className="btn focus-ring disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              {loading ? "Enviando..." : "Enviar"}
+            </button>
 
-        <label className="flex flex-col">
-          <span className="text-sm">Teléfono (opcional)</span>
-          <input
-            name="phone"
-            placeholder="+54 11 ..."
-            autoComplete="tel"
-            className="mt-1 rounded-md border border-neutral-700 bg-transparent px-3 py-2"
-          />
-        </label>
-
-        <label className="flex flex-col sm:col-span-2">
-          <span className="text-sm">Mensaje</span>
-          <textarea
-            name="message"
-            rows={6}
-            required
-            placeholder="Contanos brevemente tu situación..."
-            className="mt-1 rounded-md border border-neutral-700 bg-transparent px-3 py-2"
-          />
-        </label>
-
-        {/* Honeypot */}
-        <input name="website" type="text" className="hidden" tabIndex={-1} autoComplete="off" />
-
-        <div className="sm:col-span-2">
-          <button
-            type="submit"
-            disabled={loading}
-            className={`inline-block rounded-md border border-neutral-500 px-4 py-2 hover:bg-neutral-900 ${loading ? "cursor-not-allowed opacity-60" : ""}`}
-          >
-            {loading ? "Enviando..." : "Enviar"}
-          </button>
-
-          <div aria-live="polite" className="mt-2">
-            {status.msg && (
-              <p className={status.type === "success" ? "text-green-500" : "text-red-500"}>
-                {status.msg}
-              </p>
-            )}
+            <div aria-live="polite" className="mt-2">
+              {status.msg && (
+                <p className={status.type === "success" ? "text-green-500" : "text-red-500"}>
+                  {status.msg}
+                </p>
+              )}
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </section>
 
-      <section className="mt-6">
-        <h2 className="text-xl font-semibold">Otras vías</h2>
-        <ul className="mt-2 list-disc space-y-1 pl-5">
+      <section className="section">
+        <h2 className="section-title">Otras vías</h2>
+        <ul className="mt-3 list-disc space-y-1 pl-5">
           <li>
             Email:{" "}
-            <a href="mailto:info@estudiohadjes.com.ar" className="underline underline-offset-2">
+            <a href="mailto:info@estudiohadjes.com.ar" className="link">
               info@estudiohadjes.com.ar
             </a>
           </li>
           <li>
             Teléfono/WhatsApp:{" "}
-            <a href="tel:+5411XXXXXXX" className="underline underline-offset-2">
+            <a href="tel:+5411XXXXXXX" className="link">
               +54 11 XXXX-XXXX
             </a>
           </li>
           <li>
-            <Link href="/faq" className="underline underline-offset-2">
+            <Link href="/faq" className="link">
               Preguntas frecuentes
             </Link>
           </li>

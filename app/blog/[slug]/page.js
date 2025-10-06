@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export const revalidate = 60;
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
   const posts = getAllPostsMeta();
   return posts.map((p) => ({ slug: p.slug }));
 }
@@ -45,7 +45,13 @@ export default async function BlogPost({ params }) {
     author: { "@type": "Organization", name: meta.author || "Estudio Hadjes" },
     publisher: { "@type": "Organization", name: "Estudio Hadjes" },
     mainEntityOfPage: canonical,
-    ...(meta.ogImage ? { image: [`${base}${meta.ogImage.startsWith("/") ? "" : "/"}${meta.ogImage}`] } : {}),
+    ...(meta.ogImage
+      ? {
+          image: [
+            `${base}${meta.ogImage.startsWith("/") ? "" : "/"}${meta.ogImage}`,
+          ],
+        }
+      : {}),
   };
 
   // JSON-LD: Breadcrumbs
@@ -60,7 +66,7 @@ export default async function BlogPost({ params }) {
   };
 
   return (
-    <main className="max-w-5xl mx-auto my-10 px-4 leading-relaxed">
+    <main className="page-wrap">
       <JsonLd data={articleLd} />
       <JsonLd data={breadcrumbLd} />
 
@@ -73,31 +79,34 @@ export default async function BlogPost({ params }) {
 
       <h1 className="text-3xl font-semibold">{meta.title}</h1>
       <p className="mt-1 text-sm opacity-80">
-        {meta.date}{meta.author ? ` — ${meta.author}` : ""}
+        {meta.date}
+        {meta.author ? ` — ${meta.author}` : ""}
       </p>
 
-      {/* Cuerpo del post (HTML generado desde Markdown) */}
-      <article
-        className="mt-4 space-y-4"
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
+      {/* Cuerpo del post */}
+      <section className="section">
+        <article
+          className="leading-relaxed space-y-4"
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
+      </section>
 
       {/* Interlinking interno */}
-      <section className="mt-8">
-        <h2 className="text-xl font-semibold">Seguí leyendo</h2>
-        <ul className="mt-2 list-disc pl-5 space-y-1">
+      <section className="section">
+        <h2 className="section-title">Seguí leyendo</h2>
+        <ul className="mt-3 list-disc pl-5 space-y-1">
           <li>
-            <Link href="/servicios" className="underline underline-offset-2">
+            <Link href="/servicios" className="link">
               Ver todos los servicios
             </Link>
           </li>
           <li>
-            <Link href="/faq" className="underline underline-offset-2">
+            <Link href="/faq" className="link">
               Preguntas frecuentes
             </Link>
           </li>
           <li>
-            <Link href="/contacto" className="underline underline-offset-2">
+            <Link href="/contacto" className="link">
               Contactanos
             </Link>
           </li>

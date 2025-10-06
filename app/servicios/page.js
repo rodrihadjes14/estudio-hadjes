@@ -1,7 +1,6 @@
 // app/servicios/page.js
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
-import { LeadBlock } from "@/components/ServiceSeoBlocks";
 import { SERVICES } from "@/lib/services";
 import { pageMeta } from "@/lib/seo";
 
@@ -32,6 +31,7 @@ export default function ServiciosIndex() {
     .map((slug) => ({
       slug,
       title: SERVICES[slug].h1 || SERVICES[slug].title || "Servicio",
+      summary: SERVICES[slug].intro || SERVICES[slug].description || "",
     }));
 
   const base = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
@@ -45,27 +45,43 @@ export default function ServiciosIndex() {
   };
 
   return (
-    <main style={{ maxWidth: 800, margin: "40px auto", padding: "0 16px" }}>
+    <main className="page-wrap">
       <JsonLd data={breadcrumbLd} />
 
       <nav className="mb-4 text-sm">
-  <Link href="/">Inicio</Link> <span className="mx-1">/</span> <span>Servicios</span>
-</nav>
+        <Link href="/">Inicio</Link> <span className="mx-1">/</span> <span>Servicios</span>
+      </nav>
 
-      <h1>Servicios legales</h1>
+      <h1 className="text-3xl font-semibold">Servicios legales</h1>
 
-      <LeadBlock title="Cómo trabajamos">
-        Enfocados en trabajadores de CABA y GBA. Analizamos tu caso, definimos la estrategia y te
-        acompañamos durante todo el proceso.
-      </LeadBlock>
+      <section className="section">
+        <h2 className="section-title">Cómo trabajamos</h2>
+        <p className="mt-2 max-w-2xl">
+          Enfocados en trabajadores de CABA y GBA. Analizamos tu caso, definimos la estrategia y te
+          acompañamos durante todo el proceso.
+        </p>
+      </section>
 
-      <ul style={{ marginTop: 16, lineHeight: 1.9 }}>
-        {items.map((it) => (
-          <li key={it.slug}>
-            <Link href={`/servicios/${it.slug}`}>{it.title}</Link>
-          </li>
-        ))}
-      </ul>
+      <section className="section">
+        <h2 className="section-title">Elegí un servicio</h2>
+        <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {items.map((it) => (
+            <li key={it.slug} className="card">
+              <h3 className="text-lg font-semibold">
+                <Link href={`/servicios/${it.slug}`} className="link">
+                  {it.title}
+                </Link>
+              </h3>
+              {it.summary ? <p className="mt-1 opacity-80">{it.summary}</p> : null}
+              <div className="mt-3">
+                <Link href={`/servicios/${it.slug}`} className="btn focus-ring">
+                  Ver más
+                </Link>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
     </main>
   );
 }

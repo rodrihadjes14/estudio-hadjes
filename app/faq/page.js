@@ -14,7 +14,6 @@ export function generateMetadata() {
   });
 }
 
-// Ajustá/extendé las preguntas según tus casos reales
 const FAQS = [
   { q: "¿Cómo sé si me corresponde indemnización?", a: "Depende del tipo de despido, tu antigüedad y remuneración. Evaluamos tu caso y te orientamos con precisión." },
   { q: "¿Qué hago si tuve un accidente en el trabajo?", a: "Informalo de inmediato al empleador y solicitá derivación médica por ART. Guardá toda la documentación." },
@@ -26,7 +25,6 @@ const FAQS = [
 export default function FAQPage() {
   const base = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
-  // JSON-LD: FAQPage
   const faqLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -37,7 +35,6 @@ export default function FAQPage() {
     })),
   };
 
-  // JSON-LD: Breadcrumbs
   const breadcrumbLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -48,7 +45,7 @@ export default function FAQPage() {
   };
 
   return (
-    <main className="max-w-5xl mx-auto my-10 px-4 leading-relaxed">
+    <main className="page-wrap">
       <JsonLd data={faqLd} />
       <JsonLd data={breadcrumbLd} />
 
@@ -58,40 +55,43 @@ export default function FAQPage() {
       </nav>
 
       <h1 className="text-3xl font-semibold">Preguntas frecuentes</h1>
-      <p className="mt-2">
-        Respuestas breves y claras a las consultas más comunes. Si tu caso requiere análisis específico,{" "}
-        <Link href="/contacto" className="underline underline-offset-2">contactanos</Link>. También podés estimar tu caso con la{" "}
-        <Link href="/#calc" className="underline underline-offset-2">calculadora de indemnización</Link>.
-      </p>
 
-      {/* Acordeón accesible con <details> */}
-      <section className="mt-6 space-y-3">
-        {FAQS.map((f, i) => (
-          <details key={i} className="rounded-md border border-neutral-700 p-3">
-            <summary className="cursor-pointer select-none font-medium">{f.q}</summary>
-            <div className="mt-2">{f.a}</div>
-          </details>
-        ))}
+      <section className="section">
+        <p className="max-w-2xl">
+          Respuestas breves y claras a las consultas más comunes. Si tu caso requiere análisis específico,{" "}
+          <Link href="/contacto" className="link">contactanos</Link>. También podés estimar tu caso con la{" "}
+          <Link href="/#calc" className="link">calculadora de indemnización</Link>.
+        </p>
+      </section>
+
+      {/* Acordeón accesible */}
+      <section className="section">
+        <h2 className="section-title">Respuestas rápidas</h2>
+        <div className="mt-4 space-y-3">
+          {FAQS.map((f, i) => (
+            <details key={i} className="card">
+              <summary className="cursor-pointer select-none font-semibold">{f.q}</summary>
+              <div className="mt-2">{f.a}</div>
+            </details>
+          ))}
+        </div>
       </section>
 
       {/* Interlinking interno */}
-      <section className="mt-8">
-        <h2 className="text-xl font-semibold">Recursos relacionados</h2>
-        <ul className="mt-2 list-disc pl-5 space-y-1">
-          <li><Link href="/servicios/accidentes-de-trabajo" className="underline underline-offset-2">Accidentes de Trabajo</Link></li>
-          <li><Link href="/servicios/despidos-sin-causa" className="underline underline-offset-2">Despidos sin Causa</Link></li>
-          <li><Link href="/servicios/reclamos-a-art" className="underline underline-offset-2">Reclamos a ART</Link></li>
-          <li><Link href="/blog" className="underline underline-offset-2">Blog</Link></li>
-          <li><Link href="/#calc" className="underline underline-offset-2">Calculadora de indemnización</Link></li>
+      <section className="section">
+        <h2 className="section-title">Recursos relacionados</h2>
+        <ul className="mt-3 list-disc pl-5 space-y-1">
+          <li><Link href="/servicios/accidentes-de-trabajo" className="link">Accidentes de Trabajo</Link></li>
+          <li><Link href="/servicios/despidos-sin-causa" className="link">Despidos sin Causa</Link></li>
+          <li><Link href="/servicios/reclamos-a-art" className="link">Reclamos a ART</Link></li>
+          <li><Link href="/blog" className="link">Blog</Link></li>
+          <li><Link href="/#calc" className="link">Calculadora de indemnización</Link></li>
         </ul>
       </section>
 
       {/* CTA final */}
-      <section className="mt-6">
-        <Link
-          href="/contacto"
-          className="inline-block rounded-md border border-neutral-500 px-4 py-2 hover:bg-neutral-900"
-        >
+      <section className="section">
+        <Link href="/contacto" className="btn focus-ring">
           Consultá tu caso
         </Link>
       </section>
