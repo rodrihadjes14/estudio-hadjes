@@ -67,7 +67,7 @@
 }
 
 @utility section-title {
-  @apply text-xl md:text-2xl font-semibold;
+  @apply text-center text-xl md:text-2xl font-semibold;
 }
 
 @utility card {
