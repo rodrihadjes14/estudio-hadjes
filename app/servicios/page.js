@@ -53,39 +53,41 @@ export default function ServiciosIndex() {
         <Link href="/">Inicio</Link> <span className="mx-1">/</span> <span>Servicios</span>
       </nav>
 
-       <section id="hero" className="hero hero--lg">
-  {/* Fondo */}
-  <Image
-    src={serviciosHero}
-    alt="Despido y accidente de trabajo ART CABA GBA"
-    fill
-    priority
-    sizes="(min-width: 1280px) 1280px, (min-width: 768px) 768px, 100vw"
-    quality={60}             // bajar de 75 a 60 reduce bastante sin perder calidad percibida
-    placeholder="blur"
-    className="hero__img object-center md:object-[50%_30%]" // ajustá el encuadre si querés
-  />
+      <section id="hero" className="hero hero--lg">
+      {/* Fondo */}
+      <Image
+        src={serviciosHero}                // static import => habilita placeholder="blur"
+        alt="Servicios legales laborales en CABA y GBA"
+        fill
+        priority
+        sizes="100vw"
+        quality={60}                       // reduce peso sin pérdida visible
+        placeholder="blur"
+        className="hero__img object-center md:object-[50%_30%]" // encuadre (arriba en desktop)
+      />
 
-  {/* Overlay */}
-  <div className="hero__overlay" aria-hidden="true" />
+      {/* Overlay */}
+      <div className="hero__overlay" aria-hidden="true" />
 
-  {/* Contenido */}
-  <div className="hero__content">
-    <h1 className="text-3xl font-semibold">Servicios legales</h1>
-    <p className="mt-2 max-w-2xl">
-      Enfocados en trabajadores de CABA y GBA. Analizamos tu caso, definimos la estrategia y te
-      acompañamos durante todo el proceso.
-    </p>
-    <div className="mt-4 flex gap-3">
-      <Link href="/contacto" className="btn focus-ring bg-white text-neutral-900 hover:bg-white/90">
-        Contactanos
-      </Link>
-      <Link href="/faq" className="btn focus-ring bg-white/10 hover:bg-white/20">
-        Ver preguntas
-      </Link>
-    </div>
-  </div>
-</section>
+      {/* Contenido centrado */}
+      <div className="hero__inner">
+        <div>
+          <h1 className="hero__title">Servicios legales</h1>
+          <p className="hero__subtitle">
+            Enfocados en trabajadores de CABA y GBA. Analizamos tu caso, definimos la estrategia
+            y te acompañamos durante todo el proceso.
+          </p>
+          <div className="mt-4 flex justify-center gap-3">
+            <Link href="/contacto" className="btn focus-ring bg-white text-neutral-900 hover:bg-white/90">
+              Contactanos
+            </Link>
+            <Link href="/faq" className="btn focus-ring bg-white/10 hover:bg-white/20">
+              Ver preguntas
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
 
       <section className="section">
         <h2 className="section-title">Elegí un servicio</h2>

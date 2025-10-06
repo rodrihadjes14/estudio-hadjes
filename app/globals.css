@@ -40,6 +40,15 @@
   .hero__overlay { @apply absolute inset-0 bg-black/60 -z-10; }
   .hero__img { @apply object-cover object-center -z-10; }
   .hero__content { @apply relative max-w-3xl; }
+  .hero__inner {
+    @apply page-wrap flex items-center justify-center text-center gap-4 min-h-[48vh] py-16;
+  }
+
+  @screen md {
+    .hero__inner {
+      @apply min-h-[60vh] py-24;
+    }
+  }
 }
 
 

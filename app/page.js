@@ -21,19 +21,21 @@ export default function Home() {
   <div className="hero__overlay" aria-hidden="true" />
 
   {/* Contenido */}
-  <div className="hero__content">
-    <h1 className="text-3xl font-semibold">Abogados laborales en CABA y GBA</h1>
-    <p className="mt-2 max-w-2xl">
-      Accidentes de trabajo, despidos sin causa y reclamos a ART.
-    </p>
-    <div className="mt-4 flex gap-3">
-      <Link href="/contacto" className="btn focus-ring bg-white text-neutral-900 hover:bg-white/90">
-        Contactanos
-      </Link>
-      {/* Ancla interna */}
-      <a href="#lead-form" className="btn focus-ring bg-white/10 hover:bg-white/20">
-        Quiero una consulta
-      </a>
+  <div className="hero__inner">
+    <div>
+      <h1 className="hero__title">Abogados laborales en CABA y GBA</h1>
+      <p className="hero__subtitle">
+        Accidentes de trabajo, despidos sin causa y reclamos a ART.
+      </p>
+      <div className="mt-4 flex justify-center gap-3">
+        <Link href="/contacto" className="btn focus-ring bg-white text-neutral-900 hover:bg-white/90">
+          Contactanos
+        </Link>
+        {/* Ancla interna: <a> es correcto */}
+        <a href="#lead-form" className="btn focus-ring bg-white/10 hover:bg-white/20">
+          Quiero una consulta
+        </a>
+      </div>
     </div>
   </div>
 </section>

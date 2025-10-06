@@ -113,31 +113,39 @@ const heroPos = svc.heroPos || "object-center"; // opcional: encuadre (object-to
       </nav>
 
       {/* HERO unificado */}
-      <section id="hero" className="hero">
-        {heroSrc && (
-          <Image
-            src={heroSrc}
-            alt={heroAlt}
-            fill
-            priority
-            sizes="100vw"
-            className={`hero__img ${heroPos}`}
-          />
-        )}
-        <div className="hero__overlay" aria-hidden="true" />
-        <div className="relative">
-          <h1 className="text-3xl font-semibold">{title}</h1>
-          {intro && <p className="mt-2 max-w-2xl">{intro}</p>}
-          <div className="mt-4 flex gap-3">
-            <Link href="/contacto" className="btn focus-ring bg-white text-neutral-900 hover:bg-white/90">
-              Contactanos
-            </Link>
-            <Link href="/faq" className="btn focus-ring bg-white/10 hover:bg-white/20">
-              Ver preguntas
-            </Link>
-          </div>
-        </div>
-      </section>
+      <section id="hero" className="hero hero--lg">
+  {heroSrc && (
+    <Image
+      src={heroSrc}
+      alt={heroAlt}
+      fill
+      priority
+      sizes="100vw"
+      quality={60}
+      className={`hero__img ${heroPos}`} // p.ej. 'object-center' / 'object-[50%_30%]'
+    />
+  )}
+
+  <div className="hero__overlay" aria-hidden="true" />
+
+  {/* Contenido centrado (usa utilidades globales hero__inner/hero__title/hero__subtitle) */}
+  <div className="hero__inner">
+    <div>
+      <h1 className="hero__title">{title}</h1>
+      {intro && <p className="hero__subtitle">{intro}</p>}
+
+      <div className="mt-4 flex justify-center gap-3">
+        <Link href="/contacto" className="btn focus-ring bg-white text-neutral-900 hover:bg-white/90">
+          Contactanos
+        </Link>
+        <Link href="/faq" className="btn focus-ring bg-white/10 hover:bg-white/20">
+          Ver preguntas
+        </Link>
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* ¿En qué te ayudamos? */}
       <section className="section">
