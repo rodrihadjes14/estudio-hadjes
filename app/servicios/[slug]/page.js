@@ -116,6 +116,13 @@ export default function ServicePage({ params }) {
       <JsonLd data={breadcrumbLd} />
       <JsonLd data={legalServiceLd} />
 
+      <nav className="mb-4 text-sm">
+      <Link href="/">Inicio</Link> <span className="mx-1">/</span>{" "}
+      <Link href="/servicios">Servicios</Link> <span className="mx-1">/</span>{" "}
+      <span>{title}</span>
+      </nav>
+
+
       <h1 className="text-2xl font-semibold">{title}</h1>
 
       <LeadBlock title="¿En qué te ayudamos?">

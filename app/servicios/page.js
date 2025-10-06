@@ -48,6 +48,10 @@ export default function ServiciosIndex() {
     <main style={{ maxWidth: 800, margin: "40px auto", padding: "0 16px" }}>
       <JsonLd data={breadcrumbLd} />
 
+      <nav className="mb-4 text-sm">
+  <Link href="/">Inicio</Link> <span className="mx-1">/</span> <span>Servicios</span>
+</nav>
+
       <h1>Servicios legales</h1>
 
       <LeadBlock title="Cómo trabajamos">
