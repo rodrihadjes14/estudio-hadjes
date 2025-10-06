@@ -26,8 +26,8 @@ export default function LP() {
 
       <div style={{display:"flex", gap:12, marginTop:16}}>
         <a href="/contacto" style={{padding:"10px 16px", border:"1px solid #888", borderRadius:6}}>Escribinos</a>
-        <a href="tel:[PLACEHOLDER_TELEFONO]" style={{padding:"10px 16px", border:"1px solid #888", borderRadius:6}}>Llamar ahora</a>
-        <a href="https://wa.me/54[NUMERO_SIN_0Y15]" style={{padding:"10px 16px", border:"1px solid #888", borderRadius:6}}>WhatsApp</a>
+        <a href="tel:+5491130261498" style={{padding:"10px 16px", border:"1px solid #888", borderRadius:6}}>Llamar ahora</a>
+        <a href="https://wa.me/541130261498" style={{padding:"10px 16px", border:"1px solid #888", borderRadius:6}}>WhatsApp</a>
       </div>
 
       <ul style={{marginTop:24}}>
