@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
 import Script from "next/script";
 import GA4RouteListener from "@/components/GA4RouteListener";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 
@@ -67,9 +68,11 @@ export default function RootLayout({ children }) {
 
         <Header />
 
+        <Suspense fallback={null}>
         {/* GA4: escucha de cambios de ruta */}
         <GA4RouteListener measurementId="G-XM7QCMV29D" />
-
+        </Suspense>
+        
         {children}
 
         <Footer />

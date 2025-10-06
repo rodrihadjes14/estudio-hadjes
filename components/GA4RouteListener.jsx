@@ -1,20 +1,18 @@
 "use client";
-
 import { useEffect } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const GA_MEASUREMENT_ID = "G-XM7QCMV29D";
 
 export default function GA4RouteListener() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   useEffect(() => {
     if (typeof window === "undefined" || !window.gtag) return;
-    const q = searchParams?.toString();
-    const page_path = q ? `${pathname}?${q}` : pathname;
+    const search = window.location?.search || "";
+    const page_path = `${pathname}${search}`;
     window.gtag("config", GA_MEASUREMENT_ID, { page_path });
-  }, [pathname, searchParams]);
+  }, [pathname]);
 
   return null;
 }
