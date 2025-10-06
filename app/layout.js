@@ -7,6 +7,7 @@ import JsonLd from "@/components/JsonLd";
 import Script from "next/script";
 import GA4RouteListener from "@/components/GA4RouteListener";
 import { Suspense } from "react";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 
@@ -68,16 +69,6 @@ export default function RootLayout({ children }) {
 
         <Header />
 
-        <Suspense fallback={null}>
-        {/* GA4: escucha de cambios de ruta */}
-        <GA4RouteListener measurementId="G-XM7QCMV29D" />
-        </Suspense>
-        
-        {children}
-
-        <Footer />
-
-        {/* GA4 base */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-XM7QCMV29D"
           strategy="afterInteractive"
@@ -94,6 +85,21 @@ export default function RootLayout({ children }) {
             });
           `}
         </Script>
+
+        <Suspense fallback={null}>
+        {/* GA4: escucha de cambios de ruta */}
+        <GA4RouteListener measurementId="G-XM7QCMV29D" />
+        </Suspense>
+
+        {children}
+
+        <Footer />
+
+        {/* GA4 base */}
+
+        {/* FAB WhatsApp en todo el sitio */}
+        <WhatsAppButton />
+        
       </body>
     </html>
   );
