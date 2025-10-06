@@ -1,17 +1,19 @@
+// app/blog/[slug]/page.js
 import { notFound } from "next/navigation";
 import { getAllPostsMeta, getPostBySlug } from "@/lib/markdown";
 import { pageMeta } from "@/lib/seo";
 import JsonLd from "@/components/JsonLd";
+import Link from "next/link";
 
 export const revalidate = 60;
 
 export async function generateStaticParams() {
   const posts = getAllPostsMeta();
-  return posts.map(p => ({ slug: p.slug }));
+  return posts.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }) {
-  const { slug } = await params;
+  const { slug } = params || {};
   const post = await getPostBySlug(slug);
   if (!post) return {};
 
@@ -20,11 +22,12 @@ export async function generateMetadata({ params }) {
     title: meta.title,
     description: meta.summary || "",
     path: `/blog/${meta.slug}`,
+    ogImage: meta.ogImage, // si existe en el front-matter
   });
 }
 
 export default async function BlogPost({ params }) {
-  const { slug } = await params;
+  const { slug } = params || {};
   const post = await getPostBySlug(slug);
   if (!post) return notFound();
 
@@ -33,6 +36,7 @@ export default async function BlogPost({ params }) {
   const base = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
   const canonical = `${base}/blog/${meta.slug}`;
 
+  // JSON-LD: Article
   const articleLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -41,17 +45,64 @@ export default async function BlogPost({ params }) {
     author: { "@type": "Organization", name: meta.author || "Estudio Hadjes" },
     publisher: { "@type": "Organization", name: "Estudio Hadjes" },
     mainEntityOfPage: canonical,
+    ...(meta.ogImage ? { image: [`${base}${meta.ogImage.startsWith("/") ? "" : "/"}${meta.ogImage}`] } : {}),
+  };
+
+  // JSON-LD: Breadcrumbs
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Inicio", item: base },
+      { "@type": "ListItem", position: 2, name: "Blog", item: `${base}/blog` },
+      { "@type": "ListItem", position: 3, name: meta.title, item: canonical },
+    ],
   };
 
   return (
-    <main style={{ maxWidth: 720, margin: "40px auto", padding: "0 16px" }}>
+    <main className="max-w-5xl mx-auto my-10 px-4 leading-relaxed">
       <JsonLd data={articleLd} />
-      <h1>{meta.title}</h1>
-      <small>{meta.date} — {meta.author}</small>
+      <JsonLd data={breadcrumbLd} />
+
+      {/* Breadcrumb visible */}
+      <nav className="mb-4 text-sm">
+        <Link href="/">Inicio</Link> <span className="mx-1">/</span>{" "}
+        <Link href="/blog">Blog</Link> <span className="mx-1">/</span>{" "}
+        <span>{meta.title}</span>
+      </nav>
+
+      <h1 className="text-3xl font-semibold">{meta.title}</h1>
+      <p className="mt-1 text-sm opacity-80">
+        {meta.date}{meta.author ? ` — ${meta.author}` : ""}
+      </p>
+
+      {/* Cuerpo del post (HTML generado desde Markdown) */}
       <article
-        style={{ marginTop: 16, lineHeight: 1.7 }}
+        className="mt-4 space-y-4"
         dangerouslySetInnerHTML={{ __html: html }}
       />
+
+      {/* Interlinking interno */}
+      <section className="mt-8">
+        <h2 className="text-xl font-semibold">Seguí leyendo</h2>
+        <ul className="mt-2 list-disc pl-5 space-y-1">
+          <li>
+            <Link href="/servicios" className="underline underline-offset-2">
+              Ver todos los servicios
+            </Link>
+          </li>
+          <li>
+            <Link href="/faq" className="underline underline-offset-2">
+              Preguntas frecuentes
+            </Link>
+          </li>
+          <li>
+            <Link href="/contacto" className="underline underline-offset-2">
+              Contactanos
+            </Link>
+          </li>
+        </ul>
+      </section>
     </main>
   );
 }
