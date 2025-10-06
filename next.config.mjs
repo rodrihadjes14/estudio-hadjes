@@ -22,7 +22,12 @@ const nextConfig = {
     ];
   },
 
-  images: { formats: ["image/avif", "image/webp"] },
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 60 * 60 * 24, // 1 día en segundos (por defecto es 60s)
+  },
 };
+
+
 
 export default nextConfig;

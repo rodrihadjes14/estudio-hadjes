@@ -5,7 +5,7 @@ import { SERVICES } from "@/lib/services";
 import { pageMeta } from "@/lib/seo";
 import Image from "next/image";
 export const revalidate = 60;
-
+import serviciosHero from "@/public/hero/servicios.jpg";
 
 export function generateMetadata() {
   return pageMeta({
@@ -56,12 +56,14 @@ export default function ServiciosIndex() {
        <section id="hero" className="hero hero--lg">
   {/* Fondo */}
   <Image
-    className="hero__img object-bottom"
-    src="/hero/servicios.jpg" // colocá la imagen en /public/hero/servicios.jpg
+    src={serviciosHero}
     alt="Despido y accidente de trabajo ART CABA GBA"
     fill
     priority
-    sizes="100vw"
+    sizes="(min-width: 1280px) 1280px, (min-width: 768px) 768px, 100vw"
+    quality={60}             // bajar de 75 a 60 reduce bastante sin perder calidad percibida
+    placeholder="blur"
+    className="hero__img object-center md:object-[50%_30%]" // ajustá el encuadre si querés
   />
 
   {/* Overlay */}
