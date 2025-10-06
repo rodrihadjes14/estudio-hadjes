@@ -43,6 +43,9 @@
   .hero__inner {
     @apply page-wrap flex items-center justify-center text-center gap-4 min-h-[48vh] py-16;
   }
+  .hero__title {
+    @apply text-xl md:text-2xl font-semibold;
+  }
 
   @screen md {
     .hero__inner {
