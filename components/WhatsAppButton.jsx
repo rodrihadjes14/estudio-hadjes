@@ -1,23 +1,25 @@
 "use client";
+import Image from "next/image";
 
 export default function WhatsAppButton({
   phone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "+5491130261498",
-  message = "Hola, vengo del sitio web. Quiero hacer una consulta.",
+  message = "Hola, quiero hacer una consulta legal.",
   gaLabel = "fab",
 }) {
+  // Limpia a solo dígitos para wa.me
   const digits = phone.replace(/\D/g, "");
-  // Fallback SSR por si algo impide el onClick
   const baseHref = `https://wa.me/${digits}?text=${encodeURIComponent(message)}`;
 
   function handleClick(e) {
     try {
       e.preventDefault();
+
       const pathname =
         typeof window !== "undefined" ? window.location.pathname : "";
       const url = new URL(`https://wa.me/${digits}`);
       url.searchParams.set("text", `${message} (página: ${pathname})`);
 
-      // GA4 evento
+      // GA4: evento custom
       if (typeof window !== "undefined" && window.gtag) {
         window.gtag("event", "whatsapp_click", {
           link_url: url.toString(),
@@ -27,9 +29,10 @@ export default function WhatsAppButton({
           page_title: document.title,
         });
       }
+
       window.open(url.toString(), "_blank", "noopener,noreferrer");
     } catch {
-      // En caso de error, que siga el href default
+      // Fallback si algo falla
       window.open(baseHref, "_blank", "noopener,noreferrer");
     }
   }
@@ -40,24 +43,27 @@ export default function WhatsAppButton({
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Abrir chat de WhatsApp"
-      className="wa-fab btn-whatsapp"
       onClick={handleClick}
+      // FAB fijo, redondo, verde oficial, centrado el ícono
+      className="
+        fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50
+        flex items-center justify-center
+        h-14 w-14 md:h-16 md:w-16
+        rounded-full bg-[#25D366]
+        shadow-lg ring-1 ring-black/15
+        transition transform hover:scale-105 hover:shadow-xl
+        focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80
+        active:scale-95
+      "
     >
-      {/* Ícono SVG (nítido y escalable) */}
-      <svg
-        className="wa-ico"
-        viewBox="0 0 24 24"
-        aria-hidden="true"
-        focusable="false"
-      >
-        {/* handset blanco sobre fondo verde del botón */}
-        <path
-          fill="currentColor"
-          d="M19.5 18.8c-.2.5-1.2 1-1.6 1.1-.4.1-.9.1-1.5-.1-1.8-.7-3.2-1.9-4.4-3.5-1.1-1.6-1.5-3-1.3-4.1.1-.5.6-1.3 1.1-1.5.3-.1.7 0 1 .2l1.5 1.1c.3.2.4.5.3.8-.1.4-.3.9-.5 1.1-.1.2 0 .4.1.6.6 1 1.4 1.9 2.4 2.6.2.2.4.2.6.1.3-.2.7-.4 1.1-.5.3-.1.6 0 .8.3l1.1 1.5c.2.3.3.7.2 1z"
-        />
-      </svg>
-
-      {/* Etiqueta accesible oculta (por si querés; ya tenemos aria-label) */}
+      <Image
+        src="/icons/whatsapp.svg"
+        alt=""                             // decorativo (aria-label ya lo describe)
+        width={28}
+        height={28}
+        priority={false}
+        className="pointer-events-none w-7 h-7 md:w-8 md:h-8"
+      />
       <span className="sr-only">WhatsApp</span>
     </a>
   );
