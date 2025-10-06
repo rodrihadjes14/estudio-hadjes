@@ -2,46 +2,74 @@
 @import "tailwindcss";
 
 
+@import "tailwindcss";
+
+/* 2.1. Tokens de tema (Tailwind v4) */
+@theme {
+  /* Tipografía */
+  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  /* Colores base (oscuro de ejemplo; ajustá valores) */
+  --color-bg: #0b0b0c;
+  --color-surface: #0f1012;
+  --color-fg: #f5f5f7;
+  --color-muted: #a1a1aa;
+  --color-border: #27272a;
+  --color-brand: #0ea5e9;
+
+  /* Radios y sombras */
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+
+  /* Contenedores (para .container si lo usas) */
+  --container-3xl: 64rem;  /* 1024px */
+  --container-4xl: 80rem;  /* 1280px */
+}
+
+/* 2.2. Utilidades de diseño (no repetir clases) */
+@utility page-wrap {
+  @apply max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 leading-relaxed;
+}
+
+@utility section {
+  @apply py-8 md:py-10;
+}
+
+@utility section-title {
+  @apply text-xl md:text-2xl font-semibold;
+}
+
+@utility card {
+  @apply rounded-md border border-border bg-surface p-4;
+}
+
+@utility btn {
+  @apply inline-block rounded-md border border-border px-4 py-2 hover:bg-neutral-900;
+}
+
+@utility link {
+  @apply underline underline-offset-2;
+}
+
+@utility input-base {
+  @apply rounded-md border border-border bg-transparent px-3 py-2;
+}
+
+@utility focus-ring {
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-bg;
+}
+
+/* 2.3. Estilos globales mínimos */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark; /* ejemplo en dark; si usás light/auto, ajustá */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+html, body {
+  height: 100%;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  @apply bg-bg text-fg font-sans;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-}
 
