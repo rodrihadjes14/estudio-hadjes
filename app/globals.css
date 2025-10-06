@@ -52,23 +52,12 @@
       @apply min-h-[60vh] py-24;
     }
   }
-
-  /* Botón flotante WhatsApp: tamaño + posición + accesibilidad */
-@utility wa-fab {
-  @apply fixed bottom-4 right-4 z-50 inline-flex items-center justify-center
-         rounded-full shadow-lg transition-transform duration-150
-         w-16 h-16 md:w-14 md:h-14; /* móvil más grande */
-}
-@utility btn-whatsapp {
-  @apply bg-[#25D366] text-white hover:bg-[#1ebe57] focus:outline-none
-         focus-visible:ring-2 focus-visible:ring-offset-2
-         focus-visible:ring-[#25D366] focus-visible:ring-offset-neutral-900;
-}
-@utility wa-ico {
-  @apply w-8 h-8 md:w-7 md:h-7; /* ícono más grande en móvil */
+.wa-fab       { @apply fixed bottom-4 right-4 z-50 inline-flex items-center justify-center rounded-full shadow-lg transition-transform duration-150 w-16 h-16 md:w-14 md:h-14; }
+.btn-whatsapp { @apply bg-[#25D366] text-white hover:bg-[#1ebe57] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-neutral-900; }
+.wa-ico       { @apply w-8 h-8 md:w-7 md:h-7; }
 }
 
-}
+
 
 
 
