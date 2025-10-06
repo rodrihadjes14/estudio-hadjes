@@ -45,11 +45,13 @@ export default function ServicePage({ params }) {
   const base = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
   const canonical = `${base}/servicios/${slug}`;
 
-  // Hero (opcional por servicio)
-  const title = svc.h1 || svc.title || "Servicio";
-  const intro = svc.intro || svc.description || "";
-  const heroSrc = svc.hero || null; // ej: "/hero/accidentes-trabajo.jpg" en /public
-  const heroAlt = svc.heroAlt || title;
+  // Hero (convención de archivos en /public/hero/<slug>.jpg)
+const title   = svc.h1 || svc.title || "Servicio";
+const intro   = svc.intro || svc.description || "";
+const heroSrc = `/hero/${slug}.jpg`;          // requiere el archivo en /public/hero/
+const heroAlt = svc.heroAlt || title;
+const heroPos = svc.heroPos || "object-center"; // opcional: encuadre (object-top/bottom/…)
+
 
   // JSON-LD
   const breadcrumbLd = {
@@ -117,7 +119,7 @@ export default function ServicePage({ params }) {
             fill
             priority
             sizes="100vw"
-            className="hero__img"
+            className={`hero__img ${heroPos}`}
           />
         )}
         <div className="hero__overlay" aria-hidden="true" />
