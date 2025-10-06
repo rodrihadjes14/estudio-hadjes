@@ -56,12 +56,12 @@ export default function ServiciosIndex() {
        <section id="hero" className="hero hero--lg">
   {/* Fondo */}
   <Image
+    className="hero__img object-bottom"
     src="/hero/servicios.jpg" // colocá la imagen en /public/hero/servicios.jpg
     alt="Despido y accidente de trabajo ART CABA GBA"
     fill
     priority
     sizes="100vw"
-    className="hero__img"
   />
 
   {/* Overlay */}

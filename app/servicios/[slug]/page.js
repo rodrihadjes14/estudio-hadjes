@@ -45,9 +45,10 @@ export default function ServicePage({ params }) {
   const base = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
   const canonical = `${base}/servicios/${slug}`;
 
-  // Hero opcional
-  const heroSrc = svc.hero;
+  // Hero (opcional por servicio)
   const title = svc.h1 || svc.title || "Servicio";
+  const intro = svc.intro || svc.description || "";
+  const heroSrc = svc.hero || null; // ej: "/hero/accidentes-trabajo.jpg" en /public
   const heroAlt = svc.heroAlt || title;
 
   // JSON-LD
@@ -70,8 +71,7 @@ export default function ServicePage({ params }) {
     serviceType: title,
   };
 
-  // Contenido base
-  const intro = svc.intro || svc.description || "";
+  // Bullets base
   const bullets =
     svc.bullets ||
     (Array.isArray(svc.faqs) ? svc.faqs.map((f) => f.q).filter(Boolean) : []) ||
@@ -97,32 +97,45 @@ export default function ServicePage({ params }) {
 
   return (
     <main className="page-wrap">
-      {heroSrc && (
-        <div className="mb-4">
-          <Image
-            src={heroSrc}
-            alt={heroAlt}
-            width={1200}
-            height={630}
-            priority
-            className="h-auto w-full rounded-lg"
-          />
-        </div>
-      )}
-
+      {/* JSON-LD */}
       <JsonLd data={breadcrumbLd} />
       <JsonLd data={legalServiceLd} />
 
-      {/* Breadcrumb visible */}
+      {/* Breadcrumb visible (debajo del header) */}
       <nav className="mb-4 text-sm">
         <Link href="/">Inicio</Link> <span className="mx-1">/</span>{" "}
         <Link href="/servicios">Servicios</Link> <span className="mx-1">/</span>{" "}
         <span>{title}</span>
       </nav>
 
-      <h1 className="text-3xl font-semibold">{title}</h1>
+      {/* HERO unificado */}
+      <section id="hero" className="hero">
+        {heroSrc && (
+          <Image
+            src={heroSrc}
+            alt={heroAlt}
+            fill
+            priority
+            sizes="100vw"
+            className="hero__img"
+          />
+        )}
+        <div className="hero__overlay" aria-hidden="true" />
+        <div className="relative">
+          <h1 className="text-3xl font-semibold">{title}</h1>
+          {intro && <p className="mt-2 max-w-2xl">{intro}</p>}
+          <div className="mt-4 flex gap-3">
+            <Link href="/contacto" className="btn focus-ring bg-white text-neutral-900 hover:bg-white/90">
+              Contactanos
+            </Link>
+            <Link href="/faq" className="btn focus-ring bg-white/10 hover:bg-white/20">
+              Ver preguntas
+            </Link>
+          </div>
+        </div>
+      </section>
 
-      {/* Intro + bullets + CTA (manteniendo tus bloques actuales) */}
+      {/* ¿En qué te ayudamos? */}
       <section className="section">
         <h2 className="section-title">¿En qué te ayudamos?</h2>
         <LeadBlock>
