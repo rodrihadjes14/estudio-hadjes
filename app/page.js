@@ -1,25 +1,42 @@
 import Link from "next/link";
 import CalculadoraIndemnizacion from "@/components/CalculadoraIndemnizacion";
+import Image from "next/image";
 
 export default function Home() {
   return (
     <main className="page-wrap">
-      {/* HERO */}
-      <section id="hero" className="section">
-        <h1 className="text-3xl font-semibold">Abogados laborales en CABA y GBA</h1>
-        <p className="mt-2 max-w-2xl">
-          Accidentes de trabajo, despidos sin causa y reclamos a ART.
-        </p>
-        <div className="mt-4 flex gap-3">
-          <Link href="/contacto" className="btn focus-ring">
-            Contactanos
-          </Link>
-          {/* ancla interna: permitido usar <a> */}
-          <a href="#lead-form" className="btn focus-ring">
-            Quiero una consulta
-          </a>
-        </div>
-      </section>
+    {/* HERO */}
+    <section id="hero" className="section relative isolate overflow-hidden rounded-xl text-white">
+    {/* Fondo */}
+    <Image
+    src="/hero/hero-home.jpg"
+    alt=""
+    fill
+    priority
+    sizes="100vw"
+    className="object-cover object-center -z-10"
+    />
+    {/* Overlay para contraste */}
+    <div className="absolute inset-0 bg-black/60 -z-10" aria-hidden="true" />
+
+    {/* Contenido */}
+    <div className="relative">
+    <h1 className="text-3xl font-semibold">Abogados laborales en CABA y GBA</h1>
+    <p className="mt-2 max-w-2xl">
+      Accidentes de trabajo, despidos sin causa y reclamos a ART.
+    </p>
+    <div className="mt-4 flex gap-3">
+      <Link href="/contacto" className="btn focus-ring bg-white text-neutral-900 hover:bg-white/90">
+        Contactanos
+      </Link>
+      {/* ancla interna: mantené <a> */}
+      <a href="#lead-form" className="btn focus-ring bg-white/10 hover:bg-white/20">
+        Quiero una consulta
+      </a>
+    </div>
+    </div>
+    </section>
+
 
       {/* SERVICIOS */}
       <section id="servicios" className="section">
