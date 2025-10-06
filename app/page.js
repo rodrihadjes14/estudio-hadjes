@@ -9,8 +9,8 @@ export default function Home() {
     <section id="hero" className="section relative isolate overflow-hidden rounded-xl text-white">
     {/* Fondo */}
     <Image
-    src="/hero/hero-home.jpg"
-    alt=""
+    src="/hero/abogado-laboral.jpeg"
+    alt="Reclamo ART CABA y GBA"
     fill
     priority
     sizes="100vw"
