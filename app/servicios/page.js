@@ -3,8 +3,9 @@ import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { SERVICES } from "@/lib/services";
 import { pageMeta } from "@/lib/seo";
-
+import Image from "next/image";
 export const revalidate = 60;
+
 
 export function generateMetadata() {
   return pageMeta({
@@ -52,15 +53,37 @@ export default function ServiciosIndex() {
         <Link href="/">Inicio</Link> <span className="mx-1">/</span> <span>Servicios</span>
       </nav>
 
-      <h1 className="text-3xl font-semibold">Servicios legales</h1>
+       <section id="hero" className="hero hero--lg">
+  {/* Fondo */}
+  <Image
+    src="/hero/servicios.jpg" // colocá la imagen en /public/hero/servicios.jpg
+    alt="Despido y accidente de trabajo ART CABA GBA"
+    fill
+    priority
+    sizes="100vw"
+    className="hero__img"
+  />
 
-      <section className="section">
-        <h2 className="section-title">Cómo trabajamos</h2>
-        <p className="mt-2 max-w-2xl">
-          Enfocados en trabajadores de CABA y GBA. Analizamos tu caso, definimos la estrategia y te
-          acompañamos durante todo el proceso.
-        </p>
-      </section>
+  {/* Overlay */}
+  <div className="hero__overlay" aria-hidden="true" />
+
+  {/* Contenido */}
+  <div className="hero__content">
+    <h1 className="text-3xl font-semibold">Servicios legales</h1>
+    <p className="mt-2 max-w-2xl">
+      Enfocados en trabajadores de CABA y GBA. Analizamos tu caso, definimos la estrategia y te
+      acompañamos durante todo el proceso.
+    </p>
+    <div className="mt-4 flex gap-3">
+      <Link href="/contacto" className="btn focus-ring bg-white text-neutral-900 hover:bg-white/90">
+        Contactanos
+      </Link>
+      <Link href="/faq" className="btn focus-ring bg-white/10 hover:bg-white/20">
+        Ver preguntas
+      </Link>
+    </div>
+  </div>
+</section>
 
       <section className="section">
         <h2 className="section-title">Elegí un servicio</h2>

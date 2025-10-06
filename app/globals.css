@@ -1,6 +1,7 @@
 
 @import "tailwindcss";
 
+
 /* 2.1. Tokens de tema (Tailwind v4) */
 @theme {
   /* Tipografía */
@@ -22,6 +23,27 @@
   --container-3xl: 64rem;  /* 1024px */
   --container-4xl: 80rem;  /* 1280px */
 }
+
+@utility hero {
+  @apply relative isolate overflow-hidden rounded-xl
+         py-20 md:py-28 lg:py-32   /* más alto */
+         min-h-[420px];            /* alto mínimo consistente */
+}
+
+@layer utilities {
+  /* Hero base reutilizable */
+  .hero { @apply section relative isolate overflow-hidden rounded-xl text-white; }
+  .hero--md { @apply min-h-[420px] py-12; }
+  .hero--lg { @apply min-h-[520px] py-16; } /* tamaño por defecto recomendado */
+
+  /* Partes internas */
+  .hero__overlay { @apply absolute inset-0 bg-black/60 -z-10; }
+  .hero__img { @apply object-cover object-center -z-10; }
+  .hero__content { @apply relative max-w-3xl; }
+}
+
+
+
 
 /* 2.2. Utilidades de diseño (no repetir clases) */
 @utility page-wrap {
