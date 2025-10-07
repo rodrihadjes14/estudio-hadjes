@@ -1,256 +1,295 @@
 "use client";
 
-import { useMemo, useState } from "react";
-
-/* =========================
-   Helpers de validación
-   ========================= */
-
-// Verifica formato YYYY-MM-DD y que sea una fecha válida
-function safeParseDate(s) {
-  if (typeof s !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(s)) return null;
-  const d = new Date(s + "T00:00:00");
-  return isNaN(d.getTime()) ? null : d;
-}
-
-// Acepta "123456.78", "123.456,78" o "123456" y devuelve Number >= 0
-function parseARSNumber(input) {
-  if (typeof input === "number") return isFinite(input) && input >= 0 ? input : NaN;
-  if (typeof input !== "string") return NaN;
-  const trimmed = input.trim();
-
-  // Si viene de <input type="number"> suele ser "123456.78"
-  const n1 = Number(trimmed);
-  if (!Number.isNaN(n1) && n1 >= 0) return n1;
-
-  // Soporte a formato argentino: "1.234.567,89"
-  const normalized = trimmed
-    .replace(/\./g, "") // quita separador de miles
-    .replace(",", "."); // coma decimal -> punto
-  const n2 = Number(normalized);
-  return !Number.isNaN(n2) && n2 >= 0 ? n2 : NaN;
-}
-
-// Años completos entre fechas (0 si end < start o fechas inválidas)
-function yearsBetween(start, end) {
-  if (!(start instanceof Date) || isNaN(start)) return 0;
-  if (!(end instanceof Date) || isNaN(end)) return 0;
-  if (end < start) return 0;
-  let y = end.getFullYear() - start.getFullYear();
-  const mDiff = end.getMonth() - start.getMonth();
-  const dDiff = end.getDate() - start.getDate();
-  if (mDiff < 0 || (mDiff === 0 && dDiff < 0)) y -= 1;
-  return Math.max(0, y);
-}
-
-function formatARS(n) {
-  try {
-    return n.toLocaleString("es-AR", {
-      style: "currency",
-      currency: "ARS",
-      maximumFractionDigits: 2,
-    });
-  } catch {
-    // Fallback simple si el entorno no soporta Intl
-    return `ARS ${Math.round(n * 100) / 100}`;
-  }
-}
-
-// Retorna objeto de errores por campo
-function validateFields({ fechaIngreso, fechaDespido, remuneracion }) {
-  const errors = {};
-
-  const dIng = safeParseDate(fechaIngreso);
-  const dDes = safeParseDate(fechaDespido);
-  const R = parseARSNumber(remuneracion);
-
-  if (!fechaIngreso) errors.fechaIngreso = "Ingresá la fecha de ingreso.";
-  else if (!dIng) errors.fechaIngreso = "Fecha de ingreso no válida (usar formato AAAA-MM-DD).";
-
-  if (!fechaDespido) errors.fechaDespido = "Ingresá la fecha de despido.";
-  else if (!dDes) errors.fechaDespido = "Fecha de despido no válida (usar formato AAAA-MM-DD).";
-
-  if (dIng && dDes && dDes < dIng) {
-    errors.fechaDespido = "La fecha de despido debe ser posterior a la fecha de ingreso.";
-  }
-
-  if (remuneracion === "" || remuneracion === null || remuneracion === undefined) {
-    errors.remuneracion = "Ingresá la remuneración.";
-  } else if (Number.isNaN(R)) {
-    errors.remuneracion = "Remuneración no válida.";
-  } else if (R <= 0) {
-    errors.remuneracion = "La remuneración debe ser mayor a 0.";
-  }
-
-  return errors;
-}
-
-/* =========================
-   Componente principal
-   ========================= */
+import { useState } from "react";
 
 export default function CalculadoraIndemnizacion() {
-  const [remuneracion, setRemuneracion] = useState("");
+  // Inputs
   const [fechaIngreso, setFechaIngreso] = useState("");
   const [fechaDespido, setFechaDespido] = useState("");
+  const [remuneracion, setRemuneracion] = useState("");
+  const [tope245, setTope245] = useState("");
+  const [sinPreaviso, setSinPreaviso] = useState(true);
 
-  const [detalle, setDetalle] = useState(null);
-  const [errors, setErrors] = useState({});
-  const [submitted, setSubmitted] = useState(false);
+  // Salida y errores
+  const [errores, setErrores] = useState([]);
+  const [resultado, setResultado] = useState(null);
 
-  const dIng = useMemo(() => safeParseDate(fechaIngreso), [fechaIngreso]);
-  const dDes = useMemo(() => safeParseDate(fechaDespido), [fechaDespido]);
-
-  const anosServicio = useMemo(() => yearsBetween(dIng, dDes), [dIng, dDes]);
-
-  function handleBlur() {
-    // Valida onBlur para mostrar ayudas tempranas sin bloquear la edición
-    setErrors(validateFields({ fechaIngreso, fechaDespido, remuneracion }));
+  // ---- Helpers seguros (sin crash) ----
+  function parseFechaYYYYMMDD(str) {
+    // Acepta sólo 'YYYY-MM-DD' y construye Date local (evita desfases de TZ)
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(str)) return null;
+    const [y, m, d] = str.split("-").map(Number);
+    const dt = new Date(y, m - 1, d);
+    if (dt.getFullYear() !== y || dt.getMonth() !== m - 1 || dt.getDate() !== d) return null;
+    return dt;
   }
 
-  function calcular() {
-    setSubmitted(true);
-    const v = validateFields({ fechaIngreso, fechaDespido, remuneracion });
-    setErrors(v);
-    if (Object.keys(v).length > 0) {
-      setDetalle(null);
-      return;
+  function diasEnMes(year, monthIndex0) {
+    return new Date(year, monthIndex0 + 1, 0).getDate();
+  }
+
+  function finDeMes(date) {
+    return new Date(date.getFullYear(), date.getMonth() + 1, 0);
+  }
+
+  function diffYMD(a, b) {
+    // Diferencia b - a en años, meses, días (calendario)
+    let y = b.getFullYear() - a.getFullYear();
+    let m = b.getMonth() - a.getMonth();
+    let d = b.getDate() - a.getDate();
+
+    if (d < 0) {
+      m -= 1;
+      const prevMonth = new Date(b.getFullYear(), b.getMonth(), 0);
+      d += prevMonth.getDate();
     }
-
-    // Variables seguras
-    const R = parseARSNumber(remuneracion);
-    const diaDespido = dDes ? dDes.getDate() : 0;
-
-    // Fórmula indicada por el usuario:
-    // Total = (Años*R) + (Años>5 ? 2R : 1R) + (diaDespido>30 ? R/30*(30 - diaDespido) : 0) + (R/25) + R
-    const c1 = anosServicio * R;
-    const c2 = anosServicio > 5 ? 2 * R : 1 * R;
-    const c3 = diaDespido > 30 ? (R / 30) * (30 - diaDespido) : 0; // puede ser negativo si el día = 31
-    const c4 = R / 25;
-    const c5 = R;
-
-    const total = c1 + c2 + c3 + c4 + c5;
-
-    setDetalle({
-      R,
-      anosServicio,
-      diaDespido,
-      partes: { c1, c2, c3, c4, c5 },
-      total,
-    });
+    if (m < 0) {
+      y -= 1;
+      m += 12;
+    }
+    return { years: y, months: m, days: d };
   }
 
-  const hasErrors = Object.keys(errors).length > 0;
+  function mesesPrecisos(a, b) {
+    // Meses (con decimales) entre a y b
+    const { years, months, days } = diffYMD(a, b);
+    const baseMonths = years * 12 + months;
+    const dim = diasEnMes(b.getFullYear(), b.getMonth());
+    return baseMonths + days / dim;
+  }
+
+  function formatoARS(n) {
+    return n.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  // ---- Cálculo principal ----
+  function calcular() {
+    try {
+      const errs = [];
+
+      // Validaciones de entrada
+      const ingreso = parseFechaYYYYMMDD(fechaIngreso);
+      if (!ingreso) errs.push("Ingresá una Fecha de Ingreso válida (YYYY-MM-DD).");
+
+      const despido = parseFechaYYYYMMDD(fechaDespido);
+      if (!despido) errs.push("Ingresá una Fecha de Despido válida (YYYY-MM-DD).");
+
+      const rem = Number(remuneracion);
+      if (!Number.isFinite(rem) || rem <= 0) errs.push("Ingresá una Remuneración válida (número mayor que 0).");
+
+      let tope = tope245 === "" ? null : Number(tope245);
+      if (tope245 !== "" && (!Number.isFinite(tope) || tope <= 0)) {
+        errs.push("Ingresá un Tope Art. 245 válido (número mayor que 0) o dejalo vacío.");
+        tope = null;
+      }
+
+      if (ingreso && despido && despido < ingreso) errs.push("La Fecha de Despido debe ser posterior a la Fecha de Ingreso.");
+
+      if (errs.length) {
+        setErrores(errs);
+        setResultado(null);
+        return;
+      }
+
+      // Datos derivados
+      const antig = diffYMD(ingreso, despido); // {years, months, days}
+      const antigMesesPrec = mesesPrecisos(ingreso, despido);
+
+      // Base Art. 245 (MRMNH topeada si corresponde)
+      const B = tope ? Math.min(rem, tope) : rem;
+
+      // 1.1 Indemnización por antigüedad (Art. 245 LCT)
+      // Años completos = antig.years
+      // F = 1 si fracción > 3 meses; caso contrario 0; mínimo 1 sueldo
+      const fraccionMeses = antig.months + antig.days / diasEnMes(despido.getFullYear(), despido.getMonth());
+      const F = fraccionMeses > 3 ? 1 : 0;
+      const baseAnios = antig.years + F;
+      const indem245 = Math.max(baseAnios * B, 1 * B);
+
+      // 1.2 Preaviso (Arts. 231–232) — sólo si "sin preaviso"
+      // - 15 días si antig < 3 meses
+      // - 1 mes si antig ≤ 5 años
+      // - 2 meses si antig > 5 años
+      let indemPreaviso = 0;
+      if (sinPreaviso) {
+        const sueldoDiario30 = rem / 30;
+        if (antigMesesPrec < 3) {
+          // Período de prueba
+          indemPreaviso = 15 * sueldoDiario30;
+        } else if (antig.years <= 5) {
+          indemPreaviso = 1 * rem;
+        } else {
+          indemPreaviso = 2 * rem;
+        }
+      }
+
+      // 1.3 Integración del mes de despido (Art. 233) — sólo si "sin preaviso" y no cae último día
+      let integracionMes = 0;
+      if (sinPreaviso) {
+        const lastDay = finDeMes(despido).getDate();
+        const diasRestantes = lastDay - despido.getDate();
+        if (diasRestantes > 0) {
+          const sueldoDiario30 = rem / 30;
+          integracionMes = diasRestantes * sueldoDiario30;
+        }
+      }
+
+      // 1.4 Vacaciones no gozadas proporcionales (Arts. 156 y 155)
+      // Días según antigüedad (Art. 150): 14 (<5), 21 (≥5 y <10), 28 (≥10 y <20), 35 (≥20)
+      const diasVacacionesPorAntig = (years) => {
+        if (years < 5) return 14;
+        if (years < 10) return 21;
+        if (years < 20) return 28;
+        return 35;
+      };
+      const diasVac = diasVacacionesPorAntig(antig.years);
+      const valorDiaVac = rem / 25; // mensualizados (Art. 155 inc. a)
+      // Proporción del año trabajado hasta el despido (meses/12 con fracción del mes)
+      const despMes = despido.getMonth(); // 0..11
+      const despDia = despido.getDate();
+      const dimDesp = diasEnMes(despido.getFullYear(), despMes);
+      const mesesTrabEnAnio = despMes + despDia / dimDesp; // 0..12
+      const vacProporc = diasVac * valorDiaVac * (mesesTrabEnAnio / 12);
+
+      // 1.5 SAC proporcional (Arts. 122–123)
+      // Proporción sobre fracción del semestre: rem * (mesesFraccion / 12)
+      const semestreInicioMes = despMes < 6 ? 0 : 6; // ene o jul
+      const mesesEnSemestre = (despMes - semestreInicioMes) + despDia / dimDesp; // 0..6
+      const sacProporc = rem * (mesesEnSemestre / 12);
+
+      // Total
+      const total = indem245 + indemPreaviso + integracionMes + vacProporc + sacProporc;
+
+      setErrores([]);
+      setResultado({
+        resumen: {
+          "Indemnización Art. 245": indem245,
+          "Preaviso (Arts. 231–232)": indemPreaviso,
+          "Integración mes (Art. 233)": integracionMes,
+          "Vacaciones proporcionales (Arts. 156/155)": vacProporc,
+          "SAC proporcional (Arts. 122/123)": sacProporc,
+        },
+        total,
+        detalle: {
+          antiguedad: `${antig.years} años, ${antig.months} meses, ${antig.days} días`,
+          baseArt245: B,
+          fraccionMayor3Meses: F === 1 ? "Sí" : "No",
+        },
+      });
+    } catch (e) {
+      setErrores(["Ocurrió un error inesperado en el cálculo. Revisá los datos e intentá nuevamente."]);
+      setResultado(null);
+    }
+  }
 
   return (
     <section id="calc">
-      <h2 className="section-title">Calculadora de indemnización (Despido)</h2>
+      
 
-      {/* Ayuda general de errores al enviar */}
-      {submitted && hasErrors && (
-        <div className="mt-3 rounded-md border border-red-300 bg-red-50 p-3 text-sm text-red-700">
-          Revisá los campos marcados para continuar.
-        </div>
-      )}
+      <form onSubmit={(e) => e.preventDefault()} noValidate>
+        <div style={{ display: "grid", gap: "12px", maxWidth: 560 }}>
+          <label>
+            Fecha de Ingreso
+            <input
+              type="date"
+              name="fechaIngreso"
+              value={fechaIngreso}
+              onChange={(e) => setFechaIngreso(e.target.value)}
+              required
+              aria-invalid={errores.some(x => x.toLowerCase().includes("ingreso"))}
+            />
+          </label>
 
-      <form
-        onSubmit={(e) => e.preventDefault()}
-        className="mt-3 grid gap-3 sm:grid-cols-3"
-        noValidate
-      >
-        <label className="flex flex-col">
-          <span className="text-sm">Fecha de ingreso</span>
-          <input
-            type="date"
-            value={fechaIngreso}
-            onChange={(e) => setFechaIngreso(e.target.value)}
-            onBlur={handleBlur}
-            className="input-base focus-ring mt-1"
-            aria-invalid={Boolean(errors.fechaIngreso)}
-          />
-          {errors.fechaIngreso && (
-            <span className="mt-1 text-xs text-red-600">{errors.fechaIngreso}</span>
-          )}
-        </label>
+          <label>
+            Fecha de Despido
+            <input
+              type="date"
+              name="fechaDespido"
+              value={fechaDespido}
+              onChange={(e) => setFechaDespido(e.target.value)}
+              required
+              aria-invalid={errores.some(x => x.toLowerCase().includes("despido"))}
+            />
+          </label>
 
-        <label className="flex flex-col">
-          <span className="text-sm">Fecha de despido</span>
-          <input
-            type="date"
-            value={fechaDespido}
-            onChange={(e) => setFechaDespido(e.target.value)}
-            onBlur={handleBlur}
-            className="input-base focus-ring mt-1"
-            aria-invalid={Boolean(errors.fechaDespido)}
-          />
-          {errors.fechaDespido && (
-            <span className="mt-1 text-xs text-red-600">{errors.fechaDespido}</span>
-          )}
-        </label>
+          <label>
+            Remuneración (MRMNH)
+            <input
+              type="number"
+              inputMode="decimal"
+              step="0.01"
+              name="remuneracion"
+              value={remuneracion}
+              onChange={(e) => setRemuneracion(e.target.value)}
+              placeholder="Ej: 650000.00"
+              required
+              aria-invalid={errores.some(x => x.toLowerCase().includes("remuneración"))}
+            />
+          </label>
 
-        <label className="flex flex-col">
-          <span className="text-sm">Remuneración</span>
-          <input
-            type="number"
-            min="0"
-            step="0.01"
-            placeholder="Ej: 500000"
-            value={remuneracion}
-            onChange={(e) => setRemuneracion(e.target.value)}
-            onBlur={handleBlur}
-            className="input-base focus-ring mt-1"
-            aria-invalid={Boolean(errors.remuneracion)}
-          />
-          {errors.remuneracion && (
-            <span className="mt-1 text-xs text-red-600">{errors.remuneracion}</span>
-          )}
-          <span className="mt-1 text-[11px] text-gray-500">
-            Acepta “123456.78” o “123.456,78”.
-          </span>
-        </label>
+          <label>
+            Tope Art. 245 (opcional)
+            <input
+              type="number"
+              inputMode="decimal"
+              step="0.01"
+              name="tope245"
+              value={tope245}
+              onChange={(e) => setTope245(e.target.value)}
+              placeholder="Ej: 900000.00"
+              aria-describedby="ayuda-tope"
+            />
+          </label>
+          <small id="ayuda-tope">Si se deja vacío, no se aplica tope.</small>
 
-        <div className="sm:col-span-3 flex items-end justify-between">
-          <div className="text-sm text-gray-600">
-            Años de servicio (automático): <strong>{anosServicio}</strong>
+          <label style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+            <input
+              type="checkbox"
+              checked={sinPreaviso}
+              onChange={(e) => setSinPreaviso(e.target.checked)}
+            />
+            Despido sin preaviso (calcula indemnización sustitutiva e integración del mes)
+          </label>
+
+          <div>
+            <button type="button" onClick={calcular}>Calcular</button>
           </div>
-          <button
-            type="button"
-            className="btn focus-ring"
-            onClick={calcular}
-            // Podés deshabilitar si querés bloquear hasta que no haya errores:
-            // disabled={hasErrors}
-          >
-            Calcular
-          </button>
+
+          {errores.length > 0 && (
+            <div role="alert" aria-live="assertive" style={{ color: "#b00020" }}>
+              {errores.map((er, i) => <div key={i}>• {er}</div>)}
+            </div>
+          )}
+
+          <div id="calc-out" aria-live="polite">
+            {resultado && (
+              <div style={{ marginTop: 8 }}>
+                <strong>Antigüedad:</strong> {resultado.detalle.antiguedad}<br />
+                <strong>Base Art. 245 (B):</strong> ${formatoARS(resultado.detalle.baseArt245)}<br />
+                <strong>Fracción &gt; 3 meses:</strong> {resultado.detalle.fraccionMayor3Meses}
+                <hr />
+                <div>
+                  {Object.entries(resultado.resumen).map(([k, v]) => (
+                    <div key={k} style={{ display: "flex", justifyContent: "space-between", gap: 12 }}>
+                      <span>{k}</span>
+                      <span>${formatoARS(v)}</span>
+                    </div>
+                  ))}
+                </div>
+                <hr />
+                <div style={{ display: "flex", justifyContent: "space-between", fontWeight: 700 }}>
+                  <span>Total estimado</span>
+                  <span>${formatoARS(resultado.total)}</span>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </form>
 
-      {detalle && (
-        <div id="calc-out" className="mt-4 grid gap-2">
-          <h3 className="text-base font-medium">Resultado</h3>
-          <div className="rounded-lg border p-3 grid gap-1 text-sm">
-            <div>Remuneración (R): <strong>{formatARS(detalle.R)}</strong></div>
-            <div>Años de servicio: <strong>{detalle.anosServicio}</strong></div>
-            <div>Día del despido: <strong>{detalle.diaDespido || "-"}</strong></div>
-            <hr className="my-2" />
-            <div>c1 = Años × R: <strong>{formatARS(detalle.partes.c1)}</strong></div>
-            <div>c2 = {detalle.anosServicio > 5 ? "2 × R" : "1 × R"}: <strong>{formatARS(detalle.partes.c2)}</strong></div>
-            <div>
-              c3 = {detalle.diaDespido > 30 ? "(R/30) × (30 − día)" : "0"}:{" "}
-              <strong>{formatARS(detalle.partes.c3)}</strong>
-            </div>
-            <div>c4 = R / 25: <strong>{formatARS(detalle.partes.c4)}</strong></div>
-            <div>c5 = R: <strong>{formatARS(detalle.partes.c5)}</strong></div>
-            <hr className="my-2" />
-            <div className="text-base">
-              Total: <strong>{formatARS(detalle.total)}</strong>
-            </div>
-          </div>
-          <p className="text-xs text-gray-600">
-            Este cálculo es orientativo y sigue la fórmula especificada.
-          </p>
-        </div>
-      )}
+      <p className="disclaimer" style={{ marginTop: 12 }}>
+        Resultado orientativo. Puede variar por CCT, topes, conceptos remunerativos/no remunerativos, y particularidades del caso.
+      </p>
     </section>
   );
 }
