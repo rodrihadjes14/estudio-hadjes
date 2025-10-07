@@ -1,7 +1,7 @@
 import Link from "next/link";
 import CalculadoraIndemnizacion from "@/components/CalculadoraIndemnizacion";
 import Image from "next/image";
-import HomeLeadForm from ".app/components/HomeLeadForm";
+import HomeLeadForm from "../components/HomeLeadForm";
 
 
 export default function Home() {
