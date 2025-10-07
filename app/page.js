@@ -1,6 +1,8 @@
 import Link from "next/link";
 import CalculadoraIndemnizacion from "@/components/CalculadoraIndemnizacion";
 import Image from "next/image";
+import HomeLeadForm from "./components/HomeLeadForm";
+
 
 export default function Home() {
   return (
@@ -119,39 +121,12 @@ export default function Home() {
     </div>
 
     {/* Columna: LEAD FORM (conservamos el id para el ancla del hero) */}
+    {/* LEAD FORM */}
     <div id="lead-form">
-      <h2 className="section-title">Solicitá tu Consulta</h2>
-      <form method="POST" action="/api/contact" className="mt-4 grid gap-3 sm:grid-cols-2">
-      {/* dentro del form de la home que postea a /api/contact */}
-      <input type="hidden" name="form_location" value="home" />
-
-        <label className="flex flex-col">
-          <span className="text-sm">Nombre</span>
-          <input name="name" required className="input-base focus-ring mt-1" />
-        </label>
-        <label className="flex flex-col">
-          <span className="text-sm">Email</span>
-          <input name="email" type="email" required className="input-base focus-ring mt-1" />
-        </label>
-        <label className="flex flex-col">
-          <span className="text-sm">Teléfono</span>
-          <input name="phone" type="tel" className="input-base focus-ring mt-1" />
-        </label>
-        <label className="flex flex-col sm:col-span-2">
-          <span className="text-sm">Consulta</span>
-          <textarea name="message" rows={4} required className="input-base focus-ring mt-1" />
-        </label>
-
-        {/* Honeypot anti-spam */}
-        <input name="website" type="text" className="sr-only" tabIndex={-1} autoComplete="off" />
-
-        <div className="sm:col-span-2">
-          <button type="submit" className="btn focus-ring">
-            Enviar
-          </button>
-        </div>
-      </form>
+    <h2 className="section-title">Hacenos tu consulta gratuita</h2>
+    <HomeLeadForm />
     </div>
+
   </div>
 </section>
 
