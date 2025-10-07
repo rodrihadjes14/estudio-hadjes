@@ -10,7 +10,7 @@ export default function Home() {
   {/* Fondo */}
   <Image
     src="/hero/abogado-laboral.jpeg"
-    alt="Reclamo ART CABA y GBA"
+    alt="Abogado despido Capital Federal"
     fill
     priority
     sizes="100vw"
@@ -23,9 +23,9 @@ export default function Home() {
   {/* Contenido */}
   <div className="hero__inner">
     <div>
-      <h1 className="hero__title">Abogados laborales en CABA y GBA</h1>
+      <h1 className="hero__title">Abogados de Accidentes de Trabajo en CABA y GBA</h1>
       <p className="hero__subtitle">
-        Si fuiste despedido sin causa, sufriste un accidente de trabajo o enfermedad profesional, contactanos para poder ayudarte.
+        Brindamos asesoramiento por despido laboral, accidente de trabajo o enfermedad profesional. Contactanos para poder ayudarte.
       </p>
       <div className="mt-4 flex justify-center gap-3">
         <Link href="/contacto" className="btn focus-ring bg-white text-neutral-900 hover:bg-white/90">
@@ -131,7 +131,7 @@ export default function Home() {
   <div className="page-wrap grid gap-6 lg:grid-cols-2 items-start">
     {/* Columna: CALCULADORA */}
     <div id="calc">
-      <h2 className="section-title">Calculadora de indemnización</h2>
+      <h2 className="section-title">Calculadora de Indemnización por Despido</h2>
       <div className="mt-4">
         <CalculadoraIndemnizacion />
       </div>
@@ -139,7 +139,7 @@ export default function Home() {
 
     {/* Columna: LEAD FORM (conservamos el id para el ancla del hero) */}
     <div id="lead-form">
-      <h2 className="section-title">Solicitá tu consulta</h2>
+      <h2 className="section-title">Solicitá tu Consulta</h2>
       <form method="POST" action="/api/contact" className="mt-4 grid gap-3 sm:grid-cols-2">
         <label className="flex flex-col">
           <span className="text-sm">Nombre</span>
