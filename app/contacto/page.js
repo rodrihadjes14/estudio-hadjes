@@ -75,6 +75,9 @@ export default function Contacto() {
         </p>
 
         <form ref={formRef} onSubmit={onSubmit} className="mt-4 grid gap-3 sm:grid-cols-2">
+          {/* dentro del form de /contacto */}
+        <input type="hidden" name="form_location" value="contacto" />
+
           <label className="flex flex-col">
             <span className="text-sm">Nombre y apellido</span>
             <input

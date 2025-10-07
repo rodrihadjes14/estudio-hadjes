@@ -122,6 +122,9 @@ export default function Home() {
     <div id="lead-form">
       <h2 className="section-title">Solicitá tu Consulta</h2>
       <form method="POST" action="/api/contact" className="mt-4 grid gap-3 sm:grid-cols-2">
+      {/* dentro del form de la home que postea a /api/contact */}
+      <input type="hidden" name="form_location" value="home" />
+
         <label className="flex flex-col">
           <span className="text-sm">Nombre</span>
           <input name="name" required className="input-base focus-ring mt-1" />
