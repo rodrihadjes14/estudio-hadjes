@@ -46,56 +46,37 @@ export default function Home() {
       <section id="servicios" className="section">
         <h2 className="section-title">Servicios</h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <article className="card">
-            <h3 className="text-lg font-semibold">Accidentes de trabajo</h3>
-            <p className="mt-1 opacity-80">Asesoramiento y reclamos ante ART.</p>
-            <Link className="link mt-2 inline-block" href="/servicios/accidentes-de-trabajo">
-              Ver más
-            </Link>
-          </article>
+      <Link href="/servicios/accidentes-de-trabajo" className="card-link group">
+      <h3 className="text-lg font-semibold">Accidentes de trabajo</h3>
+      <p className="mt-1 opacity-80">Asesoramiento y reclamos ante ART.</p>
+      </Link>
 
-          <article className="card">
-            <h3 className="text-lg font-semibold">Despidos sin causa</h3>
-            <p className="mt-1 opacity-80">Cálculo de indemnización y acciones.</p>
-            <Link className="link mt-2 inline-block" href="/servicios/despidos-sin-causa">
-              Ver más
-            </Link>
-          </article>
+      <Link href="/servicios/despidos-sin-causa" className="card-link group">
+      <h3 className="text-lg font-semibold">Despidos sin causa</h3>
+      <p className="mt-1 opacity-80">Cálculo de indemnización y acciones.</p>
+      </Link>
 
-          <article className="card">
-            <h3 className="text-lg font-semibold">Enfermedades laborales</h3>
-            <p className="mt-1 opacity-80">Gestión integral del reclamo.</p>
-            <Link className="link mt-2 inline-block" href="/servicios/enfermedades-laborales">
-              Ver más
-            </Link>
-          </article>
+      <Link href="/servicios/enfermedades-laborales" className="card-link group">
+      <h3 className="text-lg font-semibold">Enfermedades laborales</h3>
+      <p className="mt-1 opacity-80">Gestión integral del reclamo.</p>
+      </Link>
 
-          <article className="card">
-            <h3 className="text-lg font-semibold">Accidentes de tránsito</h3>
-            <p className="mt-1 opacity-80">Defensa y compensaciones.</p>
-            <Link className="link mt-2 inline-block" href="/servicios/accidentes-de-transito">
-              Ver más
-            </Link>
-          </article>
+      <Link href="/servicios/accidentes-de-transito" className="card-link group">
+      <h3 className="text-lg font-semibold">Accidentes de tránsito</h3>
+      <p className="mt-1 opacity-80">Defensa y compensaciones.</p>
+    </Link>
 
-          <article className="card">
-            <h3 className="text-lg font-semibold">Defensa del consumidor</h3>
-            <p className="mt-1 opacity-80">Reclamos por servicios y productos.</p>
-            <Link className="link mt-2 inline-block" href="/servicios/defensa-al-consumidor">
-              Ver más
-            </Link>
-          </article>
+      <Link href="/servicios/defensa-al-consumidor" className="card-link group">
+      <h3 className="text-lg font-semibold">Defensa del consumidor</h3>
+      <p className="mt-1 opacity-80">Reclamos por servicios y productos.</p>
+      </Link>
 
-          <article className="card">
-            <h3 className="text-lg font-semibold">Reclamos a ART</h3>
-            <p className="mt-1 opacity-80">
-              Gestión integral ante la Aseguradora de Riesgos del Trabajo.
-            </p>
-            <Link className="link mt-2 inline-block" href="/servicios/reclamos-a-art">
-              Ver más
-            </Link>
-          </article>
-        </div>
+      <Link href="/servicios/reclamos-a-art" className="card-link group">
+      <h3 className="text-lg font-semibold">Reclamos a ART</h3>
+      <p className="mt-1 opacity-80">Gestión integral ante la Aseguradora de Riesgos del Trabajo.</p>
+    </Link>
+    </div>
+
       </section>
 
       {/* FAQ breve */}

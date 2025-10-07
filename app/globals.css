@@ -80,6 +80,11 @@
   @apply rounded-md border border-border bg-surface p-4;
 }
 
+@utility card-link {
+  @apply card block transition-colors duration-150 focus-ring hover:bg-white hover:text-black;
+}
+
+
 @utility btn {
   @apply inline-block rounded-md border border-border px-4 py-2 hover:bg-neutral-900;
 }
