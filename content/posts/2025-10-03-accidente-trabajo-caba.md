@@ -1,10 +1,10 @@
 ---
-title: "Accidente de trabajo en CABA: pasos clave"
-slug: "accidente-trabajo-caba-pasos"
+title: "Accidente de trabajo en Capital Federal: pasos clave"
+slug: "accidente-trabajo-Capital Federal-pasos"
 date: "2025-10-03"
 author: "Estudio Hadjes"
-summary: "Guía inicial para trabajadores en CABA: qué hacer tras un accidente laboral."
-tags: ["accidente de trabajo","ART","CABA"]
+summary: "Guía inicial para trabajadores en Capital Federal: qué hacer tras un accidente laboral."
+tags: ["accidente de trabajo","ART","Capital Federal"]
 ---
 ## ¿Qué hacer primero?
 1. Reportar el accidente a tu empleador.

@@ -12,7 +12,7 @@ export default async function GET(req, { params }) {
   const { slug } = params || {};
   const svc = SERVICES[slug] || {};
   const title = svc.h1 || svc.title || "Servicio legal";
-  const subtitle = svc.intro || "Asesoramiento en CABA y GBA";
+  const subtitle = svc.intro || "Asesoramiento en Capital Federal y GBA";
 
   // Si querés usar la hero del servicio como fondo:
   const origin = new URL(req.url).origin;

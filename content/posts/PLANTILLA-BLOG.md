@@ -4,11 +4,11 @@ slug: "url-amigable-con-keyword"
 date: "2025-10-04"
 author: "Estudio Hadjes"
 summary: "Resumen de 150–160 caracteres que responda rápido la intención de búsqueda."
-tags: ["keyword","secundaria","caba","gba"]
+tags: ["keyword","secundaria","Capital Federal","gba"]
 ---
 
 ## Introducción
-1–2 párrafos con promesa clara de valor y definición corta. Menciona CABA/GBA si aplica.
+1–2 párrafos con promesa clara de valor y definición corta. Menciona Capital Federal/GBA si aplica.
 
 ## ¿Qué es [tema principal]?
 Define simple, evita jerga. Si es legal, aclara que es orientativo y que cada caso se analiza aparte.
@@ -23,7 +23,7 @@ Define simple, evita jerga. Si es legal, aclara que es orientativo y que cada ca
 2. Paso 2
 3. Paso 3
 
-## Tiempos y plazos (CABA y GBA)
+## Tiempos y plazos (Capital Federal y GBA)
 Aclara plazos habituales y advertencias.
 
 ## Errores frecuentes y cómo evitarlos
@@ -36,7 +36,7 @@ Criterios claros. Diferencia casos simples vs. complejos.
 ## Interlinking recomendado
 - Ver también: [/servicios/accidentes-de-trabajo](/servicios/accidentes-de-trabajo)
 - Ver también: [/servicios/despidos-sin-causa](/servicios/despidos-sin-causa)
-- Guía relacionada: [/blog/accidente-trabajo-caba-pasos](/blog/accidente-trabajo-caba-pasos)
+- Guía relacionada: [/blog/accidente-trabajo-Capital Federal-pasos](/blog/accidente-trabajo-Capital Federal-pasos)
 
 ## Preguntas frecuentes
 **¿Pregunta 1?**  

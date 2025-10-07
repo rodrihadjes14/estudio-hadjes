@@ -8,7 +8,7 @@ export const revalidate = 60;
 export function generateMetadata() {
   return pageMeta({
     title: "Blog",
-    description: "Artículos legales en lenguaje claro para trabajadores de CABA y GBA.",
+    description: "Artículos legales en lenguaje claro para trabajadores de Capital Federal y GBA.",
     path: "/blog",
   });
 }

@@ -25,7 +25,7 @@ export default function Home() {
   {/* Contenido */}
   <div className="hero__inner">
     <div>
-      <h1 className="hero__title">Abogados de Accidentes de Trabajo en CABA y GBA</h1>
+      <h1 className="hero__title">Abogados de Accidentes de Trabajo en Capital Federal y GBA</h1>
       <p className="hero__subtitle">
         Brindamos asesoramiento por despido laboral, accidente de trabajo o enfermedad profesional. Contactanos para poder ayudarte.
       </p>
@@ -64,7 +64,7 @@ export default function Home() {
       </Link>
 
       <Link href="/servicios/accidentes-de-transito" className="card-link group">
-      <h3 className="text-lg font-semibold">Accidentes de tránsito</h3>
+      <h3 className="text-lg font-semibold">Accidente de tránsito</h3>
       <p className="mt-1 opacity-80">Defensa y compensaciones.</p>
     </Link>
 
@@ -130,24 +130,6 @@ export default function Home() {
   </div>
 </section>
 
-
-      {/* RECURSOS / INTERLINKING */}
-      <section id="recursos" className="section">
-        <h2 className="section-title">Recursos útiles</h2>
-        <ul className="mt-3 list-disc pl-5 space-y-1">
-          <li><Link href="/servicios/accidentes-de-trabajo" className="link">Accidentes de trabajo</Link></li>
-          <li><Link href="/servicios/despidos-sin-causa" className="link">Despidos sin causa</Link></li>
-          <li><Link href="/servicios/enfermedades-laborales" className="link">Enfermedades laborales</Link></li>
-          <li><Link href="/servicios/accidentes-de-transito" className="link">Accidentes de tránsito</Link></li>
-          <li><Link href="/servicios/defensa-al-consumidor" className="link">Defensa del consumidor</Link></li>
-          <li><Link href="/servicios/reclamos-a-art" className="link">Reclamos a ART</Link></li>
-          <li><Link href="/servicios" className="link">Ver todos los servicios</Link></li>
-          <li><Link href="/faq" className="link">Preguntas frecuentes</Link></li>
-          <li><Link href="/blog" className="link">Artículos y guías</Link></li>
-          <li><a href="#calc" className="link">Calculadora de indemnización</a></li>
-          <li><Link href="/contacto" className="link">Contactanos</Link></li>
-        </ul>
-      </section>
     </main>
   );
 }

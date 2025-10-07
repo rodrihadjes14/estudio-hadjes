@@ -18,7 +18,7 @@ export function generateMetadata({ params }) {
   if (!svc) return {};
 
   return pageMeta({
-    title: svc.metaTitle || `${svc.h1} en CABA y GBA`,
+    title: svc.metaTitle || `${svc.h1} en Capital Federal y GBA`,
     description: svc.metaDescription || svc.intro || "",
     path: `/servicios/${slug}`,
     ogImage: `/servicios/${slug}/opengraph-image`, // ✅ dinámico
@@ -80,6 +80,10 @@ const heroPos = svc.heroPos || "object-center"; // opcional: encuadre (object-to
     svc.bullets ||
     (Array.isArray(svc.faqs) ? svc.faqs.map((f) => f.q).filter(Boolean) : []) ||
     [];
+
+    const faqs = Array.isArray(svc.faqs)
+  ? svc.faqs.filter((f) => f && f.q && f.a)
+  : [];
 
   // Relacionados
   const RELATED_MAP = {
@@ -147,15 +151,29 @@ const heroPos = svc.heroPos || "object-center"; // opcional: encuadre (object-to
 </section>
 
 
-      {/* ¿En qué te ayudamos? */}
-      <section className="section">
-        <h2 className="section-title">¿En qué te ayudamos?</h2>
-        <LeadBlock>
-          {intro}
-          {!!bullets.length && <BulletList items={bullets} />}
-          <CtaPrimary href="/contacto">Contanos tu caso</CtaPrimary>
-        </LeadBlock>
+        {/* ¿En qué te ayudamos? */}
+    <section className="section">
+      <h2 className="section-title">¿En qué te ayudamos?</h2>
+
+      {/* Texto/CTA igual que antes */}
+      <LeadBlock>
+        {intro}
+        <CtaPrimary href="/contacto">Contanos tu caso</CtaPrimary>
+      </LeadBlock>
+
+      {/* NUEVO: Acordeón de preguntas y respuestas (igual que Home/FAQ) */}
+      {faqs.length > 0 && (
+        <div className="mt-4 space-y-3">
+          {faqs.map((f, i) => (
+            <details key={i} className="card">
+              <summary className="cursor-pointer font-semibold">{f.q}</summary>
+              <p className="mt-2">{f.a}</p>
+            </details>
+            ))}
+          </div>
+          )}
       </section>
+
 
       {/* Próximos pasos */}
       <section className="section">

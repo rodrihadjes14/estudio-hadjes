@@ -2,9 +2,9 @@ import { pageMeta } from "@/lib/seo";
 
 export const metadata = {
   ...pageMeta({
-    title: "Accidentes de Trabajo en CABA | Consulta sin cargo",
+    title: "Accidentes de Trabajo en Capital Federal | Consulta sin cargo",
     description: "LP para campañas: respuesta rápida, WhatsApp y llamada. No indexar.",
-    path: "/lp/accidentes-trabajo-caba",
+    path: "/lp/accidentes-trabajo-Capital Federal",
   }),
   robots: {
     index: false,
@@ -21,7 +21,7 @@ export const metadata = {
 export default function LP() {
   return (
     <main style={{maxWidth: 720, margin: "40px auto", padding: "0 16px", lineHeight: 1.7}}>
-      <h1>Accidentes de Trabajo en CABA — Respuesta en el día</h1>
+      <h1>Accidentes de Trabajo en Capital Federal — Respuesta en el día</h1>
       <p>Atención a trabajadores. Orientación inicial sin cargo. Plazos y pasos claros.</p>
 
       <div style={{display:"flex", gap:12, marginTop:16}}>
@@ -33,7 +33,7 @@ export default function LP() {
       <ul style={{marginTop:24}}>
         <li>Sin adelantos — honorarios por resultado (según normativa aplicable)</li>
         <li>Gestión ante ART y Superintendencia</li>
-        <li>Atención CABA y GBA</li>
+        <li>Atención Capital Federal y GBA</li>
       </ul>
     </main>
   );

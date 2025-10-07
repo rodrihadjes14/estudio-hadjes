@@ -11,7 +11,7 @@ export function generateMetadata() {
   return pageMeta({
     title: "Servicios legales",
     description:
-      "Asesoramiento a trabajadores en CABA y GBA. Elegí tu servicio para ver pasos, preguntas frecuentes y próximos pasos.",
+      "Asesoramiento a trabajadores en Capital Federal y GBA. Elegí tu servicio para ver pasos, preguntas frecuentes y próximos pasos.",
     path: "/servicios",
   });
 }
@@ -57,7 +57,7 @@ export default function ServiciosIndex() {
       {/* Fondo */}
       <Image
         src={serviciosHero}                // static import => habilita placeholder="blur"
-        alt="Servicios legales laborales en CABA y GBA"
+        alt="Servicios legales laborales en Capital Federal y GBA"
         fill
         priority
         sizes="100vw"
@@ -74,7 +74,7 @@ export default function ServiciosIndex() {
         <div>
           <h1 className="hero__title">Servicios legales</h1>
           <p className="hero__subtitle">
-            Enfocados en trabajadores de CABA y GBA. Analizamos tu caso, definimos la estrategia
+            Enfocados en trabajadores de Capital Federal y GBA. Analizamos tu caso, definimos la estrategia
             y te acompañamos durante todo el proceso.
           </p>
           <div className="mt-4 flex justify-center gap-3">

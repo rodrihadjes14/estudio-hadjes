@@ -9,7 +9,7 @@ export function generateMetadata() {
   return pageMeta({
     title: "Preguntas frecuentes",
     description:
-      "Respuestas claras sobre accidentes de trabajo, despidos, ART y procesos en CABA y GBA.",
+      "Respuestas claras sobre accidentes de trabajo, despidos, ART y procesos en Capital Federal y GBA.",
     path: "/faq",
   });
 }
@@ -18,7 +18,7 @@ const FAQS = [
   { q: "¿Cómo sé si me corresponde indemnización?", a: "Depende del tipo de despido, tu antigüedad y remuneración. Evaluamos tu caso y te orientamos con precisión." },
   { q: "¿Qué hago si tuve un accidente en el trabajo?", a: "Informalo de inmediato al empleador y solicitá derivación médica por ART. Guardá toda la documentación." },
   { q: "¿Cuánto tarda el trámite?", a: "Varía según el tipo de reclamo y la instancia (administrativa o judicial). Te damos una estimación en la primera consulta." },
-  { q: "¿Atienden en CABA y GBA?", a: "Sí. Podemos coordinar atención remota y presencial." },
+  { q: "¿Atienden en Capital Federal y GBA?", a: "Sí. Podemos coordinar atención remota y presencial." },
   { q: "¿Qué documentación tengo que reunir?", a: "Recibos de sueldo, comunicaciones con el empleador o ART, informes/constancias médicas y cualquier evidencia relevante." },
 ];
 
@@ -58,8 +58,8 @@ export default function FAQPage() {
 
       <section className="section">
         <p className="max-w-2xl">
-          Respuestas breves y claras a las consultas más comunes. Si tu caso requiere análisis específico,{" "}
-          <Link href="/contacto" className="link">contactanos</Link>. También podés estimar tu caso con la{" "}
+          Te brindamos respuestas a las preguntas mas comunes que hacen nuestros clientes . Vas a encontrar informacion relacionada a la forma de tramitar reclamos, plazos y documentación que tenés que tener en cuenta. Si tu caso requiere análisis específico,{" "}
+          <Link href="/contacto" className="link">contactanos</Link>. Tu primer consulta es gratuita. También podés estimar tu caso con la{" "}
           <Link href="/#calc" className="link">calculadora de indemnización</Link>.
         </p>
       </section>

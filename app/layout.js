@@ -14,11 +14,11 @@ const inter = Inter({ subsets: ["latin"], display: "swap" });
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://estudiohadjes.com.ar"),
   title: {
-    default: "Estudio Hadjes | Abogados Laborales en CABA y GBA",
+    default: "Estudio Hadjes | Abogados Laborales en Capital Federal y GBA",
     template: "%s | Estudio Hadjes",
   },
   description:
-    "Abogados especializados en accidentes de trabajo, despidos sin causa y reclamos a ART en CABA y GBA.",
+    "Abogados especializados en accidentes de trabajo, despidos sin causa y reclamos a ART en Capital Federal y GBA.",
   robots: {
     index: true,
     follow: true,
@@ -27,17 +27,17 @@ export const metadata = {
   openGraph: {
     type: "website",
     siteName: "Estudio Hadjes",
-    title: "Estudio Hadjes | Abogados Laborales en CABA y GBA",
+    title: "Estudio Hadjes | Abogados Laborales en Capital Federal y GBA",
     description:
-      "Abogados especializados en accidentes de trabajo, despidos sin causa y reclamos a ART en CABA y GBA.",
+      "Abogados especializados en accidentes de trabajo, despidos sin causa y reclamos a ART en Capital Federal y GBA.",
     images: [{ url: "/og-default.jpg", width: 1200, height: 630, alt: "Estudio Hadjes" }],
     locale: "es_AR",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Estudio Hadjes | Abogados Laborales en CABA y GBA",
+    title: "Estudio Hadjes | Abogados Laborales en Capital Federal y GBA",
     description:
-      "Abogados especializados en accidentes de trabajo, despidos sin causa y reclamos a ART en CABA y GBA.",
+      "Abogados especializados en accidentes de trabajo, despidos sin causa y reclamos a ART en Capital Federal y GBA.",
     images: ["/og-default.jpg"],
   },
   formatDetection: { email: false, address: false, telephone: false },
@@ -49,14 +49,14 @@ const orgLd = {
   "@type": "LegalService",
   name: "Estudio Hadjes",
   url: "https://estudiohadjes.com.ar",
-  telephone: "+54 11 XXXX-XXXX",
+  telephone: "+54 11 3026-1498",
   address: {
     "@type": "PostalAddress",
-    addressLocality: "CABA",
-    addressRegion: "Buenos Aires",
+    addressLocality: "Hipolito Yirigoyen 766, Planta Baja",
+    addressRegion: "Quilmes, Buenos Aires",
     addressCountry: "AR",
   },
-  areaServed: ["CABA", "GBA"],
+  areaServed: ["Capital Federal", "GBA"],
   sameAs: [],
 };
 

@@ -163,8 +163,8 @@ export default function Contacto() {
           </li>
           <li>
             Teléfono/WhatsApp:{" "}
-            <a href="tel:+5411XXXXXXX" className="link">
-              +54 11 XXXX-XXXX
+            <a href="tel:+541130261498" className="link">
+              +54 11 3026 1498
             </a>
           </li>
           <li>

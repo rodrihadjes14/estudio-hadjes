@@ -1,10 +1,10 @@
 ---
-title: "Despido sin causa en CABA: qué te corresponde"
-slug: "despido-sin-causa-caba"
+title: "Despido sin causa en Capital Federal: qué te corresponde"
+slug: "despido-sin-causa-Capital Federal"
 date: "2025-10-04"
 author: "Estudio Hadjes"
-summary: "Guía clara para calcular y reclamar la indemnización por despido sin causa en CABA y GBA."
-tags: ["despido sin causa","indemnización","CABA","GBA"]
+summary: "Guía clara para calcular y reclamar la indemnización por despido sin causa en Capital Federal y GBA."
+tags: ["despido sin causa","indemnización","Capital Federal","GBA"]
 ---
 ## Introducción
 Resumen simple del derecho a indemnización, documentos y plazos.
