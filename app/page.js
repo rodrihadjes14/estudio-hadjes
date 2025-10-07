@@ -126,45 +126,51 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CALCULADORA */}
-      <section id="calc" className="section">
-        <h2 className="section-title">Calculadora de indemnización</h2>
-        <div className="mt-4">
-          <CalculadoraIndemnizacion />
+      {/* CALCULADORA + LEAD FORM (lado a lado) */}
+<section id="calc-lead" className="section">
+  <div className="page-wrap grid gap-6 lg:grid-cols-2 items-start">
+    {/* Columna: CALCULADORA */}
+    <div id="calc">
+      <h2 className="section-title">Calculadora de indemnización</h2>
+      <div className="mt-4">
+        <CalculadoraIndemnizacion />
+      </div>
+    </div>
+
+    {/* Columna: LEAD FORM (conservamos el id para el ancla del hero) */}
+    <div id="lead-form">
+      <h2 className="section-title">Solicitá tu consulta</h2>
+      <form method="POST" action="/api/contact" className="mt-4 grid gap-3 sm:grid-cols-2">
+        <label className="flex flex-col">
+          <span className="text-sm">Nombre</span>
+          <input name="name" required className="input-base focus-ring mt-1" />
+        </label>
+        <label className="flex flex-col">
+          <span className="text-sm">Email</span>
+          <input name="email" type="email" required className="input-base focus-ring mt-1" />
+        </label>
+        <label className="flex flex-col">
+          <span className="text-sm">Teléfono</span>
+          <input name="phone" type="tel" className="input-base focus-ring mt-1" />
+        </label>
+        <label className="flex flex-col sm:col-span-2">
+          <span className="text-sm">Consulta</span>
+          <textarea name="message" rows={4} required className="input-base focus-ring mt-1" />
+        </label>
+
+        {/* Honeypot anti-spam */}
+        <input name="website" type="text" className="sr-only" tabIndex={-1} autoComplete="off" />
+
+        <div className="sm:col-span-2">
+          <button type="submit" className="btn focus-ring">
+            Enviar
+          </button>
         </div>
-      </section>
+      </form>
+    </div>
+  </div>
+</section>
 
-      {/* LEAD FORM */}
-      <section id="lead-form" className="section">
-        <h2 className="section-title">Solicitá tu consulta</h2>
-        <form method="POST" action="/api/contact" className="mt-4 grid gap-3 sm:grid-cols-2">
-          <label className="flex flex-col">
-            <span className="text-sm">Nombre</span>
-            <input name="name" required className="input-base focus-ring mt-1" />
-          </label>
-          <label className="flex flex-col">
-            <span className="text-sm">Email</span>
-            <input name="email" type="email" required className="input-base focus-ring mt-1" />
-          </label>
-          <label className="flex flex-col">
-            <span className="text-sm">Teléfono</span>
-            <input name="phone" type="tel" className="input-base focus-ring mt-1" />
-          </label>
-          <label className="flex flex-col sm:col-span-2">
-            <span className="text-sm">Consulta</span>
-            <textarea name="message" rows={4} required className="input-base focus-ring mt-1" />
-          </label>
-
-          {/* Honeypot anti-spam */}
-          <input name="website" type="text" className="sr-only" tabIndex={-1} autoComplete="off" />
-
-          <div className="sm:col-span-2">
-            <button type="submit" className="btn focus-ring">
-              Enviar
-            </button>
-          </div>
-        </form>
-      </section>
 
       {/* RECURSOS / INTERLINKING */}
       <section id="recursos" className="section">
