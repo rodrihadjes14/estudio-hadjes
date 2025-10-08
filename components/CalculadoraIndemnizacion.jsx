@@ -16,48 +16,28 @@ export default function CalculadoraIndemnizacion() {
 
   // ---- Helpers seguros (sin crash) ----
   function parseFechaYYYYMMDD(str) {
-    // Acepta sólo 'YYYY-MM-DD' y construye Date local (evita desfases de TZ)
     if (!/^\d{4}-\d{2}-\d{2}$/.test(str)) return null;
     const [y, m, d] = str.split("-").map(Number);
     const dt = new Date(y, m - 1, d);
     if (dt.getFullYear() !== y || dt.getMonth() !== m - 1 || dt.getDate() !== d) return null;
     return dt;
   }
-
-  function diasEnMes(year, monthIndex0) {
-    return new Date(year, monthIndex0 + 1, 0).getDate();
-  }
-
-  function finDeMes(date) {
-    return new Date(date.getFullYear(), date.getMonth() + 1, 0);
-  }
-
+  function diasEnMes(year, monthIndex0) { return new Date(year, monthIndex0 + 1, 0).getDate(); }
+  function finDeMes(date) { return new Date(date.getFullYear(), date.getMonth() + 1, 0); }
   function diffYMD(a, b) {
-    // Diferencia b - a en años, meses, días (calendario)
     let y = b.getFullYear() - a.getFullYear();
     let m = b.getMonth() - a.getMonth();
     let d = b.getDate() - a.getDate();
-
-    if (d < 0) {
-      m -= 1;
-      const prevMonth = new Date(b.getFullYear(), b.getMonth(), 0);
-      d += prevMonth.getDate();
-    }
-    if (m < 0) {
-      y -= 1;
-      m += 12;
-    }
+    if (d < 0) { m -= 1; const prevMonth = new Date(b.getFullYear(), b.getMonth(), 0); d += prevMonth.getDate(); }
+    if (m < 0) { y -= 1; m += 12; }
     return { years: y, months: m, days: d };
   }
-
   function mesesPrecisos(a, b) {
-    // Meses (con decimales) entre a y b
     const { years, months, days } = diffYMD(a, b);
     const baseMonths = years * 12 + months;
     const dim = diasEnMes(b.getFullYear(), b.getMonth());
     return baseMonths + days / dim;
   }
-
   function formatoARS(n) {
     return n.toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
@@ -67,7 +47,6 @@ export default function CalculadoraIndemnizacion() {
     try {
       const errs = [];
 
-      // Validaciones de entrada
       const ingreso = parseFechaYYYYMMDD(fechaIngreso);
       if (!ingreso) errs.push("Ingresá una Fecha de Ingreso válida (YYYY-MM-DD).");
 
@@ -91,30 +70,20 @@ export default function CalculadoraIndemnizacion() {
         return;
       }
 
-      // Datos derivados
-      const antig = diffYMD(ingreso, despido); // {years, months, days}
+      const antig = diffYMD(ingreso, despido);
       const antigMesesPrec = mesesPrecisos(ingreso, despido);
 
-      // Base Art. 245 (MRMNH topeada si corresponde)
       const B = tope ? Math.min(rem, tope) : rem;
 
-      // 1.1 Indemnización por antigüedad (Art. 245 LCT)
-      // Años completos = antig.years
-      // F = 1 si fracción > 3 meses; caso contrario 0; mínimo 1 sueldo
       const fraccionMeses = antig.months + antig.days / diasEnMes(despido.getFullYear(), despido.getMonth());
       const F = fraccionMeses > 3 ? 1 : 0;
       const baseAnios = antig.years + F;
       const indem245 = Math.max(baseAnios * B, 1 * B);
 
-      // 1.2 Preaviso (Arts. 231–232) — sólo si "sin preaviso"
-      // - 15 días si antig < 3 meses
-      // - 1 mes si antig ≤ 5 años
-      // - 2 meses si antig > 5 años
       let indemPreaviso = 0;
       if (sinPreaviso) {
         const sueldoDiario30 = rem / 30;
         if (antigMesesPrec < 3) {
-          // Período de prueba
           indemPreaviso = 15 * sueldoDiario30;
         } else if (antig.years <= 5) {
           indemPreaviso = 1 * rem;
@@ -123,7 +92,6 @@ export default function CalculadoraIndemnizacion() {
         }
       }
 
-      // 1.3 Integración del mes de despido (Art. 233) — sólo si "sin preaviso" y no cae último día
       let integracionMes = 0;
       if (sinPreaviso) {
         const lastDay = finDeMes(despido).getDate();
@@ -134,8 +102,6 @@ export default function CalculadoraIndemnizacion() {
         }
       }
 
-      // 1.4 Vacaciones no gozadas proporcionales (Arts. 156 y 155)
-      // Días según antigüedad (Art. 150): 14 (<5), 21 (≥5 y <10), 28 (≥10 y <20), 35 (≥20)
       const diasVacacionesPorAntig = (years) => {
         if (years < 5) return 14;
         if (years < 10) return 21;
@@ -143,21 +109,18 @@ export default function CalculadoraIndemnizacion() {
         return 35;
       };
       const diasVac = diasVacacionesPorAntig(antig.years);
-      const valorDiaVac = rem / 25; // mensualizados (Art. 155 inc. a)
-      // Proporción del año trabajado hasta el despido (meses/12 con fracción del mes)
-      const despMes = despido.getMonth(); // 0..11
+      const valorDiaVac = rem / 25;
+
+      const despMes = despido.getMonth();
       const despDia = despido.getDate();
       const dimDesp = diasEnMes(despido.getFullYear(), despMes);
-      const mesesTrabEnAnio = despMes + despDia / dimDesp; // 0..12
+      const mesesTrabEnAnio = despMes + despDia / dimDesp;
       const vacProporc = diasVac * valorDiaVac * (mesesTrabEnAnio / 12);
 
-      // 1.5 SAC proporcional (Arts. 122–123)
-      // Proporción sobre fracción del semestre: rem * (mesesFraccion / 12)
-      const semestreInicioMes = despMes < 6 ? 0 : 6; // ene o jul
-      const mesesEnSemestre = (despMes - semestreInicioMes) + despDia / dimDesp; // 0..6
+      const semestreInicioMes = despMes < 6 ? 0 : 6;
+      const mesesEnSemestre = (despMes - semestreInicioMes) + despDia / dimDesp;
       const sacProporc = rem * (mesesEnSemestre / 12);
 
-      // Total
       const total = indem245 + indemPreaviso + integracionMes + vacProporc + sacProporc;
 
       setErrores([]);
@@ -183,12 +146,10 @@ export default function CalculadoraIndemnizacion() {
   }
 
   return (
-    <section id="calc">
-      
-
+    <section id="calc" className="calc">
       <form onSubmit={(e) => e.preventDefault()} noValidate>
-        <div style={{ display: "grid", gap: "12px", maxWidth: 560 }}>
-          <label>
+        <div className="calc-grid">
+          <label className="row">
             Fecha de Ingreso
             <input
               type="date"
@@ -200,7 +161,7 @@ export default function CalculadoraIndemnizacion() {
             />
           </label>
 
-          <label>
+          <label className="row">
             Fecha de Despido
             <input
               type="date"
@@ -212,7 +173,7 @@ export default function CalculadoraIndemnizacion() {
             />
           </label>
 
-          <label>
+          <label className="row">
             Remuneración (MRMNH)
             <input
               type="number"
@@ -227,7 +188,7 @@ export default function CalculadoraIndemnizacion() {
             />
           </label>
 
-          <label>
+          <label className="row">
             Tope Art. 245 (opcional)
             <input
               type="number"
@@ -240,9 +201,10 @@ export default function CalculadoraIndemnizacion() {
               aria-describedby="ayuda-tope"
             />
           </label>
-          <small id="ayuda-tope">Si se deja vacío, no se aplica tope.</small>
 
-          <label style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+          <small id="ayuda-tope" className="help">Si se deja vacío, no se aplica tope.</small>
+
+          <label className="checkbox">
             <input
               type="checkbox"
               checked={sinPreaviso}
@@ -251,12 +213,12 @@ export default function CalculadoraIndemnizacion() {
             Despido sin preaviso (calcula indemnización sustitutiva e integración del mes)
           </label>
 
-          <div>
-            <button type="button" onClick={calcular}>Calcular</button>
+          <div className="actions">
+            <button type="button" onClick={calcular} className="btn">Calcular</button>
           </div>
 
           {errores.length > 0 && (
-            <div role="alert" aria-live="assertive" style={{ color: "#b00020" }}>
+            <div role="alert" aria-live="assertive" className="errors">
               {errores.map((er, i) => <div key={i}>• {er}</div>)}
             </div>
           )}
@@ -287,9 +249,104 @@ export default function CalculadoraIndemnizacion() {
         </div>
       </form>
 
-      <p className="disclaimer" style={{ marginTop: 12 }}>
+      <p className="disclaimer">
         Resultado orientativo. Puede variar por CCT, topes, conceptos remunerativos/no remunerativos, y particularidades del caso.
       </p>
+
+      {/* ====== Estilos: alineación y skins ====== */}
+      <style jsx>{`
+        .calc {
+          background: #f2f2f2;           /* Fondo gris de toda la calculadora */
+          padding: 20px 16px;
+          border-radius: 12px;
+          border: 1px solid #e2e2e2;
+          max-width: 640px;
+        }
+        .calc-grid {
+          display: grid;
+          gap: 12px;
+        }
+        /* Cada fila (label + input) es una grilla de 2 columnas:
+           - Columna izquierda: texto flexible
+           - Columna derecha: input de ancho fijo -> alinea verticalmente todos los inputs */
+        .row {
+          display: grid;
+          grid-template-columns: 1fr 260px; /* controla el ancho común de todos los inputs */
+          align-items: center;
+          gap: 12px;
+          font-weight: 500;
+        }
+        /* Ayuda y acciones usan el ancho de la "columna derecha" para alinear visualmente */
+        .help {
+          justify-self: end;              /* se alinea con la columna de inputs */
+          width: 260px;                   /* mismo ancho que los inputs */
+          color: #555;
+        }
+        .checkbox {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          font-weight: 500;
+        }
+        .actions {
+          display: flex;
+          justify-content: flex-end;      /* botón a la derecha, bajo la columna de inputs */
+        }
+
+        /* Inputs: fondo negro y texto blanco */
+        .row :global(input[type="text"]),
+        .row :global(input[type="number"]),
+        .row :global(input[type="date"]) {
+          width: 100%;
+          box-sizing: border-box;
+          background: #000;
+          color: #fff;
+          border: 1px solid #444;
+          border-radius: 8px;
+          padding: 10px 12px;
+          outline: none;
+        }
+        /* Mejora date inputs en dark */
+        .row :global(input[type="date"]) {
+          color-scheme: dark;
+        }
+        /* Placeholder legible */
+        .row :global(input::placeholder) {
+          color: #cfcfcf;
+          opacity: 1;
+        }
+        /* Foco accesible */
+        .row :global(input:focus) {
+          border-color: #888;
+          box-shadow: 0 0 0 3px rgba(0,0,0,0.25);
+        }
+        /* Error visual si aria-invalid=true */
+        .row :global(input[aria-invalid="true"]) {
+          border-color: #b00020;
+          box-shadow: 0 0 0 3px rgba(176,0,32,0.2);
+        }
+
+        .btn {
+          background: #111;
+          color: #fff;
+          border: 1px solid #333;
+          border-radius: 10px;
+          padding: 10px 14px;
+          cursor: pointer;
+        }
+        .btn:hover { background: #000; }
+
+        .errors { color: #b00020; }
+
+        .disclaimer { margin-top: 12px; }
+
+        /* Responsivo: en pantallas angostas, que el input ocupe todo el ancho */
+        @media (max-width: 480px) {
+          .row { grid-template-columns: 1fr; }
+          .help { justify-self: start; width: 100%; }
+          .actions { justify-content: flex-start; }
+        }
+      `}</style>
     </section>
   );
 }
