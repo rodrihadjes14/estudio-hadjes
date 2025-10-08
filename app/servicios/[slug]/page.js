@@ -157,7 +157,7 @@ const heroPos = svc.heroPos || "object-center"; // opcional: encuadre (object-to
 
       {/* Texto/CTA igual que antes */}
       <LeadBlock>
-        {intro}
+        {sub}
         <CtaPrimary href="/contacto">Contanos tu caso</CtaPrimary>
       </LeadBlock>
 
