@@ -157,11 +157,11 @@ const heroPos = svc.heroPos || "object-center"; // opcional: encuadre (object-to
     <section className="section">
       <h2 className="section-title">¿En qué te ayudamos?</h2>
 
-      {sub && (
+      {sub && 
      <p className="mt-2 text-base leading-relaxed text-gray-700">
       {sub}
       </p>
-      )}
+      }
         <CtaPrimary href="/contacto">Contanos tu caso</CtaPrimary>
      
 
