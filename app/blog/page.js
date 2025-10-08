@@ -25,7 +25,7 @@ export default function BlogIndex() {
 
       <h1 className="text-3xl font-semibold">Blog</h1>
 
-      <section className="section">
+      <section className="section section-center">
         <p className="max-w-2xl">
           Artículos breves y prácticos sobre derecho laboral y del consumidor.
         </p>

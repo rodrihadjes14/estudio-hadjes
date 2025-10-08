@@ -2,6 +2,9 @@
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { pageMeta } from "@/lib/seo";
+import { FAQS } from "@/lib/faqs";
+import FaqAccordion from "@/components/FaqAccordion";
+
 
 export const revalidate = 60;
 
@@ -14,13 +17,7 @@ export function generateMetadata() {
   });
 }
 
-const FAQS = [
-  { q: "¿Cómo sé si me corresponde indemnización?", a: "Depende del tipo de despido, tu antigüedad y remuneración. Evaluamos tu caso y te orientamos con precisión." },
-  { q: "¿Qué hago si tuve un accidente en el trabajo?", a: "Informalo de inmediato al empleador y solicitá derivación médica por ART. Guardá toda la documentación." },
-  { q: "¿Cuánto tarda el trámite?", a: "Varía según el tipo de reclamo y la instancia (administrativa o judicial). Te damos una estimación en la primera consulta." },
-  { q: "¿Atienden en Capital Federal y GBA?", a: "Sí. Podemos coordinar atención remota y presencial." },
-  { q: "¿Qué documentación tengo que reunir?", a: "Recibos de sueldo, comunicaciones con el empleador o ART, informes/constancias médicas y cualquier evidencia relevante." },
-];
+
 
 export default function FAQPage() {
   const base = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
@@ -56,25 +53,19 @@ export default function FAQPage() {
 
       <h1 className="text-3xl font-semibold">Preguntas frecuentes</h1>
 
-      <section className="section">
-        <p className="max-w-2xl">
-          Te brindamos respuestas a las preguntas mas comunes que hacen nuestros clientes . Vas a encontrar informacion relacionada a la forma de tramitar reclamos, plazos y documentación que tenés que tener en cuenta. Si tu caso requiere análisis específico,{" "}
-          <Link href="/contacto" className="link">contactanos</Link>. Tu primer consulta es gratuita. También podés estimar tu caso con la{" "}
-          <Link href="/#calc" className="link">calculadora de indemnización</Link>.
-        </p>
+      <section className="section text-center">
+      <p className="max-w-2xl mx-auto text-white">
+      Te brindamos respuestas a las preguntas mas comunes que hacen nuestros clientes. Vas a encontrar informacion relacionada a la forma de tramitar reclamos, plazos y documentación que tenés que tener en cuenta. Si tu caso requiere análisis específico,{" "}
+      <Link href="/contacto" className="link">contactanos</Link>. Tu primer consulta es gratuita. También podés estimar tu caso con la{" "}
+      <Link href="/#calc" className="link">calculadora de indemnización</Link>.
+      </p>
       </section>
+
 
       {/* Acordeón accesible */}
       <section className="section">
         <h2 className="section-title">Respuestas rápidas</h2>
-        <div className="mt-4 space-y-3">
-          {FAQS.map((f, i) => (
-            <details key={i} className="card">
-              <summary className="cursor-pointer select-none font-semibold">{f.q}</summary>
-              <div className="mt-2">{f.a}</div>
-            </details>
-          ))}
-        </div>
+        <FaqAccordion items={FAQS} />
       </section>
 
       {/* Interlinking interno */}

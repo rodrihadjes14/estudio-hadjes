@@ -5,6 +5,9 @@ import JsonLd from "@/components/JsonLd";
 import { LeadBlock, BulletList, CtaPrimary } from "@/components/ServiceSeoBlocks";
 import { SERVICES } from "@/lib/services";
 import { pageMeta } from "@/lib/seo";
+import { getHelpH2 } from "@/lib/serviceCopy";
+import FaqAccordion from "@/components/FaqAccordion";
+
 
 
 export const revalidate = 60;
@@ -30,6 +33,9 @@ export function generateMetadata({ params }) {
 export default function ServicePage({ params }) {
   const { slug } = params || {};
   const svc = SERVICES[slug];
+  const helpH2 = getHelpH2(slug, svc);
+
+
 
   if (!svc) {
     return (
@@ -83,9 +89,12 @@ const heroPos = svc.heroPos || "object-center"; // opcional: encuadre (object-to
     (Array.isArray(svc.faqs) ? svc.faqs.map((f) => f.q).filter(Boolean) : []) ||
     [];
 
-    const faqs = Array.isArray(svc.faqs)
-  ? svc.faqs.filter((f) => f && f.q && f.a)
+    const faqs = Array.isArray(svc?.faqs)
+  ? svc.faqs
+      .map((f) => (f ? { q: String(f.q || "").trim(), a: String(f.a || "").trim() } : null))
+      .filter((f) => f && f.q && f.a)
   : [];
+
 
   // Relacionados
   const RELATED_MAP = {
@@ -155,45 +164,44 @@ const heroPos = svc.heroPos || "object-center"; // opcional: encuadre (object-to
 
         {/* ¿En qué te ayudamos? */}
     <section className="section">
-      <h2 className="section-title">¿En qué te ayudamos?</h2>
+      <h2 className="section-title">{helpH2}</h2>
+
 
       {sub && (
-     <p className="mt-2 text-base leading-relaxed text-gray-700">
+     <p className="mt-2 text-base leading-relaxed text-white text-center">
       {sub}
       </p>
       )}
 
       {/* Texto/CTA igual que antes */} 
+      <div className="mt-4 flex justify-center">
         <CtaPrimary href="/contacto">Contanos tu caso</CtaPrimary>
-     
+      </div>
 
       {/* NUEVO: Acordeón de preguntas y respuestas (igual que Home/FAQ) */}
       {faqs.length > 0 && (
-        <div className="mt-4 space-y-3">
-          {faqs.map((f, i) => (
-            <details key={i} className="card">
-              <summary className="cursor-pointer font-semibold">{f.q}</summary>
-              <p className="mt-2">{f.a}</p>
-            </details>
-            ))}
-          </div>
-          )}
+      <div className="mt-4 text-white">
+    <FaqAccordion items={faqs} />
+      </div>
+    )}
+
       </section>
 
 
       {/* Próximos pasos */}
-      <section className="section">
-        <h2 className="section-title">Próximos pasos</h2>
-        <div className="card mt-2">
-          <BulletList
-            items={[
-              "Enviá tu consulta con la mayor cantidad de detalles posible.",
-              "Te respondemos con una evaluación preliminar.",
-              "Te guiamos en los pasos administrativos iniciales.",
-            ]}
-          />
-        </div>
-      </section>
+    <section className="section text-center">
+      <h2 className="section-title">Próximos pasos</h2>
+      <div className="card mt-2 centered-list text-white">
+      <BulletList
+      items={[
+        "Enviá tu consulta con la mayor cantidad de detalles posible.",
+        "Te respondemos con una evaluación preliminar.",
+        "Te guiamos en los pasos administrativos iniciales.",
+      ]}
+      />
+    </div>
+    </section>
+
 
       {/* Relacionados + recursos */}
       <section className="section">

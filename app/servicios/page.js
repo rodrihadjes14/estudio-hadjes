@@ -91,17 +91,22 @@ export default function ServiciosIndex() {
 
       <section className="section">
         <h2 className="section-title">Elegí un servicio</h2>
-        <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {items.map((it) => (
-        <li key={it.slug}>
-          <Link href={`/servicios/${it.slug}`} className="card-link group">
-            <h3 className="text-lg font-semibold">{it.title}</h3>
-            {it.summary ? <p className="mt-1 opacity-80">{it.summary}</p> : null}
-            <span className="sr-only">Ver {it.title}</span>
-          </Link>
-          </li>
-        ))}
-        </ul>
+       <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+  {items.map((it) => (
+    <li key={it.slug} className="h-full">
+      <Link href={`/servicios/${it.slug}`} className="card-link">
+        <h3 className="card-title mb-2">{it.title}</h3>
+        {it.summary ? (
+          <p className="card-summary">{it.summary}</p>
+        ) : (
+          <p className="card-summary">&nbsp;</p>
+        )}
+        <span className="sr-only">Ver {it.title}</span>
+      </Link>
+    </li>
+  ))}
+</ul>
+
 
       </section>
     </main>

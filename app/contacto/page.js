@@ -68,7 +68,7 @@ export default function Contacto() {
 
       <h1 className="text-3xl font-semibold">Contacto</h1>
 
-      <section className="section">
+      <section className="section section-center">
         <p className="max-w-2xl">
           Contanos tu caso y te respondemos a la brevedad. También podés usar la{" "}
           <Link href="/#calc" className="link">calculadora de indemnización</Link>.

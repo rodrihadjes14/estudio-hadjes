@@ -2,6 +2,8 @@ import Link from "next/link";
 import CalculadoraIndemnizacion from "@/components/CalculadoraIndemnizacion";
 import Image from "next/image";
 import HomeLeadForm from "../components/HomeLeadForm";
+import HomeFaqSection from "@/components/HomeFaqSection";
+
 
 
 export default function Home() {
@@ -25,9 +27,9 @@ export default function Home() {
   {/* Contenido */}
   <div className="hero__inner">
     <div>
-      <h1 className="hero__title">Abogados de Accidentes de Trabajo en Capital Federal y GBA</h1>
+      <h1 className="hero__title">Estudio Hadjes | Abogados laboralistas y de defensa al consumidor</h1>
       <p className="hero__subtitle">
-        Brindamos asesoramiento por despido laboral, accidente de trabajo o enfermedad profesional. Contactanos para poder ayudarte.
+        Ejerciendo representación de los derechos de los trabajadores, tenemos larga experiencia como abogados laborales en Capital Federal. Nuestro asesoramiento comprende todas las etapas de un reclamo laboral, desde la consulta inicial hasta la resolución del conflicto, incluyendo negociaciones, mediaciones y litigios judiciales. 
       </p>
       <div className="mt-4 flex justify-center gap-3">
         <Link href="/contacto" className="btn focus-ring bg-white text-neutral-900 hover:bg-white/90">
@@ -82,32 +84,10 @@ export default function Home() {
       </section>
 
       {/* FAQ breve */}
-      <section id="faq" className="section">
+        <section id="faq" className="section">
         <h2 className="section-title">Preguntas frecuentes</h2>
-        <div className="mt-4 space-y-3">
-          <details className="card">
-            <summary className="cursor-pointer font-semibold">
-              ¿Cómo sé si me corresponde indemnización?
-            </summary>
-            <p className="mt-2">
-              Depende del tipo de despido y tu antigüedad. Debajo podés estimarla.
-            </p>
-          </details>
-          <details className="card">
-            <summary className="cursor-pointer font-semibold">¿Cuánto tarda el trámite?</summary>
-            <p className="mt-2">Varía según el caso. Te orientamos en la primera consulta.</p>
-          </details>
-          <details className="card">
-            <summary className="cursor-pointer font-semibold">¿Cuánto cuesta la consulta?</summary>
-            <p className="mt-2">La primera consulta es sin costo.</p>
-          </details>
-        </div>
-        <div className="mt-3">
-          <Link href="/faq" className="link">
-            Ver más preguntas
-          </Link>
-        </div>
-      </section>
+        <HomeFaqSection />
+        </section>
 
       {/* CALCULADORA + LEAD FORM (lado a lado) */}
 <section id="calc-lead" className="section">
