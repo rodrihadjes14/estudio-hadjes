@@ -6,6 +6,8 @@ import { pageMeta } from "@/lib/seo";
 import Image from "next/image";
 export const revalidate = 60;
 import serviciosHero from "@/public/hero/servicios.jpg";
+import HeroLeadMiniForm from "@/components/HeroLeadMiniForm";
+
 
 
 export function generateMetadata() {
