@@ -50,6 +50,7 @@ export default function ServicePage({ params }) {
   // Hero (convención de archivos en /public/hero/<slug>.jpg)
 const title   = svc.h1 || svc.title || "Servicio";
 const intro   = svc.intro || svc.description || "";
+const sub     = svc.sub || ""; 
 const heroSrc = `/hero/${slug}.jpg`;          // requiere el archivo en /public/hero/
 const heroAlt = svc.heroAlt || title;
 const heroPos = svc.heroPos || "object-center"; // opcional: encuadre (object-top/bottom/…)
