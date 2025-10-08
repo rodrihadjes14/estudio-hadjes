@@ -7,6 +7,7 @@ import Image from "next/image";
 export const revalidate = 60;
 import serviciosHero from "@/public/hero/servicios.jpg";
 
+
 export function generateMetadata() {
   return pageMeta({
     title: "Servicios legales",
@@ -77,36 +78,15 @@ export default function ServiciosIndex() {
             Enfocados en trabajadores de Capital Federal y GBA. Analizamos tu caso, definimos la estrategia
             y te acompañamos durante todo el proceso.
           </p>
-          <div className="mt-4 flex justify-center gap-3">
-            <Link href="/contacto" className="btn focus-ring bg-white text-neutral-900 hover:bg-white/90">
-              Contactanos
-            </Link>
-            <Link href="/faq" className="btn focus-ring bg-white/10 hover:bg-white/20">
-              Ver preguntas
-            </Link>
+          <HeroLeadMiniForm source="hero-servicio" />
+
           </div>
-        </div>
-      </div>
-    </section>
+          </div>
+        </section>
 
       <section className="section">
         <h2 className="section-title">Elegí un servicio</h2>
-       <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-  {items.map((it) => (
-    <li key={it.slug} className="h-full">
-      <Link href={`/servicios/${it.slug}`} className="card-link">
-        <h3 className="card-title mb-2">{it.title}</h3>
-        {it.summary ? (
-          <p className="card-summary">{it.summary}</p>
-        ) : (
-          <p className="card-summary">&nbsp;</p>
-        )}
-        <span className="sr-only">Ver {it.title}</span>
-      </Link>
-    </li>
-  ))}
-</ul>
-
+       
 
       </section>
     </main>

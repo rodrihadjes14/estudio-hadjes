@@ -7,6 +7,8 @@ import { SERVICES } from "@/lib/services";
 import { pageMeta } from "@/lib/seo";
 import { getHelpH2 } from "@/lib/serviceCopy";
 import FaqAccordion from "@/components/FaqAccordion";
+import HeroLeadMiniForm from "@/components/HeroLeadMiniForm";
+
 
 
 
@@ -149,20 +151,14 @@ const heroPos = svc.heroPos || "object-center"; // opcional: encuadre (object-to
       <h1 className="hero__title">{title}</h1>
       {intro && <p className="hero__subtitle">{intro}</p>}
 
-      <div className="mt-4 flex justify-center gap-3">
-        <Link href="/contacto" className="btn focus-ring bg-white text-neutral-900 hover:bg-white/90">
-          Contactanos
-        </Link>
-        <Link href="/faq" className="btn focus-ring bg-white/10 hover:bg-white/20">
-          Ver preguntas
-        </Link>
-      </div>
+      <HeroLeadMiniForm source="hero-servicio" />
+
     </div>
   </div>
-</section>
+    </section>
 
 
-        {/* ¿En qué te ayudamos? */}
+        
     <section className="section">
       <h2 className="section-title">{helpH2}</h2>
 

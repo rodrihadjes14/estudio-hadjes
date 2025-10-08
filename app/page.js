@@ -3,6 +3,8 @@ import CalculadoraIndemnizacion from "@/components/CalculadoraIndemnizacion";
 import Image from "next/image";
 import HomeLeadForm from "../components/HomeLeadForm";
 import HomeFaqSection from "@/components/HomeFaqSection";
+import HeroLeadMiniForm from "@/components/HeroLeadMiniForm";
+
 
 
 
@@ -29,20 +31,12 @@ export default function Home() {
     <div>
       <h1 className="hero__title">Estudio Hadjes</h1>
       <p className="hero__subtitle">
-        Ejerciendo representación de los derechos de los trabajadores, tenemos larga experiencia como Abogados laboralistas y de defensa al consumidor. 
+        Ejerciendo representación de los derechos de los trabajadores, contamos con un grupo experto de abogados laboralistas y de defensa al consumidor. 
       </p>
-      <div className="mt-4 flex justify-center gap-3">
-        <Link href="/contacto" className="btn focus-ring bg-white text-neutral-900 hover:bg-white/90">
-          Contactanos
-        </Link>
-        {/* Ancla interna: <a> es correcto */}
-        <a href="#lead-form" className="btn focus-ring bg-white/10 hover:bg-white/20">
-          Quiero una consulta
-        </a>
+      <HeroLeadMiniForm source="hero-servicio" />
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
 
 
