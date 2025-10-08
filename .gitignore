@@ -42,3 +42,9 @@ next-env.d.ts
 
 # Env
 .env.local
+
+# Sitemaps generados por next-sitemap
+public/sitemap*.xml
+
+public/robots.txt
+
