@@ -6,6 +6,7 @@ import { LeadBlock, BulletList, CtaPrimary } from "@/components/ServiceSeoBlocks
 import { SERVICES } from "@/lib/services";
 import { pageMeta } from "@/lib/seo";
 
+
 export const revalidate = 60;
 
 export function generateStaticParams() {
@@ -50,7 +51,7 @@ export default function ServicePage({ params }) {
   // Hero (convención de archivos en /public/hero/<slug>.jpg)
 const title   = svc.h1 || svc.title || "Servicio";
 const intro   = svc.intro || svc.description || "";
-const sub     = svc.sub || ""; 
+const sub = svc.sub || "";
 const heroSrc = `/hero/${slug}.jpg`;          // requiere el archivo en /public/hero/
 const heroAlt = svc.heroAlt || title;
 const heroPos = svc.heroPos || "object-center"; // opcional: encuadre (object-top/bottom/…)
@@ -156,11 +157,13 @@ const heroPos = svc.heroPos || "object-center"; // opcional: encuadre (object-to
     <section className="section">
       <h2 className="section-title">¿En qué te ayudamos?</h2>
 
-      {/* Texto/CTA igual que antes */}
-      <LeadBlock>
-        {sub}
+      {sub && (
+     <p className="mt-2 text-base leading-relaxed text-gray-700">
+      {sub}
+      </p>
+      )}
         <CtaPrimary href="/contacto">Contanos tu caso</CtaPrimary>
-      </LeadBlock>
+     
 
       {/* NUEVO: Acordeón de preguntas y respuestas (igual que Home/FAQ) */}
       {faqs.length > 0 && (
