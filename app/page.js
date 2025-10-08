@@ -27,9 +27,9 @@ export default function Home() {
   {/* Contenido */}
   <div className="hero__inner">
     <div>
-      <h1 className="hero__title">Estudio Hadjes | Abogados laboralistas y de defensa al consumidor</h1>
+      <h1 className="hero__title">Estudio Hadjes</h1>
       <p className="hero__subtitle">
-        Ejerciendo representación de los derechos de los trabajadores, tenemos larga experiencia como abogados laborales en Capital Federal. Nuestro asesoramiento comprende todas las etapas de un reclamo laboral, desde la consulta inicial hasta la resolución, incluyendo negociaciones, mediaciones y litigios judiciales. 
+        Ejerciendo representación de los derechos de los trabajadores, tenemos larga experiencia como Abogados laboralistas y de defensa al consumidor. 
       </p>
       <div className="mt-4 flex justify-center gap-3">
         <Link href="/contacto" className="btn focus-ring bg-white text-neutral-900 hover:bg-white/90">

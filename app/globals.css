@@ -44,9 +44,15 @@
     @apply page-wrap flex items-center justify-center text-center gap-4 min-h-[48vh] py-16;
   }
   .hero__title {
-    @apply text-xl md:text-2xl font-semibold;
+    /* Más grande y con separación inferior */
+    @apply text-3xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight
+           mb-3 md:mb-4;
+  .hero__subtitle {
+    /* Tamaño y legibilidad del párrafo bajo el título */
+    @apply text-base md:text-lg lg:text-xl leading-relaxed text-white/90;
   }
-  
+  }
+
   .section-center {
     text-align: center;     /* centra el texto del bloque */
   }
