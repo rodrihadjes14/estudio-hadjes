@@ -5,11 +5,12 @@ import { pageMeta } from "@/lib/seo";
 import JsonLd from "@/components/JsonLd";
 import Link from "next/link";
 
-
 // --- FAQ Schema extractor (sin jsdom, compatible con build de Next.js) ---
+// Convención: cada pregunta en H3 (### ¿...?); respuesta en el <p> inmediato.
 function extractFaqSchemaFromHtml(html) {
-  // Busca pares de <h3>Pregunta?</h3> seguidos de <p>Respuesta</p>
-  const regex = /<h3[^>]*>(?:<a[^>]*>)?\s*([^<\n]*\?)\s*(?:<\/a>)?\s*<\/h3>\s*<p>([\s\S]*?)<\/p>/gi;
+  const regex =
+    /<h3[^>]*>(?:<a[^>]*>)?\s*([^<\n]*\?)\s*(?:<\/a>)?\s*<\/h3>\s*<p>([\s\S]*?)<\/p>/gi;
+
   const faqs = [];
   let match;
   while ((match = regex.exec(html)) !== null) {
@@ -23,29 +24,15 @@ function extractFaqSchemaFromHtml(html) {
       });
     }
   }
+
   if (faqs.length === 0) return null;
+
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     mainEntity: faqs,
   };
 }
-
-
-
-  if (faqs.length === 0) return null;
-
-  return {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": faqs.map(f => ({
-      "@type": "Question",
-      "name": f.q,
-      "acceptedAnswer": { "@type": "Answer", "text": f.a }
-    }))
-  };
-
-
 
 export const revalidate = 60;
 
@@ -69,12 +56,14 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function BlogPost({ params }) {
-  const faqSchema = extractFaqSchemaFromHtml(html);
   const { slug } = params || {};
   const post = await getPostBySlug(slug);
   if (!post) return notFound();
 
   const { meta, html } = post;
+
+  // Generamos el FAQPage en base al HTML ya renderizado del Markdown
+  const faqSchema = extractFaqSchemaFromHtml(html);
 
   const base = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
   const canonical = `${base}/blog/${meta.slug}`;
@@ -113,7 +102,6 @@ export default async function BlogPost({ params }) {
       <JsonLd data={articleLd} />
       <JsonLd data={breadcrumbLd} />
       {faqSchema && <JsonLd data={faqSchema} />}
-
 
       {/* Breadcrumb visible */}
       <nav className="mb-4 text-sm">
