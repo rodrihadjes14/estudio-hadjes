@@ -6,6 +6,9 @@ import { pageMeta } from "@/lib/seo";
 import Image from "next/image";
 export const revalidate = 60;
 import serviciosHero from "@/public/hero/servicios.jpg";
+import HeroLeadMiniForm from "@/components/HeroLeadMiniForm";
+
+
 
 export function generateMetadata() {
   return pageMeta({
@@ -77,19 +80,13 @@ export default function ServiciosIndex() {
             Enfocados en trabajadores de Capital Federal y GBA. Analizamos tu caso, definimos la estrategia
             y te acompañamos durante todo el proceso.
           </p>
-          <div className="mt-4 flex justify-center gap-3">
-            <Link href="/contacto" className="btn focus-ring bg-white text-neutral-900 hover:bg-white/90">
-              Contactanos
-            </Link>
-            <Link href="/faq" className="btn focus-ring bg-white/10 hover:bg-white/20">
-              Ver preguntas
-            </Link>
-          </div>
-        </div>
-      </div>
-    </section>
+          <HeroLeadMiniForm source="hero-servicio" />
 
-      <section className="section">
+          </div>
+          </div>
+        </section>
+
+       <section className="section">
         <h2 className="section-title">Elegí un servicio</h2>
        <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
   {items.map((it) => (
