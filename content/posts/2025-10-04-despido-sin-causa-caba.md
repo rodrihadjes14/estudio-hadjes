@@ -1,40 +1,57 @@
 ---
-title: "Despido sin causa en Capital Federal: qué te corresponde"
-slug: "despido-sin-causa-Capital Federal"
-date: "2025-10-04"
+title: "Indemnización por despido sin causa en Capital Federal: pasos y cálculo 2025"
+slug: "indemnizacion-despido-sin-causa-capital-federal"
+date: "2025-10-09"
 author: "Estudio Hadjes"
-summary: "Guía clara para calcular y reclamar la indemnización por despido sin causa en Capital Federal y GBA."
-tags: ["despido sin causa","indemnización","Capital Federal","GBA"]
+summary: "Guía práctica para calcular la indemnización por despido sin causa en CABA: pasos, plazos, documentación y cómo iniciar el reclamo."
+tags: ["despido","indemnización","Capital Federal","laboral","trabajadores"]
+ogImage: "/images/blog/indemnizacion-capital-federal-2025.jpg"
 ---
+
 ## Introducción
-Resumen simple del derecho a indemnización, documentos y plazos.
+Si fuiste despedido sin causa en la Capital Federal (CABA), esta guía te explica **cómo calcular tu indemnización**, qué **documentación** reunir y los **pasos** para reclamar.
 
-## ¿Qué se considera despido sin causa?
-Definición y ejemplos comunes.
+## ¿Qué es el despido sin causa?
+Es la extinción del contrato dispuesta por el empleador **sin invocar una causal**. En estos casos, el trabajador tiene derecho a **indemnización** conforme a la ley vigente. *(La estrategia concreta se define caso por caso.)*
 
-## Documentación mínima
-- Últimos recibos de sueldo
-- Carta documento y comunicaciones
-- CCT aplicable, antigüedad
+## Requisitos / Documentación
+- Últimos **recibos de sueldo** y **alta/baja**.
+- **Carta documento** o comunicación del despido (si existiera).
+- **Datos del empleador** y **antigüedad**.
+- **Testigos** y cualquier comunicación relevante.
 
-## Cálculo básico de indemnización (orientativo)
-Parámetros habituales y advertencias.
+## Pasos para reclamar en Capital Federal
+1. **Evaluación del caso**: revisar antigüedad, mejor remuneración y situación registral.
+2. **Cálculo de indemnización**: estimar montos (preaviso, integración mes, SAC proporcional, vacaciones, multas si aplican).
+3. **Intimación**: enviar **CD** (si corresponde) o notificación fehaciente.
+4. **Negociación/Conciliación**: explorar acuerdo administrativo o judicial.
+5. **Acción judicial**: iniciar demanda si no hay acuerdo.
 
-## Pasos recomendados
-1) Reunir documentación  
-2) Análisis técnico de liquidación  
-3) Envío de carta documento
+## Tiempos y plazos (Capital Federal)
+- Plazos **orientativos** sujetos al caso y carga de trabajo de organismos.
+- Documentación completa agiliza los tiempos.
+- Es clave **no demorar** la consulta profesional.
+
+## Errores frecuentes y cómo evitarlos
+- **No conservar recibos** y comunicaciones → Digitalizá todo.
+- **Firmar acuerdos sin revisión** → Consultá antes a un profesional.
+- **Calcular mal la base remunerativa** → Verificar el mejor salario.
 
 ## Interlinking recomendado
-- Servicio: [/servicios/despidos-sin-causa](/servicios/despidos-sin-causa)
-- Servicio: [/servicios/accidentes-de-trabajo](/servicios/accidentes-de-trabajo)
+- Ver también: [/servicios/despidos-sin-causa]
+- Guía relacionada: [/blog/accidente-trabajo-Capital Federal-pasos]
+- Consultas: [/contacto]
 
 ## Preguntas frecuentes
-**¿Sirve enviar carta documento?**  
-Sí, pero debe redactarse técnicamente.
+**¿Cómo se calcula la indemnización?**  
+Se toma la **mejor remuneración mensual** normal y habitual como base. Luego se suman rubros legales aplicables y, si corresponde, multas.
 
-**¿Cuánto tarda?**  
-Depende del caso y la vía elegida.
+**¿Qué pasa si estaba mal registrado?**  
+Pueden corresponder **multas** adicionales. La situación debe evaluarse con la documentación.
+
+**¿Necesito abogado para enviar carta documento?**  
+Es lo recomendable para evitar vicios formales y **proteger tu derecho** al reclamo.
 
 ## Conclusión + CTA
-[Consultanos tu caso](/contacto).
+Queremos que tomes decisiones con información clara. **Evaluación inicial sin costo** y guía de pasos.  
+[Contactanos](/contacto) | [Despidos sin causa](/servicios/despidos-sin-causa)

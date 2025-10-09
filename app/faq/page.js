@@ -53,7 +53,7 @@ export default function FAQPage() {
 
       <h1 className="text-3xl font-semibold">Preguntas frecuentes</h1>
 
-      <section className="section text-center">
+      <section className="section section-center">
       <p className="max-w-2xl mx-auto text-white">
       Te brindamos respuestas a las preguntas mas comunes que hacen nuestros clientes. Vas a encontrar informacion relacionada a la forma de tramitar reclamos, plazos y documentación que tenés que tener en cuenta. Si tu caso requiere análisis específico,{" "}
       <Link href="/contacto" className="link">contactanos</Link>. Tu primer consulta es gratuita. También podés estimar tu caso con la{" "}

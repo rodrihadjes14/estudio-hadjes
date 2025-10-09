@@ -4,6 +4,37 @@ import { getAllPostsMeta, getPostBySlug } from "@/lib/markdown";
 import { pageMeta } from "@/lib/seo";
 import JsonLd from "@/components/JsonLd";
 import Link from "next/link";
+import { JSDOM } from "jsdom";
+
+function extractFAQsFromHTML(html) {
+  const dom = new JSDOM(html);
+  const paragraphs = dom.window.document.querySelectorAll("p");
+  const faqs = [];
+  let currentQuestion = null;
+
+  paragraphs.forEach(p => {
+    const text = p.textContent.trim();
+    if (text.startsWith("¿") && text.endsWith("?")) {
+      currentQuestion = text;
+    } else if (currentQuestion) {
+      faqs.push({ q: currentQuestion, a: text });
+      currentQuestion = null;
+    }
+  });
+
+  if (faqs.length === 0) return null;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(f => ({
+      "@type": "Question",
+      "name": f.q,
+      "acceptedAnswer": { "@type": "Answer", "text": f.a }
+    }))
+  };
+}
+
 
 export const revalidate = 60;
 
@@ -27,6 +58,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function BlogPost({ params }) {
+  const faqSchema = extractFaqSchemaFromHtml(html);
   const { slug } = params || {};
   const post = await getPostBySlug(slug);
   if (!post) return notFound();
@@ -69,6 +101,8 @@ export default async function BlogPost({ params }) {
     <main className="page-wrap">
       <JsonLd data={articleLd} />
       <JsonLd data={breadcrumbLd} />
+      {faqSchema && <JsonLd data={faqSchema} />}
+
 
       {/* Breadcrumb visible */}
       <nav className="mb-4 text-sm">

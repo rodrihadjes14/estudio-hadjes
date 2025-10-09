@@ -1,17 +1,18 @@
 ---
-title: "TÍTULO CON PALABRA CLAVE PRINCIPAL"
+title: "TÍTULO CON PALABRA CLAVE PRINCIPAL + localidad (CABA/GBA)"
 slug: "url-amigable-con-keyword"
-date: "2025-10-04"
+date: "YYYY-MM-DD"
 author: "Estudio Hadjes"
-summary: "Resumen de 150–160 caracteres que responda rápido la intención de búsqueda."
-tags: ["keyword","secundaria","Capital Federal","gba"]
+summary: "Resumen de 150–160 caracteres que responda la intención de búsqueda."
+tags: ["keyword","secundaria","Capital Federal","GBA"]
+ogImage: "/images/blog/<archivo>.jpg"
 ---
 
 ## Introducción
-1–2 párrafos con promesa clara de valor y definición corta. Menciona Capital Federal/GBA si aplica.
+1–2 párrafos con promesa de valor. Menciona Capital Federal/GBA si aplica.
 
 ## ¿Qué es [tema principal]?
-Define simple, evita jerga. Si es legal, aclara que es orientativo y que cada caso se analiza aparte.
+Definición clara (orientativo, cada caso se evalúa aparte).
 
 ## Requisitos / Documentación
 - Punto 1
@@ -24,29 +25,29 @@ Define simple, evita jerga. Si es legal, aclara que es orientativo y que cada ca
 3. Paso 3
 
 ## Tiempos y plazos (Capital Federal y GBA)
-Aclara plazos habituales y advertencias.
+Plazos típicos + advertencias.
 
 ## Errores frecuentes y cómo evitarlos
 - Error 1 → Solución
 - Error 2 → Solución
 
 ## ¿Cuándo necesito un abogado?
-Criterios claros. Diferencia casos simples vs. complejos.
+Criterios claros; diferencia casos simples vs. complejos.
 
 ## Interlinking recomendado
-- Ver también: [/servicios/accidentes-de-trabajo](/servicios/accidentes-de-trabajo)
-- Ver también: [/servicios/despidos-sin-causa](/servicios/despidos-sin-causa)
-- Guía relacionada: [/blog/accidente-trabajo-Capital Federal-pasos](/blog/accidente-trabajo-Capital Federal-pasos)
+- Ver también: [/servicios/accidentes-de-trabajo]
+- Ver también: [/servicios/despidos-sin-causa]
+- Guía relacionada: [/blog/accidente-trabajo-Capital Federal-pasos]
 
 ## Preguntas frecuentes
 **¿Pregunta 1?**  
-Respuesta breve y directa.
+Respuesta breve.
 
 **¿Pregunta 2?**  
-Respuesta breve y directa.
+Respuesta breve.
 
 **¿Pregunta 3?**  
-Respuesta breve y directa.
+Respuesta breve.
 
 ## Conclusión + CTA
-Mensaje de seguridad y claridad. [Contactanos](/contacto).
+Mensaje claro. [Contactanos](/contacto) | [Servicio relacionado](/servicios/<slug>)
