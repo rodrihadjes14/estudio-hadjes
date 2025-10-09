@@ -168,7 +168,7 @@ body {
 
 /* === Calculadora Indemnización (scoped por id) === */
 #calc.calc {
-  background: #4a4a4a;
+  background: #414141;
   padding: 20px 16px;
   border-radius: 12px;
   border: 1px solid #e2e2e2;
@@ -261,4 +261,16 @@ body {
   #calc label.row { grid-template-columns: 1fr; }
   #calc .help { justify-self: start; width: 100%; }
   #calc .actions { justify-content: flex-start; }
+  #calc .row input[type="text"],
+#calc .row input[type="number"],
+#calc .row input[type="date"] {
+  width: 80%;
+  box-sizing: border-box;
+  background: #000;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 10px 12px;
+  outline: none;
+}
 }
