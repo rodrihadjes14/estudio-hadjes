@@ -4,23 +4,33 @@ import { getAllPostsMeta, getPostBySlug } from "@/lib/markdown";
 import { pageMeta } from "@/lib/seo";
 import JsonLd from "@/components/JsonLd";
 import Link from "next/link";
-import { JSDOM } from "jsdom";
 
-function extractFAQsFromHTML(html) {
-  const dom = new JSDOM(html);
-  const paragraphs = dom.window.document.querySelectorAll("p");
+
+// --- FAQ Schema extractor (sin jsdom, compatible con build de Next.js) ---
+function extractFaqSchemaFromHtml(html) {
+  // Busca pares de <h3>Pregunta?</h3> seguidos de <p>Respuesta</p>
+  const regex = /<h3[^>]*>(?:<a[^>]*>)?\s*([^<\n]*\?)\s*(?:<\/a>)?\s*<\/h3>\s*<p>([\s\S]*?)<\/p>/gi;
   const faqs = [];
-  let currentQuestion = null;
-
-  paragraphs.forEach(p => {
-    const text = p.textContent.trim();
-    if (text.startsWith("¿") && text.endsWith("?")) {
-      currentQuestion = text;
-    } else if (currentQuestion) {
-      faqs.push({ q: currentQuestion, a: text });
-      currentQuestion = null;
+  let match;
+  while ((match = regex.exec(html)) !== null) {
+    const question = match[1]?.trim();
+    const answer = match[2]?.trim();
+    if (question && answer) {
+      faqs.push({
+        "@type": "Question",
+        name: question,
+        acceptedAnswer: { "@type": "Answer", text: answer },
+      });
     }
-  });
+  }
+  if (faqs.length === 0) return null;
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs,
+  };
+}
+
 
   if (faqs.length === 0) return null;
 
