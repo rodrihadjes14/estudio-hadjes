@@ -38,9 +38,9 @@ Es la extinción del contrato dispuesta por el empleador **sin invocar una causa
 - **Calcular mal la base remunerativa** → Verificar el mejor salario.
 
 ## Interlinking recomendado
-- Ver también: [/servicios/despidos-sin-causa]
-- Guía relacionada: [/blog/accidente-trabajo-Capital Federal-pasos]
-- Consultas: [/contacto]
+- Ver también: (/servicios/despidos-sin-causa)
+- Guía relacionada: (/blog/accidente-trabajo-caba)
+- Consultas: (/contacto)
 
 ## Preguntas frecuentes
 **¿Cómo se calcula la indemnización?**  
