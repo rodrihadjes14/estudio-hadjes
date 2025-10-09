@@ -32,6 +32,7 @@ function extractFaqSchemaFromHtml(html) {
 }
 
 
+
   if (faqs.length === 0) return null;
 
   return {
@@ -43,7 +44,7 @@ function extractFaqSchemaFromHtml(html) {
       "acceptedAnswer": { "@type": "Answer", "text": f.a }
     }))
   };
-}
+
 
 
 export const revalidate = 60;
