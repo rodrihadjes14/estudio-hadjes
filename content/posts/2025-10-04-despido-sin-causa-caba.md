@@ -2,7 +2,7 @@
 title: "Indemnización por despido sin causa en Capital Federal: pasos y cálculo 2025"
 slug: "indemnizacion-despido-sin-causa-capital-federal"
 date: "2025-10-09"
-author: "Estudio Hadjes"
+author: "Tu Abogado Cerca"
 summary: "Guía práctica para calcular la indemnización por despido sin causa en CABA: pasos, plazos, documentación y cómo iniciar el reclamo."
 tags: ["despido","indemnización","Capital Federal","laboral","trabajadores"]
 ogImage: "/images/blog/indemnizacion-capital-federal-2025.jpg"

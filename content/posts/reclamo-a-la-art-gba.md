@@ -2,7 +2,7 @@
 title: "Reclamo a la ART por secuelas permanentes en GBA: checklist 2025"
 slug: "reclamo-a-la-art-gba"
 date: "2025-10-09"
-author: "Estudio Hadjes"
+author: "Tu Abogado Cerca"
 summary: "Cómo reclamar a la ART por secuelas permanentes en GBA: pasos, documentación, incapacidad y revisión de dictámenes."
 tags: ["reclamo a la ART","GBA","incapacidad","laboral"]
 ogImage: "/images/blog/reclamo-art-gba-2025.jpg"

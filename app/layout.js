@@ -14,8 +14,8 @@ const inter = Inter({ subsets: ["latin"], display: "swap" });
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://tuabogadocerca.com.ar"),
   title: {
-    default: "Estudio Hadjes | Abogados Laborales en Capital Federal y GBA",
-    template: "%s | Estudio Hadjes",
+    default: "Tu Abogado Cerca | Abogados Laborales en Capital Federal y GBA",
+    template: "%s | Tu Abogado Cerca",
   },
   description:
     "Abogados especializados en accidentes de trabajo, despidos sin causa y reclamos a ART en Capital Federal y GBA.",
@@ -26,16 +26,16 @@ export const metadata = {
   },
   openGraph: {
     type: "website",
-    siteName: "Estudio Hadjes",
-    title: "Estudio Hadjes | Abogados Laborales en Capital Federal y GBA",
+    siteName: "Tu Abogado Cerca",
+    title: "Tu Abogado Cerca | Abogados Laborales en Capital Federal y GBA",
     description:
       "Abogados especializados en accidentes de trabajo, despidos sin causa y reclamos a ART en Capital Federal y GBA.",
-    images: [{ url: "/og-default.jpg", width: 1200, height: 630, alt: "Estudio Hadjes" }],
+    images: [{ url: "/og-default.jpg", width: 1200, height: 630, alt: "Tu Abogado Cerca" }],
     locale: "es_AR",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Estudio Hadjes | Abogados Laborales en Capital Federal y GBA",
+    title: "Tu Abogado Cerca | Abogados Laborales en Capital Federal y GBA",
     description:
       "Abogados especializados en accidentes de trabajo, despidos sin causa y reclamos a ART en Capital Federal y GBA.",
     images: ["/og-default.jpg"],
@@ -47,7 +47,7 @@ export const metadata = {
 const orgLd = {
   "@context": "https://schema.org",
   "@type": "LegalService",
-  name: "Estudio Hadjes",
+  name: "Tu Abogado Cerca",
   url: "https://tuabogadocerca.com.ar",
   telephone: "+54 11 3026-1498",
   address: {

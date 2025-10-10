@@ -29,7 +29,7 @@ export default function Home() {
   {/* Contenido */}
   <div className="hero__inner">
     <div>
-      <h1 className="hero__title">Estudio Hadjes</h1>
+      <h1 className="hero__title">Tu Abogado Cerca</h1>
       <p className="hero__subtitle">
         Ejerciendo representación de los derechos de los trabajadores, contamos con un grupo experto de abogados laboralistas y de defensa al consumidor. 
       </p>

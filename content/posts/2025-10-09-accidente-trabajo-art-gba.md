@@ -2,7 +2,7 @@
 title: "Accidente de trabajo: qué hacer ante la ART en GBA (guía práctica 2025)"
 slug: "accidente-trabajo-art-gba"
 date: "2025-10-09"
-author: "Estudio Hadjes"
+author: "Tu Abogado Cerca"
 summary: "Guía clara para actuar tras un accidente de trabajo en GBA: denuncia a la ART, plazos, documentación y pasos clave para tu cobertura."
 tags: ["accidente de trabajo","ART","GBA","riesgos del trabajo","trabajadores"]
 ogImage: "/images/blog/accidente-trabajo-art-gba-2025.jpg"

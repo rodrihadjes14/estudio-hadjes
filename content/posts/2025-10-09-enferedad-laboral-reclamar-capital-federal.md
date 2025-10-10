@@ -2,7 +2,7 @@
 title: "Enfermedad laboral: cómo reclamar en capital federal (pruebas y plazos)"
 slug: "enfermedad-laboral-reclamar-capital-federal"
 date: "2025-10-09"
-author: "Estudio Hadjes"
+author: "Tu Abogado Cerca"
 summary: "Explicamos cómo iniciar un reclamo por enfermedad laboral en capital federal: pruebas médicas, plazos, ART y próximos pasos."
 tags: ["enfermedad laboral","capital federal","ART","trabajadores","derecho laboral"]
 ogImage: "/images/blog/enfermedad-laboral-capital-federal-2025.jpg"

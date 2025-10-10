@@ -74,8 +74,8 @@ export default async function BlogPost({ params }) {
     "@type": "Article",
     headline: meta.title,
     datePublished: meta.date || "",
-    author: { "@type": "Organization", name: meta.author || "Estudio Hadjes" },
-    publisher: { "@type": "Organization", name: "Estudio Hadjes" },
+    author: { "@type": "Organization", name: meta.author || "Tu Abogado Cerca" },
+    publisher: { "@type": "Organization", name: "Tu Abogado Cerca" },
     mainEntityOfPage: canonical,
     ...(meta.ogImage
       ? {

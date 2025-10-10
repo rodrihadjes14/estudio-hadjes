@@ -2,7 +2,7 @@
 title: "Accidente de tránsito y trabajo: ¿cuándo interviene la ART? (GBA)"
 slug: "accidente-transito-art-gba"
 date: "2025-10-09"
-author: "Estudio Hadjes"
+author: "Tu Abogado Cerca"
 summary: "Cuándo interviene la ART si sufriste un accidente de tránsito vinculado al trabajo en GBA: supuestos, pasos y documentación clave."
 tags: ["accidente de tránsito","ART","GBA","laboral","trabajadores"]
 ogImage: "/images/blog/accidente-transito-art-gba-2025.jpg"
