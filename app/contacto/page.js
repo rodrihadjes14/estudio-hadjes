@@ -157,8 +157,8 @@ export default function Contacto() {
         <ul className="mt-3 list-disc space-y-1 pl-5">
           <li>
             Email:{" "}
-            <a href="mailto:info@estudiohadjes.com.ar" className="link">
-              info@estudiohadjes.com.ar
+            <a href="mailto:info@tuabogadocerca.com.ar" className="link">
+              info@tuabogadocerca.com.ar
             </a>
           </li>
           <li>

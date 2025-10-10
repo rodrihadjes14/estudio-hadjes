@@ -1,5 +1,5 @@
 /** @type {import('next-sitemap').IConfig} */
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://estudiohadjes.com.ar';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://tuabogadocerca.com.ar';
 
 module.exports = {
   siteUrl,

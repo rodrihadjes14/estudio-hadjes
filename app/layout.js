@@ -12,7 +12,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://estudiohadjes.com.ar"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://tuabogadocerca.com.ar"),
   title: {
     default: "Estudio Hadjes | Abogados Laborales en Capital Federal y GBA",
     template: "%s | Estudio Hadjes",
@@ -48,7 +48,7 @@ const orgLd = {
   "@context": "https://schema.org",
   "@type": "LegalService",
   name: "Estudio Hadjes",
-  url: "https://estudiohadjes.com.ar",
+  url: "https://tuabogadocerca.com.ar",
   telephone: "+54 11 3026-1498",
   address: {
     "@type": "PostalAddress",
