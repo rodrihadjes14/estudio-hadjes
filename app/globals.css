@@ -283,7 +283,7 @@ body {
   --font-sans:    var(--font-inter);
 
   /* Escala tipográfica con clamp (ajústala si querés) */
-  --size-h1: clamp(2rem, 4vw, 3.5rem);      /* ~32→56px */
+  --size-h1: clamp(2rem, 3vw, 2.75rem);      /* ~32→56px */
   --size-h2: clamp(1.5rem, 2.5vw, 2.25rem); /* ~24→36px */
   --size-h3: clamp(1.125rem, 1.4vw, 1.5rem);/* ~18→24px */
 }
