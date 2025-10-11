@@ -40,20 +40,23 @@
   .hero__overlay { @apply absolute inset-0 bg-black/60 -z-10; }
   .hero__img { @apply object-cover object-center -z-10; }
   .hero__content { @apply relative max-w-3xl; }
+  @layer utilities {
+  /* Contenedor del hero: conserva tu layout y agrega columna para apilar */
   .hero__inner {
-    @apply page-wrap flex items-center justify-center text-center gap-4 min-h-[48vh] py-16;
+    @apply page-wrap flex flex-col items-center justify-center text-center gap-4 min-h-[48vh] py-16;
   }
-  .hero__title {
-  /* un nivel menos que antes */
-  @apply text-2xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight
-         mb-3 md:mb-4;
 
+  /* Título del hero: un tamaño por debajo del h1 global + peso reducido y centrado */
+  .hero__inner h1 {
+    @apply font-medium leading-tight tracking-tight text-center mb-4; /* 16px debajo del h1 */
+  }
 
+  /* Subtítulo: preserva tu legibilidad y color; agrega el doble de espacio respecto al h1 */
   .hero__subtitle {
-    /* Tamaño y legibilidad del párrafo bajo el título */
-    @apply text-base md:text-lg lg:text-xl leading-relaxed text-white/90;
+    @apply text-base md:text-lg lg:text-xl leading-relaxed text-white/90 mb-8; /* 32px (doble que el h1) */
+    max-width: 60ch; /* mejora la lectura en desktop */
   }
-  }
+}
 
   .section-center {
     text-align: center;     /* centra el texto del bloque */
