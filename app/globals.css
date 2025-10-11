@@ -340,6 +340,56 @@ body {
   }
 }
 
+/* TABLET ONLY */
+@media (min-width: 481px) and (max-width: 1024px) {
+  /* El bloque completo queda centrado */
+  #calc {
+    width: 100%;
+    max-width: 720px;          /* ancho del contenedor de la calculadora */
+    margin-inline: auto;       /* centra el bloque */
+    float: none;
+  }
+
+  /* La grilla interna ocupa el ancho, sin “empujar” a la derecha */
+  #calc .calc-grid {
+    display: grid;
+    gap: 12px;
+    justify-items: stretch;    /* no centra hijos, permite que llenen el ancho */
+  }
+
+  /* Cada fila: centra el par (label + input) como bloque */
+  #calc label.row {
+    width: 100%;
+    max-width: 640px;          /* ancho consistente por fila */
+    margin-inline: auto;       /* centra cada fila dentro del contenedor */
+    grid-template-columns: 1fr min(260px, 42vw); /* texto + input fijo/fluido */
+    align-items: center;
+    justify-items: stretch;
+  }
+
+  /* Inputs: ocupan su columna sin desbordar */
+  #calc .row input[type="text"],
+  #calc .row input[type="number"],
+  #calc .row input[type="date"] {
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* Bloque de ayuda alineado con la columna de inputs y centrado por fila */
+  #calc .help {
+    width: min(260px, 42vw);
+    max-width: 100%;
+    justify-self: end;         /* acompaña la columna de inputs */
+    margin-inline: auto;       /* asegura centrado del bloque de la fila */
+  }
+
+  /* Acciones centradas en tablet */
+  #calc .actions {
+    max-width: 640px;
+    margin-inline: auto;
+    justify-content: center;
+  }
+}
 
 
 
