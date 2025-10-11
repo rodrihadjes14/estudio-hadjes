@@ -29,7 +29,7 @@ export default function Home() {
   {/* Contenido */}
   <div className="hero__inner">
     <div>
-      <h1 className="hero__title">Abogados especialistas en derecho laboral y defensa al consumidor</h1>
+      <h1>Abogados especialistas en derecho laboral y defensa al consumidor</h1>
       <p className="hero__subtitle">
         Ejerciendo representación de tu derechos, contamos con un experto grupo de abogados laboralistas que te brindan atención personal en todo momento. Contactanos, tu primera consulta es gratuita.
       </p>
