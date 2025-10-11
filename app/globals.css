@@ -56,7 +56,7 @@
     @apply text-base md:text-lg lg:text-xl leading-relaxed text-white/90 mb-8; /* 32px (doble que el h1) */
     max-width: 60ch; /* mejora la lectura en desktop */
   }
-}
+
 
   .section-center {
     text-align: center;     /* centra el texto del bloque */
