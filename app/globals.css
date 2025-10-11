@@ -481,3 +481,69 @@ body {
     @apply mt-0; /* si tu componente inyecta margen, esto lo neutraliza */
   }
 }
+
+
+
+@layer utilities {
+  /* Footer: borde y espaciado general */
+  .site-footer {
+    @apply mt-10 border-t border-neutral-700;
+  }
+
+  /* Contenedor interno: heredamos tipografía pequeña y buen leading */
+  .site-footer__inner {
+    @apply page-wrap py-6 text-sm leading-relaxed;
+  }
+
+  /* Grid responsive:
+     - Mobile: 1 columna
+     - MD+: 3 columnas iguales (espacio uniforme)
+     - Alineado al centro en desktop (contenido y columnas)
+  */
+  .site-footer__grid {
+    display: grid;
+    gap: 1.5rem;               /* = 24px (gap-y y gap-x base) */
+  }
+
+  @media (min-width: 768px) {
+    .site-footer__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      column-gap: 2rem;        /* ~32px = gap-x-8 */
+      row-gap: 1.5rem;         /* ~24px = gap-y-6 */
+      justify-items: center;   /* centra cada columna en el grid */
+      align-items: start;      /* alinea contenido al inicio vertical */
+    }
+  }
+
+  /* Columna: mismo padding lateral que usabas y ancho máximo para centrar contenido */
+  .site-footer__col {
+    @apply w-full md:px-4;
+    max-width: 36rem;          /* evita columnas demasiado anchas al centrarlas */
+    text-align: center;        /* centrado de contenido para desktop (coincide con objetivo) */
+  }
+
+  /* Títulos y listas dentro de columnas */
+  .site-footer__title {
+    @apply m-0 font-semibold;
+  }
+
+  .site-footer__list {
+    @apply mt-2 list-disc list-inside space-y-1;
+  }
+
+  /* Grupo de enlaces (primera columna) */
+  .site-footer__nav {
+    @apply mt-2 flex gap-4 justify-center;  /* centrados en desktop */
+  }
+
+  /* Enlace con subrayado al hover (conserva tu estilo) */
+  .link,
+  .site-footer__nav a {
+    @apply hover:underline underline-offset-2;
+  }
+
+  /* Línea legal inferior */
+  .site-footer__legal {
+    @apply mt-4 block opacity-80 text-center; /* centrado para mantener alineación global */
+  }
+}
