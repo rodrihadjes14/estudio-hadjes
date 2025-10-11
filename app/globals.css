@@ -43,21 +43,6 @@
 
   .hero__content { @apply relative max-w-3xl; }
   
-  /* Contenedor del hero: conserva tu layout y agrega columna para apilar */
-  .hero__inner {
-    @apply page-wrap flex flex-col items-center justify-center text-center gap-4 min-h-[48vh] py-16;
-  }
-
-  /* Título del hero: un tamaño por debajo del h1 global + peso reducido y centrado */
-  .hero__inner h1 {
-    @apply font-medium leading-tight tracking-tight text-center mb-4; /* 16px debajo del h1 */
-  }
-
-  /* Subtítulo: preserva tu legibilidad y color; agrega el doble de espacio respecto al h1 */
-  .hero__subtitle {
-    @apply text-base md:text-lg lg:text-xl leading-relaxed text-white/90 mb-8; /* 32px (doble que el h1) */
-    max-width: 60ch; /* mejora la lectura en desktop */
-  }
 
 
   .section-center {
@@ -259,9 +244,27 @@ body {
 #calc .errors { color: #b00020; }
 #calc .disclaimer { margin-top: 12px; }
 
-/* Responsive */
 /* SOLO MOBILE */
+
+
 @media (max-width: 480px) {
+
+  /* 3) Calculadora centrada */
+  #calc {
+    width: 100%;
+    max-width: 560px;
+    margin-inline: auto;        /* centra el bloque */
+    display: grid;              /* para poder usar justify-items */
+    justify-items: center;      /* centra hijos (labels, rows, etc.) */
+    justify-content: center;    /* centra si el grid tuviera espacio extra */
+    float: none !important;     /* neutraliza flotados heredados */
+    text-align: initial;        /* evita forzar alineación a la derecha */
+  }
+
+  /* Las filas e inputs ocupan el ancho disponible */
+  #calc .row {
+    width: 100%;
+  }
   /* Inputs de texto, número y fecha dentro de la calculadora */
   #calc .row input[type="text"],
   #calc .row input[type="number"],
