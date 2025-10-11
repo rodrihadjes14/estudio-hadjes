@@ -40,7 +40,7 @@
   .hero__overlay { @apply absolute inset-0 bg-black/60 -z-10; }
   .hero__img { @apply object-cover object-center -z-10; }
   .hero__content { @apply relative max-w-3xl; }
-  @layer utilities {
+  
   /* Contenedor del hero: conserva tu layout y agrega columna para apilar */
   .hero__inner {
     @apply page-wrap flex flex-col items-center justify-center text-center gap-4 min-h-[48vh] py-16;
