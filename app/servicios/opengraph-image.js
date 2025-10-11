@@ -54,7 +54,7 @@ export default async function GET(req, { params }) {
           {subtitle}
         </div>
         <div style={{ position: "absolute", bottom: 32, left: 64, fontSize: 24, opacity: 0.9 }}>
-          Tu Abogado Cerca
+          HH Legales
         </div>
       </div>
     ),

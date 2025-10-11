@@ -13,10 +13,10 @@ const sora = Sora({ subsets: ['latin'], variable: '--font-sora', display: 'swap'
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap', weight: ['400','500'] });
 
 export const metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://tuabogadocerca.com.ar"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://hhlegales.com.ar"),
   title: {
-    default: "Tu Abogado Cerca | Abogados Laborales en Capital Federal y GBA",
-    template: "%s | Tu Abogado Cerca",
+    default: "HH Legales | Abogados Laborales en Capital Federal y GBA",
+    template: "%s | HH Legales",
   },
   description:
     "Abogados especializados en accidentes de trabajo, despidos sin causa y reclamos a ART en Capital Federal y GBA.",
@@ -27,16 +27,16 @@ export const metadata = {
   },
   openGraph: {
     type: "website",
-    siteName: "Tu Abogado Cerca",
-    title: "Tu Abogado Cerca | Abogados Laborales en Capital Federal y GBA",
+    siteName: "HH Legales",
+    title: "HH Legales | Abogados Laborales en Capital Federal y GBA",
     description:
       "Abogados especializados en accidentes de trabajo, despidos sin causa y reclamos a ART en Capital Federal y GBA.",
-    images: [{ url: "/og-default.jpg", width: 1200, height: 630, alt: "Tu Abogado Cerca" }],
+    images: [{ url: "/og-default.jpg", width: 1200, height: 630, alt: "HH Legales" }],
     locale: "es_AR",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tu Abogado Cerca | Abogados Laborales en Capital Federal y GBA",
+    title: "HH Legales | Abogados Laborales en Capital Federal y GBA",
     description:
       "Abogados especializados en accidentes de trabajo, despidos sin causa y reclamos a ART en Capital Federal y GBA.",
     images: ["/og-default.jpg"],
@@ -48,8 +48,8 @@ export const metadata = {
 const orgLd = {
   "@context": "https://schema.org",
   "@type": "LegalService",
-  name: "Tu Abogado Cerca",
-  url: "https://tuabogadocerca.com.ar",
+  name: "HH Legales",
+  url: "https://hhlegales.com.ar",
   telephone: "+54 11 3026-1498",
   address: {
     "@type": "PostalAddress",

@@ -2,7 +2,7 @@
 title: "Despido indirecto en capital federal: causales, cartas documento y cálculo"
 slug: "despido-indirecto-capital-federal"
 date: "2025-10-09"
-author: "Tu Abogado Cerca"
+author: "HH Legales"
 summary: "Qué es el despido indirecto en capital federal, causales típicas, cartas documento y pautas para calcular la indemnización."
 tags: ["despido indirecto","capital federal","indemnización","laboral"]
 ogImage: "/images/blog/despido-indirecto-capital-federal-2025.jpg"

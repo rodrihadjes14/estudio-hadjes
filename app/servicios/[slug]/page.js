@@ -79,7 +79,7 @@ const heroPos = svc.heroPos || "object-center"; // opcional: encuadre (object-to
   const legalServiceLd = {
     "@context": "https://schema.org",
     "@type": "LegalService",
-    name: `Tu Abogado Cerca — ${title}`,
+    name: `HH Legales — ${title}`,
     url: canonical,
     areaServed: "AR",
     serviceType: title,

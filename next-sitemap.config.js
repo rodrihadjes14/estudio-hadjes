@@ -1,5 +1,5 @@
 /** @type {import('next-sitemap').IConfig} */
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://tuabogadocerca.com.ar';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://hhlegales.com.ar';
 
 module.exports = {
   siteUrl,

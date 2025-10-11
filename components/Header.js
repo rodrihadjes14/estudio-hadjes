@@ -5,7 +5,7 @@ export default function Header() {
   return (
     <header className="border-b border-neutral-700">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-        <Link href="/" className="text-lg font-semibold">Tu Abogado Cerca</Link>
+        <Link href="/" className="text-lg font-semibold">HH Legales</Link>
         <div className="flex gap-4">
           <Link href="/servicios" className="hover:underline underline-offset-2">Servicios</Link>
           <Link href="/blog" className="hover:underline underline-offset-2">Blog</Link>

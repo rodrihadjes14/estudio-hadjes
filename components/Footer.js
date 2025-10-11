@@ -9,7 +9,7 @@ export default function Footer() {
   const orgLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: NAP.name || "Tu Abogado Cerca",
+    name: NAP.name || "HH Legales",
     url: base,
     logo: `${base}/favicon.ico`,
     sameAs: [],
