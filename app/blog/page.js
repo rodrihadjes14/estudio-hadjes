@@ -23,7 +23,7 @@ export default function BlogIndex() {
         <Link href="/">Inicio</Link> <span className="mx-1">/</span> <span>Blog</span>
       </nav>
 
-      <h1 className="h1">Blog</h1>
+      <h1>Blog</h1>
 
       <section className="section section-center">
         <p className="max-w-2xl">

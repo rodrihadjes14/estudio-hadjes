@@ -73,9 +73,7 @@
 .wa-ico       { @apply w-8 h-8 md:w-7 md:h-7; }
 }
 
-@layer base {
-  h1 { @apply text-center; }
-}
+
 
 
 /* ===== Cards de servicios: base reutilizable ===== */
@@ -276,53 +274,60 @@ body {
 }
 
 
-@theme {
-  /* Tipografías (se referencian a CSS vars que setea next/font) */
-  --font-heading: var(--font-sora);   /* o --font-space-grotesk */
-  --font-sans:    var(--font-inter);  /* o --font-source-sans-3 */
+@import "tailwindcss";
 
-  /* Escala tipográfica (puedes ajustarla) */
-  --size-h1:  clamp(2rem, 4vw, 3.5rem);  /* ~32→56px */
-  --size-h2:  clamp(1.5rem, 2.5vw, 2.25rem); /* ~24→36px */
-  --size-h3:  clamp(1.125rem, 1.4vw, 1.5rem); /* ~18→24px */
+/* 1) Tokens de tema */
+@theme {
+  /* Estas vars deben venir de next/font en el <html>: --font-sora y --font-inter */
+  --font-heading: var(--font-sora);
+  --font-sans:    var(--font-inter);
+
+  /* Escala tipográfica con clamp (ajústala si querés) */
+  --size-h1: clamp(2rem, 4vw, 3.5rem);      /* ~32→56px */
+  --size-h2: clamp(1.5rem, 2.5vw, 2.25rem); /* ~24→36px */
+  --size-h3: clamp(1.125rem, 1.4vw, 1.5rem);/* ~18→24px */
 }
 
+/* 2) Base global mínima */
 @layer base {
   html { @apply antialiased; }
-
-  /* Párrafos y texto base */
   body { font-family: var(--font-sans); }
 
-  /* Headings unificados site-wide */
-  h1, .h1 { 
-    font-family: var(--font-heading);
-    font-size: var(--size-h1);
-    @apply font-semibold leading-tight tracking-tight;
-  }
-  h2, .h2 { 
-    font-family: var(--font-heading);
-    font-size: var(--size-h2);
-    @apply font-semibold leading-tight tracking-tight;
-  }
-  h3, .h3 { 
-    font-family: var(--font-heading);
-    font-size: var(--size-h3);
-    @apply font-medium leading-snug tracking-tight;
-  }
+  /* Aplica las utilidades tipográficas a los elementos */
+  h1 { @apply h1; }
+  h2 { @apply h2; }
+  h3 { @apply h3; }
 }
 
+/* 3) Define las utilidades tipográficas (ahora h2 existe) */
+@utility h1 {
+  font-family: var(--font-heading);
+  font-size: var(--size-h1);
+  @apply font-semibold leading-tight tracking-tight;
+}
+
+@utility h2 {
+  font-family: var(--font-heading);
+  font-size: var(--size-h2);
+  @apply font-semibold leading-tight tracking-tight;
+}
+
+@utility h3 {
+  font-family: var(--font-heading);
+  font-size: var(--size-h3);
+  @apply font-medium leading-snug tracking-tight;
+}
+
+/* 4) Utilidades derivadas */
 @utility section-title {
-  /* Mantén la utilidad pero ya basada en la escala global */
   @apply h2 text-center;
 }
 
-/* Hero refinado (menos bold y tamaño más contenido) */
+/* 5) Hero ajustado (menos tamaño y bold) */
 @layer utilities {
   .hero__title {
-    /* un nivel menos que antes: aprox h1 reducido */
-    @apply font-semibold tracking-tight leading-tight;
     font-family: var(--font-heading);
-    font-size: clamp(1.75rem, 3.5vw, 3rem); /* ~28→48px (antes llegaba a 5xl) */
-    margin-bottom: clamp(0.5rem, 1vw, 1rem); /* 8→16px según viewport */
+    font-size: clamp(1.75rem, 3.5vw, 3rem); /* ~28→48px */
+    @apply font-semibold tracking-tight leading-tight mb-3 md:mb-4;
   }
 }

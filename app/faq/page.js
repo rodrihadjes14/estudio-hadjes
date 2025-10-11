@@ -51,7 +51,7 @@ export default function FAQPage() {
         <Link href="/">Inicio</Link> <span className="mx-1">/</span> <span>Preguntas frecuentes</span>
       </nav>
 
-      <h1 className="h1">Preguntas frecuentes</h1>
+      <h1>Preguntas frecuentes</h1>
 
       <section className="section section-center">
       <p className="max-w-2xl mx-auto text-white">
