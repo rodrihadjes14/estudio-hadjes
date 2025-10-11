@@ -110,7 +110,7 @@ export default async function BlogPost({ params }) {
         <span>{meta.title}</span>
       </nav>
 
-      <h1 className="text-3xl font-semibold">{meta.title}</h1>
+      <h1 className="h1">{meta.title}</h1>
       <p className="mt-1 text-sm opacity-80">
         {meta.date}
         {meta.author ? ` — ${meta.author}` : ""}

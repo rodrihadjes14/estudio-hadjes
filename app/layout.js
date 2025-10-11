@@ -1,5 +1,5 @@
 // app/layout.js
-import { Inter } from "next/font/google";
+import { Sora, Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -9,7 +9,8 @@ import GA4RouteListener from "@/components/GA4RouteListener";
 import { Suspense } from "react";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
-const inter = Inter({ subsets: ["latin"], display: "swap" });
+const sora = Sora({ subsets: ['latin'], variable: '--font-sora', display: 'swap', weight: ['500','600'] });
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap', weight: ['400','500'] });
 
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://tuabogadocerca.com.ar"),
@@ -62,13 +63,19 @@ const orgLd = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="es-AR">
-      <body className={inter.className}>
+    <html
+      lang="es-AR"
+      // Si usás dark mode por clase, dejá este warning off
+      suppressHydrationWarning
+      className={`${sora.variable} ${inter.variable}`}
+    >
+      <body>
         {/* JSON-LD global */}
         <JsonLd data={orgLd} />
 
         <Header />
 
+        {/* GA4 base */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-XM7QCMV29D"
           strategy="afterInteractive"
@@ -86,20 +93,17 @@ export default function RootLayout({ children }) {
           `}
         </Script>
 
-        <Suspense fallback={null}>
         {/* GA4: escucha de cambios de ruta */}
-        <GA4RouteListener measurementId="G-XM7QCMV29D" />
+        <Suspense fallback={null}>
+          <GA4RouteListener measurementId="G-XM7QCMV29D" />
         </Suspense>
 
         {children}
 
         <Footer />
 
-        {/* GA4 base */}
-
         {/* FAB WhatsApp en todo el sitio */}
         <WhatsAppButton />
-        
       </body>
     </html>
   );

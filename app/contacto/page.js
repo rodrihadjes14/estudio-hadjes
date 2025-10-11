@@ -66,7 +66,7 @@ export default function Contacto() {
         <Link href="/">Inicio</Link> <span className="mx-1">/</span> <span>Contacto</span>
       </nav>
 
-      <h1 className="text-3xl font-semibold">Contacto</h1>
+      <h1 className="h1">Contacto</h1>
 
       <section className="section section-center">
         <p className="max-w-2xl">

@@ -31,7 +31,7 @@ export default function Home() {
     <div>
       <h1 className="hero__title">Abogados especialistas en derecho laboral y defensa al consumidor</h1>
       <p className="hero__subtitle">
-        Ejerciendo representación de los derechos de los trabajadores, contamos con un grupo experto de abogados laboralistas y exertos en reclamos del consumidor. Contactanos, tu primera consulta es gratuita.
+        Ejerciendo representación de tu derechos, contamos con un experto grupo de abogados laboralistas que te brindan atención personal en todo momento. Contactanos, tu primera consulta es gratuita.
       </p>
       <HeroLeadMiniForm source="hero-servicio" />
       </div>

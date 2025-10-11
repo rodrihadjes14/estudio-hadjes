@@ -75,7 +75,7 @@ export default function ServiciosIndex() {
       {/* Contenido centrado */}
       <div className="hero__inner">
         <div>
-          <h1 className="hero__title">Servicios legales</h1>
+          <h1 className="h1">Servicios legales</h1>
           <p className="hero__subtitle">
             Enfocados en trabajadores de Capital Federal y GBA. Analizamos tu caso, definimos la estrategia
             y te acompañamos durante todo el proceso.

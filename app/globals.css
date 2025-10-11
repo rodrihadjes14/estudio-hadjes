@@ -123,9 +123,9 @@
   @apply py-8 md:py-10;
 }
 
-@utility section-title {
-  @apply text-center text-xl md:text-2xl font-semibold;
-}
+  @utility section-title {
+    @apply text-center text-xl md:text-2xl font-semibold;
+  }
 
 @utility card {
   @apply rounded-md border border-border bg-surface p-4;
@@ -273,4 +273,56 @@ body {
   padding: 10px 12px;
   outline: none;
 }
+}
+
+
+@theme {
+  /* Tipografías (se referencian a CSS vars que setea next/font) */
+  --font-heading: var(--font-sora);   /* o --font-space-grotesk */
+  --font-sans:    var(--font-inter);  /* o --font-source-sans-3 */
+
+  /* Escala tipográfica (puedes ajustarla) */
+  --size-h1:  clamp(2rem, 4vw, 3.5rem);  /* ~32→56px */
+  --size-h2:  clamp(1.5rem, 2.5vw, 2.25rem); /* ~24→36px */
+  --size-h3:  clamp(1.125rem, 1.4vw, 1.5rem); /* ~18→24px */
+}
+
+@layer base {
+  html { @apply antialiased; }
+
+  /* Párrafos y texto base */
+  body { font-family: var(--font-sans); }
+
+  /* Headings unificados site-wide */
+  h1, .h1 { 
+    font-family: var(--font-heading);
+    font-size: var(--size-h1);
+    @apply font-semibold leading-tight tracking-tight;
+  }
+  h2, .h2 { 
+    font-family: var(--font-heading);
+    font-size: var(--size-h2);
+    @apply font-semibold leading-tight tracking-tight;
+  }
+  h3, .h3 { 
+    font-family: var(--font-heading);
+    font-size: var(--size-h3);
+    @apply font-medium leading-snug tracking-tight;
+  }
+}
+
+@utility section-title {
+  /* Mantén la utilidad pero ya basada en la escala global */
+  @apply h2 text-center;
+}
+
+/* Hero refinado (menos bold y tamaño más contenido) */
+@layer utilities {
+  .hero__title {
+    /* un nivel menos que antes: aprox h1 reducido */
+    @apply font-semibold tracking-tight leading-tight;
+    font-family: var(--font-heading);
+    font-size: clamp(1.75rem, 3.5vw, 3rem); /* ~28→48px (antes llegaba a 5xl) */
+    margin-bottom: clamp(0.5rem, 1vw, 1rem); /* 8→16px según viewport */
+  }
 }
