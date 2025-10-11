@@ -38,7 +38,9 @@
 
   /* Partes internas */
   .hero__overlay { @apply absolute inset-0 bg-black/60 -z-10; }
+
   .hero__img { @apply object-cover object-center -z-10; }
+
   .hero__content { @apply relative max-w-3xl; }
   
   /* Contenedor del hero: conserva tu layout y agrega columna para apilar */
@@ -333,5 +335,36 @@ body {
     font-family: var(--font-heading);
     font-size: clamp(1.75rem, 3.5vw, 3rem); /* ~28→48px */
     @apply font-semibold tracking-tight leading-tight mb-3 md:mb-4;
+  }
+}
+
+@layer utilities {
+  /* Contenedor del hero: columna y centrado del contenido */
+  .hero__inner {
+    @apply page-wrap flex flex-col items-center justify-center text-center min-h-[48vh] py-16;
+  }
+
+  /* Opcional: limita el ancho de la columna interna si tu HTML usa <div> envolvente */
+  .hero__inner > div {
+    @apply w-full max-w-3xl; /* evita que nada "se pegue" a la izquierda por ancho */
+  }
+
+  /* Espaciado jerárquico:
+     - h1: mb-4 (16px)
+     - p: mb-8 (32px) → DOBLE respecto del h1
+   */
+  .hero__inner h1 {
+    @apply font-medium leading-tight tracking-tight text-center mb-4;
+  }
+
+  .hero__inner .hero__subtitle {
+    @apply text-base md:text-lg lg:text-xl leading-relaxed text-white/90 mb-8 text-center;
+    max-width: 60ch;      /* mejora legibilidad */
+    margin-inline: auto;  /* centra el BLOQUE del párrafo (equivalente a mx-auto) */
+  }
+
+  /* Asegura que el formulario NO agregue margen adicional que rompa la proporción */
+  .hero__inner form {
+    @apply mt-0; /* si tu componente inyecta margen, esto lo neutraliza */
   }
 }
