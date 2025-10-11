@@ -303,8 +303,9 @@ body {
 @utility h1 {
   font-family: var(--font-heading);
   font-size: var(--size-h1);
-  @apply font-semibold leading-tight tracking-tight;
+  @apply font-medium leading-tight tracking-tight text-center;
 }
+
 
 @utility h2 {
   font-family: var(--font-heading);
