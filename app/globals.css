@@ -260,23 +260,53 @@ body {
 #calc .disclaimer { margin-top: 12px; }
 
 /* Responsive */
+/* SOLO MOBILE */
 @media (max-width: 480px) {
-  #calc label.row { grid-template-columns: 1fr; }
-  #calc .help { justify-self: start; width: 100%; }
-  #calc .actions { justify-content: flex-start; }
+  /* Inputs de texto, número y fecha dentro de la calculadora */
   #calc .row input[type="text"],
-#calc .row input[type="number"],
-#calc .row input[type="date"] {
-  width: 80%;
-  box-sizing: border-box;
-  background: #000;
-  color: #fff;
-  border: 1px solid #444;
-  border-radius: 8px;
-  padding: 10px 12px;
-  outline: none;
+  #calc .row input[type="number"],
+  #calc .row input[type="date"] {
+    width: 100%;              /* más predecible que 80% en grid/flex */
+    box-sizing: border-box;
+    font: inherit;            /* unifica tipografía */
+    line-height: 1.5;         /* ritmo de línea consistente */
+    height: 44px;             /* MISMA altura para todos */
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: #fff;
+    background: #000;
+    outline: none;
+
+    /* normaliza diferencias nativas solo en mobile */
+    -webkit-appearance: none;
+    appearance: none;
+    min-width: 0;             /* evita desbordes en grid/flex */
+  }
+
+  /* Quita flechas de number en mobile */
+  #calc .row input[type="number"] {
+    -moz-appearance: textfield;
+  }
+  #calc .row input[type="number"]::-webkit-outer-spin-button,
+  #calc .row input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Compensa el icono del date en mobile para que no “estire” */
+  #calc .row input[type="date"] {
+    padding-right: 2.25rem;   /* reserva espacio para el picker */
+  }
+  #calc .row input[type="date"]::-webkit-calendar-picker-indicator {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin: 0;
+    opacity: 1;
+    cursor: pointer;
+  }
 }
-}
+
 
 
 @import "tailwindcss";
